@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# production
+/build
+
+# build scripts
+/public/assetMap.json
+
+# misc
+.env
+npm-debug.log*

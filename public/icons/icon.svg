@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    circle, polygon, line { fill: none; stroke: #000; stroke-width: 8; }
+	  @media (prefers-color-scheme: dark) { circle, polygon, line { stroke: #fff; } }
+  </style>
+  <circle cx="37" cy="33" r="25" />
+  <polygon points="37,83 77,25 77,83"/>
+  <line x1="77" y1="83" x2="77" y2="98"/>
+  <line x1="77" y1="83" x2="92" y2="83"/>
+</svg>

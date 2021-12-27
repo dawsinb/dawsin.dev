@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+    <link rel='apple-touch-icon' href='/icons/icon-192.svg'>
+    <link rel="stylesheet" href="styles.css">
+    <title>nine four</title>
+  </head>
+  <body>
+    <noscript>
+      you need to enable javascript to run this app
+    </noscript>
+    <script defer="defer" src="/bundle.js"></script>
+
+    <div id="loadScreen">
+        <div id="progressContainer"> 
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <style>
+              circle, polygon, line { fill: none; stroke: #fff; stroke-width: 8; }
+            </style>
+            <circle cx="37" cy="33" r="25" />
+            <polygon points="37,83 77,25 77,83" />
+            <line x1="77" y1="83" x2="77" y2="98" />
+            <line x1="77" y1="83" x2="92" y2="83" />
+          </svg>
+          <div id="progressFill"></div>
+        </div>
+        <div id="progressText">
+          initializing
+        </div>
+      </div>
+    </div>
+    
+    <script type="module">
+      // change text from initializing to loading after bundle is downloaded
+      window.addEventListener('load', function() {
+        document.getElementById('progressText').innerHTML = 'loading';
+      });
+
+      // load asset map
+      const assetMap = await fetch('/assetMap.json').then(response => response.json());
+
+      // get total number of assets in the map
+      const totalAssets = Object.keys(assetMap).length;
+      // get total number of bytes of assets
+      let totalBytes = 0;
+      for (const asset in assetMap) {
+        totalBytes += assetMap[asset];
+      }
+
+      // trackers for how many assets and total bytes have been loaded
+      let assetsLoaded = 0;
+      let bytesLoaded = 0;
+      // executes when asset is finished loading
+      window.addEventListener('assetLoad', function(event) {
+        // increment trackers
+        assetsLoaded = assetsLoaded + 1;
+        bytesLoaded += assetMap[event.detail];
+        
+        // update progress
+        document.getElementById('progressFill').style['height'] = Math.min((bytesLoaded / totalBytes) * 100, 100).toString() + "%";
+
+        // if all images are loaded hide the load screen
+        if (assetsLoaded === totalAssets) {
+          // hide loadscreen after short delay (delay allows progress to finish filling)
+          setTimeout(function() {
+            document.getElementById('loadScreen').style['pointer-events'] = 'none';
+            document.getElementById('loadScreen').style['opacity'] = 0;
+          }, 300);
+        }
+
+        // log warning if more assets are loaded than expected
+        if (assetsLoaded > totalAssets) {
+          console.warn('Expected to load ' + totalAssets + ' assets, but loaded ' + assetsLoaded);
+        }
+      })
+    </script>
+
+    <div id="root"></div>
+  </body>
+</html>

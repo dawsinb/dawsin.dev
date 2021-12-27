@@ -1,0 +1,43 @@
+{
+  "short_name": "nine four",
+  "name": "nine four",
+  "description": "",
+  "background_color": "#101010",
+  "theme_color": "#101010",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": "/index.html",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "48x48 72x72 96x96 128x128 192x192 150x150 256x256 512x512 1024x1024",
+      "purpose": "any"
+    }
+  ]
+}
