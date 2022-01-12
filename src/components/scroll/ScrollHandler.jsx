@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import useStore from 'Utils/store';
+import ScrollOverlay from 'Components/scroll/overlay/ScrollOverlay';
 
-function ScrollHandler() {
+function ScrollHandler({ numSections, sectionNames }) {
+  // update scroll store with number of sections
+  useStore.setState({ maxScroll: numSections - 1 });
+
   // get update functions from the store
   const applyScrollDelta = useStore((state) => state.applyScrollDelta);
   const snapScrollPosition = useStore((state) => state.snapScrollPosition);
@@ -14,11 +18,11 @@ function ScrollHandler() {
   const handleWheel = (event) => {
     // adjust scroll position
     applyScrollDelta(event.deltaY / 100 / 8);
-    // clear timeout if one exists
+
+    // set/reset timeout
     if (timeout) {
       clearTimeout(timeout);
     }
-    // call snap function after short delay
     timeout = setTimeout(snapScrollPosition, 500);
   };
 
@@ -38,25 +42,23 @@ function ScrollHandler() {
     }
   };
 
-  // apply normalized delta on touch move
+  // update scroll on move
   const handleTouchmove = (event) => {
-    // calculate delta
+    // calculate and apply normalized delta
     const scrollDelta = previousY - event.touches.item(0).clientY;
-
-    // apply scroll normalized by the window height
     applyScrollDelta(scrollDelta / scrollFactor / window.innerHeight);
 
+    // update previous position
     previousY = event.touches.item(0).clientY;
   };
 
   // call snap function when no more touches
   const handleTouchend = (event) => {
-    if (event.touches.lenghth === 0) {
-      // clear timeout if one exists
+    if (event.touches.length === 0) {
+      // set/reset timeout
       if (timeout) {
         clearTimeout(timeout);
       }
-      // call snap function after short delay
       timeout = setTimeout(snapScrollPosition, 500);
     }
   };
@@ -76,7 +78,11 @@ function ScrollHandler() {
     };
   }, []);
 
-  return null;
+  return <ScrollOverlay numSections={numSections} sectionNames={sectionNames} />;
 }
+
+ScrollHandler.defaultProps = {
+  sectionNames: []
+};
 
 export default ScrollHandler;

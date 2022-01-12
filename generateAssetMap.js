@@ -17,7 +17,7 @@ args.forEach(directory => {
 })
 
 // write asset map
-fs.writeFileSync(path.join(basePath, "assetMap.json"), JSON.stringify(assetMap));
+fs.writeFileSync(path.join(basePath, "/loading/assetMap.json"), JSON.stringify(assetMap));
 
 // recursively gets all files of the given directory and updates the asset map with the size of each file
 function getAllFiles(dirPath, assetMap) {

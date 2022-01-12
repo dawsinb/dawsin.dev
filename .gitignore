@@ -5,7 +5,7 @@
 /build
 
 # build scripts
-/public/assetMap.json
+/public/loading/assetMap.json
 
 # misc
 .env

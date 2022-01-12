@@ -2,8 +2,8 @@ import { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import styled from 'styled-components';
 import useStore from 'Utils/store';
-import ScrollHandler from 'Components/scroll/ScrollHandler';
 import Test from 'Components/Test';
+import ScrollHandler from 'Components/scroll/ScrollHandler';
 
 const AppContainer = styled('div')`
   width: 100vw;
@@ -18,10 +18,13 @@ const CanvasContainer = styled('div')`
 function App() {
   // switch to vertical layout if height > width
   useEffect(() => {
+    useStore.setState({ isVertical: window.innerHeight > window.innerWidth });
     window.addEventListener('resize', () => {
       useStore.setState({ isVertical: window.innerHeight > window.innerWidth });
     });
   }, []);
+
+  const sectionNames = ['', 'about me', 'commercial', 'portfolio', 'research', 'euphony', 'music', ''];
 
   return (
     <AppContainer>
@@ -33,7 +36,7 @@ function App() {
         </CanvasContainer>
       </Suspense>
 
-      <ScrollHandler />
+      <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} />
     </AppContainer>
   );
 }
