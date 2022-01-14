@@ -26,7 +26,7 @@
     "assetMap": "node generateAssetMap.js assets",
     "deploy": "echo 'test.dawsin.dev' > ./build/CNAME && gh-pages -d build",
     "predeploy": "npm run build",
-    "format": "prettier --write \"src/**/*+(.ts|.tsx|.js|.jsx|.css)\"",
+    "format": "prettier --write \"{src,__tests__}/**/*+(.ts|.tsx|.js|.jsx|.css)\"",
     "test": "jest --env=node --colors test"
   },
   "browserslist": {
