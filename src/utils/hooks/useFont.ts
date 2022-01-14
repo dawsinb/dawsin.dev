@@ -18,7 +18,7 @@ function useFont(url: string, callback: (font: Font) => void) {
 
         callback(loadedFonts[url]);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 }
 

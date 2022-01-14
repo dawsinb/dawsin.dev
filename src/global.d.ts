@@ -11,7 +11,5 @@ interface ObjectConstructor {
     o: TDictionary extends Dictionary ? TDictionary : never
   ): TDictionary extends Dictionary<infer TElement> ? TElement[] : never;
 
-  entries<TDictionary>(
-    o: TDictionary
-  ): [string, GetDictionaryValue<TDictionary>][];
+  entries<TDictionary>(o: TDictionary): [string, GetDictionaryValue<TDictionary>][];
 }
