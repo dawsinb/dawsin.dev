@@ -14,8 +14,6 @@ const config = {
     modules: [path.join(__dirname, '/src'), 'node_modules'],
     alias: {
       Components: path.join(__dirname, '/src/components/'),
-      Shaders: path.join(__dirname, '/src/shaders/'),
-      Fonts: path.join(__dirname, '/src/fonts/'),
       Utils: path.join(__dirname, '/src/utils/')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg']

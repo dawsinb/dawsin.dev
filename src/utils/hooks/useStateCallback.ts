@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-function useStateCallback(initialValue) {
-  var [value, setValue] = useState(initialValue);
-  var callbackRef = useRef(null);
-  var isFirst = useRef(true);
+function useStateCallback(initialValue: unknown) {
+  const [value, setValue] = useState(initialValue);
+  const callbackRef = useRef<() => void>();
+  const isFirst = useRef(true);
 
   useEffect(() => {
     // dont run on initial render
@@ -13,13 +13,13 @@ function useStateCallback(initialValue) {
     }
 
     // execute callback if one was defined
-    if (typeof callbackRef.current === 'function') {
+    if (callbackRef.current) {
       callbackRef.current();
     }
   }, [value]);
 
   // define callback
-  var setValueCallback = useCallback((newVal, callback) => {
+  const setValueCallback = useCallback((newVal: unknown, callback: () => void) => {
     callbackRef.current = callback;
     setValue(newVal);
   }, []);

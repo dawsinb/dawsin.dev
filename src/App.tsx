@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import styled from 'styled-components';
-import useStore from 'Utils/hooks/useStore';
+import useLayout from 'Utils/stores/layout';
 import Title from 'Components/sections/screens/Title';
 import ScrollHandler from 'Components/scroll/ScrollHandler';
 
@@ -18,9 +18,9 @@ const CanvasContainer = styled('div')`
 function App() {
   // switch to vertical layout if height > width
   useEffect(() => {
-    useStore.setState({ isVertical: window.innerHeight > window.innerWidth });
+    useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
     window.addEventListener('resize', () => {
-      useStore.setState({ isVertical: window.innerHeight > window.innerWidth });
+      useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
     });
   }, []);
 

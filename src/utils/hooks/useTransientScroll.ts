@@ -1,13 +1,13 @@
 import { useRef, useEffect } from 'react';
-import useStore from 'Utils/hooks/useStore';
+import useScroll from 'Utils/stores/scroll';
 
-function useScroll() {
+function useTransientScroll() {
   // store scroll position in a ref so that it is preserved on rerender and doesn't cause a rerender itself
-  const scrollRef = useRef(useStore.getState().scrollPosition);
+  const scrollRef = useRef(useScroll.getState().scrollPosition);
 
   // register transient subscription to the scroll position
   useEffect(() => {
-    useStore.subscribe(
+    useScroll.subscribe(
       (state) => state.scrollPosition,
       (scrollPosition) => (scrollRef.current = scrollPosition)
     );
@@ -16,4 +16,4 @@ function useScroll() {
   return scrollRef;
 }
 
-export default useScroll;
+export default useTransientScroll;

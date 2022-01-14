@@ -1,9 +1,9 @@
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 
 // track loaded fonts so we dont fetch them multiple times
-const loadedFonts = {};
+const loadedFonts: Dictionary<Font> = {};
 
-function useFont(url, callback) {
+function useFont(url: string, callback: (font: Font) => void) {
   // if already loaded just execute callback
   if (url in loadedFonts) {
     callback(loadedFonts[url]);
@@ -17,7 +17,8 @@ function useFont(url, callback) {
         dispatchEvent(new CustomEvent('assetLoad', { detail: url }));
 
         callback(loadedFonts[url]);
-      });
+      })
+      .catch(error => console.log(error));
   }
 }
 
