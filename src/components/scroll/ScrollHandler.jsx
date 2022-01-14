@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useStore from 'Utils/store';
+import useStore from 'Utils/hooks/useStore';
 import ScrollOverlay from 'Components/scroll/overlay/ScrollOverlay';
 
 function ScrollHandler({ numSections, sectionNames }) {

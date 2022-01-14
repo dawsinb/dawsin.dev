@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import useStore from 'Utils/store';
 import { animated } from '@react-spring/web';
+import useStore from 'Utils/hooks/useStore';
 import Circle from 'Components/scroll/overlay/Circle';
 import Square from 'Components/scroll/overlay/Square';
 

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { animated } from '@react-spring/web';
 import { useSpring, useSpringRef, useChain } from '@react-spring/core';
 import styled from 'styled-components';
-import useStore from 'Utils/store';
+import useStore from 'Utils/hooks/useStore';
 import useStateCallback from 'Utils/hooks/useStateCallback';
 import Background from 'Components/scroll/overlay/Background';
 import SectionMarker from 'Components/scroll/overlay/SectionMarker';

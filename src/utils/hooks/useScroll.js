@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import useStore from 'Utils/store';
+import useStore from 'Utils/hooks/useStore';
 
 function useScroll() {
   // store scroll position in a ref so that it is preserved on rerender and doesn't cause a rerender itself

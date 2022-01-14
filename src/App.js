@@ -1,8 +1,8 @@
 import { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import styled from 'styled-components';
-import useStore from 'Utils/store';
-import Test from 'Components/Test';
+import useStore from 'Utils/hooks/useStore';
+import Title from 'Components/sections/screens/Title';
 import ScrollHandler from 'Components/scroll/ScrollHandler';
 
 const AppContainer = styled('div')`
@@ -30,8 +30,8 @@ function App() {
     <AppContainer>
       <Suspense fallback={null}>
         <CanvasContainer>
-          <Canvas linear dpr={[2, 2]} camera={{ position: [0, 0, 100], far: 200 }}>
-            <Test />
+          <Canvas linear flat orthographic dpr={[1, 1]} camera={{ position: [0, 0, 10000], far: 20000 }}>
+            <Title index={0} parallax={1} />
           </Canvas>
         </CanvasContainer>
       </Suspense>

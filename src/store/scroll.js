@@ -1,10 +1,6 @@
-import create from 'zustand';
-import { subscribeWithSelector } from 'zustand/middleware';
 import { clamp } from 'Utils/math';
 
-/* store slices */
-
-const scrollSlice = (set, get) => ({
+const scroll = (set, get) => ({
   scrollPosition: 0,
   minScroll: 0,
   maxScroll: 0,
@@ -20,17 +16,4 @@ const scrollSlice = (set, get) => ({
   }
 });
 
-const layoutSlice = () => ({
-  isVertical: false
-});
-
-/* combine slices into store */
-
-const useStore = create(
-  subscribeWithSelector((set, get) => ({
-    ...layoutSlice(),
-    ...scrollSlice(set, get)
-  }))
-);
-
-export default useStore;
+export default scroll;
