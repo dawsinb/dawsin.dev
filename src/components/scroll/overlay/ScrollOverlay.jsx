@@ -8,7 +8,7 @@ import Background from 'Components/scroll/overlay/Background';
 import SectionMarker from 'Components/scroll/overlay/SectionMarker';
 import PositionMarker from 'Components/scroll/overlay/PositionMarker';
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Container = styled(({ isVertical, ...props }) => <animated.div {...props} />)`
   position: fixed;
   right: ${(props) => (props.isVertical ? `calc(50% - ${props.width / 2}px)` : '0')};

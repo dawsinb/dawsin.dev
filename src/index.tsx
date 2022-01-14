@@ -5,13 +5,13 @@ import App from './App';
 // register service worker
 if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js');
+    navigator.serviceWorker.register('/service-worker.js').catch((error) => console.log(error));
   });
 }
 
 // get url on load start
-let currentUrl = null;
-DefaultLoadingManager.onStart = (url) => {
+let currentUrl: string;
+DefaultLoadingManager.onStart = (url: string) => {
   currentUrl = url;
 };
 // send load event on load to progress loading animation

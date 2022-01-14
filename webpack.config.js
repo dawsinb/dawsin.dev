@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { GenerateSW } = require('workbox-webpack-plugin');
 
 const config = {
-  entry: path.join(__dirname, '/src/index.js'),
+  entry: path.join(__dirname, '/src/index.tsx'),
   output: {
     path: path.join(__dirname, '/build'),
     filename: 'bundle.js'
@@ -18,18 +18,25 @@ const config = {
       Fonts: path.join(__dirname, '/src/fonts/'),
       Utils: path.join(__dirname, '/src/utils/')
     },
-    extensions: ['.js', '.jsx', '.svg']
-    
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg']
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
         },
       },
+
       {
         test: /\.css$/,
         use: [

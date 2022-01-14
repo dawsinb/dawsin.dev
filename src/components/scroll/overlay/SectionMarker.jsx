@@ -13,7 +13,7 @@ const Container = styled('div')`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 `;
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MarkerContainer = styled(({ isVertical, ...props }) => <div {...props} />)`
   position: absolute;
   top: ${(props) => (props.isVertical ? 'auto' : '0')};
@@ -25,7 +25,7 @@ const MarkerContainer = styled(({ isVertical, ...props }) => <div {...props} />)
   cursor: pointer;
 `;
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TextContainer = styled(({ isVertical, ...props }) => <animated.div {...props} />)`
   position: absolute;
   top: ${(props) => (props.isVertical ? 'auto' : '0')};

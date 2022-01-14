@@ -8,6 +8,9 @@
     "@react-spring/web": "^9.4.0",
     "@react-three/drei": "^7.25.4",
     "@react-three/fiber": "^7.0.21",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/three": "^0.136.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.3",
@@ -23,8 +26,7 @@
     "assetMap": "node generateAssetMap.js assets",
     "deploy": "echo 'test.dawsin.dev' > ./build/CNAME && gh-pages -d build",
     "predeploy": "npm run build",
-    "format": "prettier --write \"src/**/*+(.jsx|.js|.css)\"",
-    "lint": "eslint --ext .jsx,.js src/"
+    "format": "prettier --write \"src/**/*+(.ts|.tsx|.js|.jsx|.css)\""
   },
   "browserslist": {
     "production": [
@@ -39,23 +41,30 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.16.7",
     "@babel/eslint-parser": "^7.16.3",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@babel/runtime": "^7.16.7",
     "@svgr/webpack": "^6.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.0",
     "css-loader": "^6.5.1",
-    "eslint": "^8.4.0",
+    "eslint": "^8.6.0",
     "eslint-plugin-react": "^7.27.1",
     "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.5.1",
     "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0",
+    "webpack-dev-server": "^4.7.3",
     "workbox-precaching": "^6.4.2",
     "workbox-webpack-plugin": "^6.4.2"
   }
