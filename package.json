@@ -26,7 +26,8 @@
     "assetMap": "node generateAssetMap.js assets",
     "deploy": "echo 'test.dawsin.dev' > ./build/CNAME && gh-pages -d build",
     "predeploy": "npm run build",
-    "format": "prettier --write \"src/**/*+(.ts|.tsx|.js|.jsx|.css)\""
+    "format": "prettier --write \"src/**/*+(.ts|.tsx|.js|.jsx|.css)\"",
+    "test": "jest --env=node --colors test"
   },
   "browserslist": {
     "production": [
@@ -49,9 +50,11 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.16.7",
     "@svgr/webpack": "^6.1.2",
+    "@types/jest": "^27.4.0",
     "@types/styled-components": "^5.1.20",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
+    "babel-jest": "^27.4.6",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.0",
     "css-loader": "^6.5.1",
@@ -61,7 +64,9 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
+    "react-test-renderer": "^17.0.2",
     "style-loader": "^3.3.1",
+    "ts-jest": "^27.1.2",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.4",
     "webpack": "^5.65.0",

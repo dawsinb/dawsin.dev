@@ -1,7 +1,7 @@
 import { createContext, useRef, useContext } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { lerp } from 'Utils/math';
-import useScroll from 'Utils/hooks/useScroll';
+import useScroll from 'utils/hooks/useTransientScroll';
 
 const ParallaxContext = createContext({ offset: 0, parallax: 1 });
 

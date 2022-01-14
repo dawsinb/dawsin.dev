@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSpring } from '@react-spring/core';
 import { animated } from '@react-spring/web';
-import useScroll from 'Utils/hooks/useScroll';
+import useScroll from 'utils/hooks/useTransientScroll';
 import { lerp } from 'Utils/math';
 import Square from 'Components/scroll/overlay/Square';
 
