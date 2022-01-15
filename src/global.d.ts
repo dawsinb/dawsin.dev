@@ -15,9 +15,9 @@ interface ObjectConstructor {
 }
 
 // re-export css properites for convience when using styled-props
-declare type CssProperties = import("csstype").Properties;
+declare type CssProperties = import('csstype').Properties;
 
 // workaround for interpolated values having an ambiguous In type that is uneeded
-declare type Interpolation = import('@react-spring/core').Interpolation
+declare type Interpolation = import('@react-spring/core').Interpolation;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnimatedValue<T> = Interpolation<any, T>
+type AnimatedValue<T> = Interpolation<any, T>;

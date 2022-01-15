@@ -17,17 +17,17 @@ describe('ScrollHandler Tests', () => {
   const deltaY = 100;
 
   test('Render', () => {
-    const { container } = render(<ScrollHandler numSections={5} />)
-    expect(container.firstChild).toMatchSnapshot()
-  })
+    const { container } = render(<ScrollHandler numSections={5} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
 
   beforeEach(() => {
     // switch to fake timers
     jest.useFakeTimers();
     // reset scroll
-    useScroll.setState({ scrollPosition: 0 })
+    useScroll.setState({ scrollPosition: 0 });
     // render component
-    render(<ScrollHandler numSections={3} wheelStrength={wheelStrength} touchStrength={touchStrength}/>);
+    render(<ScrollHandler numSections={3} wheelStrength={wheelStrength} touchStrength={touchStrength} />);
   });
 
   test('Wheel Scrolling', () => {
@@ -55,13 +55,13 @@ describe('ScrollHandler Tests', () => {
       );
       // additional scroll should have happened but no snap
       expect(useScroll.getState().scrollPosition).toBeCloseTo(2 * wheelStrength);
-      
+
       // skip snap timer
       jest.runOnlyPendingTimers();
       // scroll should snap to nearest whole number
       expect(useScroll.getState().scrollPosition).toBeCloseTo(Math.round(2 * wheelStrength));
-    })
-  })
+    });
+  });
 
   test('Touch Scrolling', () => {
     // scrolling should start at 0
@@ -82,10 +82,10 @@ describe('ScrollHandler Tests', () => {
 
       // there should be no scrolling yet
       expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
-    })
-    
+    });
+
     // move touch up screen
-    const percentageOfScreenTravelled = 1 / 8
+    const percentageOfScreenTravelled = 1 / 8;
     act(() => {
       // update touch y
       touch.clientY = -window.innerHeight * percentageOfScreenTravelled;
@@ -99,7 +99,7 @@ describe('ScrollHandler Tests', () => {
       );
       // there should be scrolling now
       expect(useScroll.getState().scrollPosition).toBeCloseTo(percentageOfScreenTravelled * touchStrength);
-    }) 
+    });
 
     // release finger from screen
     act(() => {
@@ -112,12 +112,12 @@ describe('ScrollHandler Tests', () => {
       );
       // there should be a delay before the snap
       expect(useScroll.getState().scrollPosition).toBeCloseTo(percentageOfScreenTravelled * touchStrength);
-      
+
       // skip snap timer
       jest.runOnlyPendingTimers();
       // scroll should snap to nearest whole number
       expect(useScroll.getState().scrollPosition).toBeCloseTo(Math.round(percentageOfScreenTravelled * touchStrength));
-    }) 
+    });
   });
 
   test('Out of Bounds Scrolling', () => {
@@ -135,7 +135,7 @@ describe('ScrollHandler Tests', () => {
       );
       // scroll should be kept in bounds
       expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
-    })
+    });
 
     // set scroll to max and attempt to scroll past
     act(() => {
@@ -151,10 +151,9 @@ describe('ScrollHandler Tests', () => {
       );
       // scroll should be kept in bounds
       expect(useScroll.getState().scrollPosition).toBeCloseTo(useScroll.getState().maxScroll);
-    })
-  })
+    });
+  });
 });
-
 
 /* jsdom doesnt support touch events natively so we have to manually recreate them */
 
@@ -186,13 +185,13 @@ class TouchList {
 
 // recreate minimal touch event (we only need the argtype and touch list)
 interface TouchEventInit extends EventInit {
-  touches: TouchList
+  touches: TouchList;
 }
 class TouchEvent extends Event {
   touches: TouchList;
 
   constructor(typeArg: string, eventInit: TouchEventInit) {
-    super(typeArg, eventInit)
+    super(typeArg, eventInit);
     this.touches = eventInit.touches;
   }
 }

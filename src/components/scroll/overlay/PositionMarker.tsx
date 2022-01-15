@@ -80,7 +80,9 @@ function PositionMarker({ isVertical, size, offsetDistance, numSections, jumpDir
       style={{
         '--shift': `${scrollPosition * offsetDistance}px`,
         '--rotate':
-          jumpDirection !== 0 ? rotate.to((value) => `${value * Math.PI}`).to((value) => value + "rad") : `${scrollPosition * Math.PI}rad`
+          jumpDirection !== 0
+            ? rotate.to((value) => `${value * Math.PI}`).to((value) => value + 'rad')
+            : `${scrollPosition * Math.PI}rad`
       }}
     >
       <Square strokeWidth={2} />

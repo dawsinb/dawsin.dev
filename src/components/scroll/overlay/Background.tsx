@@ -4,9 +4,9 @@ import { animated } from '@react-spring/web';
 interface BackgroundProps {
   $isVertical: boolean;
   style: CssProperties & {
-    '--size': AnimatedValue<number>
-    '--opacity': AnimatedValue<number>
-  }
+    '--size': AnimatedValue<number>;
+    '--opacity': AnimatedValue<number>;
+  };
 }
 const Background = styled(animated.div)<BackgroundProps>`
   position: absolute;

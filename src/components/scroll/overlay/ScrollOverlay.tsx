@@ -44,7 +44,7 @@ function ScrollOverlay({ numSections, sectionNames = [] }: ScrollOverlayProps) {
   const width = isVertical ? numSections * offsetDistance + size : size * 4;
 
   // calculate background size
-  const largestNameLength = sectionNames.reduce((a, b) => (a.length > b.length ? a : b), "").length;
+  const largestNameLength = sectionNames.reduce((a, b) => (a.length > b.length ? a : b), '').length;
   const scaleFactor = isVertical ? 2.5 : 3.5;
   const maxBackgroundSize = (Math.max(largestNameLength, scaleFactor) / scaleFactor) * 100;
 

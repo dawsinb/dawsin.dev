@@ -9,7 +9,12 @@ interface ScrollHandlerProps {
   touchStrength?: number;
 }
 
-function ScrollHandler({ numSections, sectionNames = [], wheelStrength = 0.075, touchStrength = 3.5 }: ScrollHandlerProps) {
+function ScrollHandler({
+  numSections,
+  sectionNames = [],
+  wheelStrength = 0.075,
+  touchStrength = 3.5
+}: ScrollHandlerProps) {
   // update scroll store with number of sections
   useScroll.setState({ maxScroll: numSections - 1 });
 
