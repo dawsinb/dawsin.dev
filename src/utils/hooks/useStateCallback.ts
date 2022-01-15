@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-function useStateCallback(initialValue: unknown) {
+function useStateCallback<T>(initialValue: T) {
   const [value, setValue] = useState(initialValue);
   const callbackRef = useRef<() => void>();
   const isFirst = useRef(true);
@@ -19,12 +19,21 @@ function useStateCallback(initialValue: unknown) {
   }, [value]);
 
   // define callback
-  const setValueCallback = useCallback((newVal: unknown, callback: () => void) => {
+  const setValueCallback = useCallback((newValue: T | ((prevValue?: T) => T), callback?: () => void) => {
     callbackRef.current = callback;
-    setValue(newVal);
+
+    if (newValue instanceof Function) {
+      setValue(newValue());
+    } else {
+      setValue(newValue);
+    }
   }, []);
 
-  return [value, setValueCallback];
+  return [value, setValueCallback] as const;
 }
 
+// provide type definition for setter function
+type SetValue<T> = (newValue: T | ((prevValue?: T) => T), callback?: () => void) => void;
+
 export default useStateCallback;
+export type { SetValue };

@@ -24,14 +24,8 @@ const config = {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              "@babel/preset-react",
-              "@babel/preset-typescript",
-            ],
-          },
+          loader: "babel-loader"
+          
         },
       },
 
@@ -74,5 +68,9 @@ if (process.env.NODE_ENV === 'production') {
     })
   )
 }
+
+//if (process.env.NODE_ENV !== 'test') {
+//  config.module.rules[0].exclude.push(path.join(__dirname, '/src/tests.d.ts'))
+//}
 
 module.exports = config

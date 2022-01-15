@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
-import useStore from 'Utils/hooks/useStore';
+import useTheme from 'Utils/stores/theme';
 import { Section, SectionItem } from 'Components/sections/Section';
 import Refractor from 'Components/refractor/Refractor';
 import useFont from 'Utils/hooks/useFont';
@@ -11,8 +11,8 @@ function Title({ index, parallax }) {
   const { size } = useThree();
 
   // get colors
-  const primary = useStore((state) => state.primaryColor);
-  const secondary = useStore((state) => state.secondaryColor);
+  const primary = useTheme((state) => state.primaryColor);
+  const secondary = useTheme((state) => state.secondaryColor);
 
   // calculate Positions and sizes
   const titleX = 0;

@@ -27,7 +27,8 @@
     "deploy": "echo 'test.dawsin.dev' > ./build/CNAME && gh-pages -d build",
     "predeploy": "npm run build",
     "format": "prettier --write \"{src,__tests__}/**/*+(.ts|.tsx|.js|.jsx|.css)\"",
-    "test": "jest --env=node --colors test"
+    "test": "jest test --silent=false",
+    "snapshot": "jest test --updateSnapshot"
   },
   "browserslist": {
     "production": [
@@ -50,7 +51,9 @@
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.16.7",
     "@svgr/webpack": "^6.1.2",
+    "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.4.0",
+    "@types/react-test-renderer": "^17.0.1",
     "@types/styled-components": "^5.1.20",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",

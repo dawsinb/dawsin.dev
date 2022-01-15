@@ -1,29 +1,40 @@
 import { useState, useRef, useEffect } from 'react';
-import { animated } from '@react-spring/web';
-import { useSpring, useSpringRef, useChain } from '@react-spring/core';
 import styled from 'styled-components';
-import useStore from 'Utils/hooks/useStore';
+import { animated } from '@react-spring/web';
+import { useSpring, useSpringRef, useChain, SpringValue } from '@react-spring/core';
+import useLayout from 'Utils/stores/layout';
 import useStateCallback from 'Utils/hooks/useStateCallback';
 import Background from 'Components/scroll/overlay/Background';
 import SectionMarker from 'Components/scroll/overlay/SectionMarker';
 import PositionMarker from 'Components/scroll/overlay/PositionMarker';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Container = styled(({ isVertical, ...props }) => <animated.div {...props} />)`
+interface ContainerProps {
+  $isVertical: boolean;
+  $width: number;
+  $height: number;
+  style: CssProperties & {
+    '--scale': AnimatedValue<number>;
+  };
+}
+const Container = styled(animated.div)<ContainerProps>`
   position: fixed;
-  right: ${(props) => (props.isVertical ? `calc(50% - ${props.width / 2}px)` : '0')};
-  top: ${(props) => (props.isVertical ? 'auto' : `calc(50% - ${props.height / 2}px)`)};
-  bottom: ${(props) => (props.isVertical ? '0' : 'auto')};
-  height: ${(props) => props.height}px;
-  width: ${(props) => props.width}px;
+  right: ${({ $isVertical, $width }) => ($isVertical ? `calc(50% - ${$width / 2}px)` : '0')};
+  top: ${({ $isVertical, $height }) => ($isVertical ? 'auto' : `calc(50% - ${$height / 2}px)`)};
+  bottom: ${({ $isVertical }) => ($isVertical ? '0' : 'auto')};
+  height: ${({ $height }) => $height}px;
+  width: ${({ $width }) => $width}px;
   z-index: 2;
-  transform-origin: ${(props) => (props.isVertical ? 'center bottom' : 'center right')};
+  transform-origin: ${({ $isVertical }) => ($isVertical ? 'center bottom' : 'center right')};
   transform: scale(var(--scale, 1));
 `;
 
-function ScrollOverlay({ numSections, sectionNames }) {
+interface ScrollOverlayProps {
+  numSections: number;
+  sectionNames?: string[];
+}
+function ScrollOverlay({ numSections, sectionNames = [] }: ScrollOverlayProps) {
   // switch to vertical layout if screen size is vertical
-  const isVertical = useStore((state) => state.isVertical);
+  const isVertical = useLayout((state) => state.isVertical);
 
   // calculate marker size and offset between markers
   const size = Math.ceil(window.innerHeight / (9 * numSections));
@@ -33,11 +44,14 @@ function ScrollOverlay({ numSections, sectionNames }) {
   const width = isVertical ? numSections * offsetDistance + size : size * 4;
 
   // calculate background size
-  const largestNameLength = sectionNames.reduce((a, b) => (a.length > b.length ? a : b)).length;
-  const maxBackgroundSize = (largestNameLength / (isVertical ? 2.5 : 3.5)) * 100;
+  const largestNameLength = sectionNames.reduce((a, b) => (a.length > b.length ? a : b), "").length;
+  const scaleFactor = isVertical ? 2.5 : 3.5;
+  const maxBackgroundSize = (Math.max(largestNameLength, scaleFactor) / scaleFactor) * 100;
 
   // calculate offsets for marker positions
-  const offsetFactors = [...Array(numSections)].map((_, index) => index - (numSections - 1) / 2);
+  const offsetFactors = Array.from({ length: numSections }, (_, index) => index).map(
+    (index) => index - (numSections - 1) / 2
+  );
 
   // state toggle used to interpolate values for animations
   const [toggle, setToggle] = useState(false);
@@ -54,7 +68,7 @@ function ScrollOverlay({ numSections, sectionNames }) {
     toggle: Number(toggle)
   }).toggle;
   const textSpringRefs = [];
-  const textToggles = [];
+  const textToggles: SpringValue<number>[] = [];
   for (let i = 0; i < numSections; i++) {
     textSpringRefs[i] = useSpringRef();
     textToggles[i] = useSpring({
@@ -73,9 +87,9 @@ function ScrollOverlay({ numSections, sectionNames }) {
   );
 
   // state for handling spin of marker when clicking on a section
-  const [jumpDirection, setJumpDirection] = useStateCallback(null);
+  const [jumpDirection, setJumpDirection] = useStateCallback<number>(0);
   // timeout ref to handle spin reset across multiple markers
-  const timeoutRef = useRef();
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   // make the overlay interactable after a very short delay to prevent touches from interacting when opening the menu
   const [active, setActive] = useState(false);
@@ -89,18 +103,18 @@ function ScrollOverlay({ numSections, sectionNames }) {
     <Container
       onMouseEnter={() => setToggle(true)}
       onMouseLeave={() => setToggle(false)}
-      isVertical={isVertical}
-      width={width}
-      height={height}
+      $isVertical={isVertical}
+      $width={width}
+      $height={height}
       style={{
         '--scale': overlayToggle.to({ output: [1, 1.5] })
       }}
     >
       <Background
-        isVertical={isVertical}
+        $isVertical={isVertical}
         style={{
           '--size': bgToggle.to({ output: [100, maxBackgroundSize] }).to((value) => `${value}%`),
-          opacity: bgToggle.to({ output: [0, 1] })
+          '--opacity': bgToggle.to({ output: [0, 1] })
         }}
       />
 

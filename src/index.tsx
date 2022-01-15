@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
 }
 
 // get url on load start
-let currentUrl: string;
+let currentUrl = '';
 DefaultLoadingManager.onStart = (url: string) => {
   currentUrl = url;
 };
