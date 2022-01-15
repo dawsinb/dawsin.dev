@@ -10,7 +10,7 @@ describe('ScrollHandler Tests', () => {
   Object.defineProperty(window, 'innerHeight', { value: 1080 });
 
   // scroll handler params
-  const wheelStrength = 0.075;
+  const wheelStrength = 0.1;
   const touchStrength = 3.5;
 
   // single mouse wheel has delta of 100 positive or negative

@@ -12,7 +12,7 @@ interface ScrollHandlerProps {
 function ScrollHandler({
   numSections,
   sectionNames = [],
-  wheelStrength = 0.075,
+  wheelStrength = 0.1,
   touchStrength = 3.5
 }: ScrollHandlerProps) {
   // update scroll store with number of sections
