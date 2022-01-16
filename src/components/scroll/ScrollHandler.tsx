@@ -1,14 +1,41 @@
+/**
+ * Test
+ * @module Components/ScrollHandler
+ * @mergeTarget 
+ */
+
 import { useEffect } from 'react';
 import useScroll from 'Utils/stores/scroll';
 import ScrollOverlay from 'Components/scroll/overlay/ScrollOverlay';
 
+/** Props for {@link ScrollHandler} */
 interface ScrollHandlerProps {
+  /** Number of sections, needed to set max scroll range */
   numSections: number;
+  /** Optional list of titles for each section to be displayed in {@link ScrollOverlay} */
   sectionNames?: string[];
+  /** Amount of the page a single movement of the scroll wheel scrolls
+   * 
+   *  *defaults to 0.1*
+   */
   wheelStrength?: number;
+  /**
+   * Amount that the movement of a touch is multiplied by. 
+   * In other words `1 / wheelStrength` gives the percentage of the screen that must be moved for a full page scroll
+   * 
+   * *defaults to 3.5*
+   */
   touchStrength?: number;
 }
-
+/**
+ * Creates a scroll handler which updates the global scroll store. Can handle both mouse wheel/trackpad and touch scrolling.
+ * 
+ * Also creates an interactable {@link ScrollOverlay scroll overlay} to show scroll position and allow jumping to {@link Section sections}
+ * 
+ * The scroll store can be accessed using the {@link useTransientScroll} hook or directly using {@link useScroll}
+ * @param props 
+ * @category Component
+ */
 function ScrollHandler({
   numSections,
   sectionNames = [],
@@ -92,4 +119,4 @@ function ScrollHandler({
   return <ScrollOverlay numSections={numSections} sectionNames={sectionNames} />;
 }
 
-export default ScrollHandler;
+export { ScrollHandler };

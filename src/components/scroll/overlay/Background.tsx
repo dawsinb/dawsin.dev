@@ -1,13 +1,28 @@
+/**
+ * Test
+ * @module Components/ScrollOverlay
+ * @mergeTarget 
+ */
+
 import styled from 'styled-components';
 import { animated } from '@react-spring/web';
+import { MutableRefObject, useRef } from 'react';
 
+/** Props for {@link Background} */
 interface BackgroundProps {
+  /** Determines if vertical layout should be used */
   $isVertical: boolean;
+  /** Handles css variables for animating css */
   style: CssProperties & {
-    '--size': AnimatedValue<number>;
+    /** test */
+    '--size': AnimatedValue<string>;
     '--opacity': AnimatedValue<number>;
   };
 }
+/**
+ * style handler for {@link Background}
+ * @category Style Provider
+ */
 const Background = styled(animated.div)<BackgroundProps>`
   position: absolute;
   right: ${({ $isVertical }) => ($isVertical ? 'auto' : 0)};
@@ -20,3 +35,4 @@ const Background = styled(animated.div)<BackgroundProps>`
 `;
 
 export default Background;
+export type { BackgroundProps };

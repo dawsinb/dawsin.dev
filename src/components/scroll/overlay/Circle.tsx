@@ -1,3 +1,9 @@
+/**
+ * Test
+ * @module Components/ScrollOverlay
+ * @mergeTarget 
+ */
+
 interface CircleProps {
   diameter?: number;
   strokeWidth?: number;

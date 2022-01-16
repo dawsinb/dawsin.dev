@@ -1,3 +1,9 @@
+/**
+ * Test
+ * @module Components/ScrollOverlay
+ * @mergeTarget 
+ */
+
 interface SquareProps {
   sideLength?: number;
   strokeWidth?: number;

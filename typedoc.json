@@ -1,6 +1,6 @@
 {
   "entryPoints": ["./src"],
   "entryPointStrategy": "expand",
-  "categorizeByGroup": true,
+  "mergeModulesMergeMode": "module",
   "out": "docs"
 }
