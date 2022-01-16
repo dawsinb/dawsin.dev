@@ -1,7 +1,7 @@
 /**
  * Test
  * @module Components/Section
- * @mergeTarget 
+ * @mergeTarget
  */
 
 import { createContext, useRef, useContext, ReactNode } from 'react';
@@ -12,27 +12,27 @@ import { Group } from 'three';
 
 /**
  * Creates a react context to allow for children to know the offset and parallax of the parent section
- * 
+ *
  * Used by {@link SectionItem} to set up relative parallax
  */
 const ParallaxContext = createContext({ offset: 0, parallax: 1 });
 
 /** Props for {@link Section} */
 interface SectionProps {
-  /** 
+  /**
    * Whole number index of the section starting at 0
-   * 
+   *
    * ***do not skip indicies as it may lead to unexpected behavior***
    */
-  index: number,
-  /** 
+  index: number;
+  /**
    *  Parallax factor which determines how fast the section will scroll in. Can be set to a negative number to scroll backwards
-   * 
+   *
    *  *defaults to 1 for regular scroll speed*
    */
-  parallax?: number,
+  parallax?: number;
   /** Children contained within the section */
-  children?: ReactNode
+  children?: ReactNode;
 }
 /**
  * Creates a section to anchor elements to a screen in a one page scroll layout
@@ -60,7 +60,7 @@ function Section({ index, parallax = 1, children }: SectionProps) {
         scrollRef.current * size.height * parallax,
         0.07
       );
-    } 
+    }
   });
 
   return (
@@ -74,18 +74,18 @@ function Section({ index, parallax = 1, children }: SectionProps) {
 
 // creates a sub section item which can have a different parallax than the parent
 interface SectionItemProps {
-  /** 
+  /**
    *  Parallax factor which determines how fast the section will scroll in relative to the parent parallax. Can be set to a negative number to scroll backwards
-   * 
+   *
    *  *defaults to 1, which matches the parent scroll speed*
    */
-  parallax?: number,
+  parallax?: number;
   /** Children contained within the sub-section */
-  children: ReactNode
+  children: ReactNode;
 }
 /**
  * Creates a sub-section which can have a different parallax than the parent, allowing elements within a page to be scrolled in at different rates
- * @param props 
+ * @param props
  * @category Component
  */
 function SectionItem({ parallax = 1, children }: SectionItemProps) {
@@ -108,7 +108,7 @@ function SectionItem({ parallax = 1, children }: SectionItemProps) {
         scrollRef.current * size.height * parallax * parentParallax,
         0.07
       );
-    } 
+    }
   });
 
   return (
@@ -119,4 +119,4 @@ function SectionItem({ parallax = 1, children }: SectionItemProps) {
 }
 
 export { Section, SectionItem, ParallaxContext };
-export type {SectionProps, SectionItemProps}
+export type { SectionProps, SectionItemProps };

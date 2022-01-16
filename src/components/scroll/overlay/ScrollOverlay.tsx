@@ -1,7 +1,7 @@
 /**
  * Test
  * @module Components/ScrollOverlay
- * @mergeTarget 
+ * @mergeTarget
  */
 
 import { useState, useRef, useEffect } from 'react';

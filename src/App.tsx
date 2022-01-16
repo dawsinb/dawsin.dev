@@ -17,7 +17,7 @@ const CanvasContainer = styled('div')`
 
 /**
  * The base app component that is rendered by react.
- * 
+ *
  * As a single page application this is where all screens should go, alongside any global state handlers such as layout and their respective default params.
  * @category Component
  */
