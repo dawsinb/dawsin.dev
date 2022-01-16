@@ -4,6 +4,9 @@
 # production
 /build
 
+# documentation
+/docs
+
 # build scripts
 /public/loading/assetMap.json
 

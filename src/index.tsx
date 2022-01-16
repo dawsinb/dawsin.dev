@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { DefaultLoadingManager } from 'three';
-import App from './App';
+import { App } from './App';
 
 // register service worker
 if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {

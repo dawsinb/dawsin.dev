@@ -1,0 +1,6 @@
+{
+  "entryPoints": ["./src"],
+  "entryPointStrategy": "expand",
+  "categorizeByGroup": true,
+  "out": "docs"
+}

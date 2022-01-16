@@ -15,6 +15,12 @@ const CanvasContainer = styled('div')`
   height: 100%;
 `;
 
+/**
+ * The base app component that is rendered by react.
+ * 
+ * As a single page application this is where all screens should go, alongside any global state handlers such as layout and their respective default params.
+ * @category Component
+ */
 function App() {
   // switch to vertical layout if height > width
   useEffect(() => {
@@ -41,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };
