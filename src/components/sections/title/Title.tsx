@@ -62,8 +62,8 @@ function Title({ index, parallax }: TitleProps) {
   }, []);
 
   // rotate text to look at mouse position
-  const mouseX = useRef<number>(0)
-  const mouseY = useRef<number>(0)
+  const mouseX = useRef<number>(0);
+  const mouseY = useRef<number>(0);
   useFrame(({ mouse }) => {
     if (textGroupRef.current) {
       // lerp position values to mouse position to smooth movement
