@@ -7,18 +7,18 @@ import { useMemo, useRef } from 'react';
 import { Mesh, WebGLRenderTarget } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import BackfaceMaterial from 'Components/refractor/shaders/BackfaceMaterial';
-import RefractionMaterial from 'Components/refractor/shaders/RefractionMaterial';
+import { BackfaceMaterial } from 'Components/refractor/shaders/BackfaceMaterial';
+import { RefractionMaterial } from 'Components/refractor/shaders/RefractionMaterial';
 import useTransientScroll from 'utils/hooks/useTransientScroll';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {
   /** Index of section refractor is in; used to prevent unnecessary computations when off screen */
-  index: number
+  index: number;
 }
 /**
  * Refractor used in {@link Title} to create shifting/splitting effect.
- * 
+ *
  * *Objects should be placed on layer 1 in order to be affected by the refractor*
  * @category Component
  */
@@ -51,7 +51,7 @@ function Refractor({ index }: RefractorProps) {
   const scrollRef = useTransientScroll();
 
   useFrame(({ clock }) => {
-    if (model.current && (scrollRef.current < (index + 1) && scrollRef.current > (index - 1))) {
+    if (model.current && scrollRef.current < index + 1 && scrollRef.current > index - 1) {
       // rotate model
       model.current.rotateX(0.006);
       model.current.rotateY(0.004);
@@ -81,7 +81,13 @@ function Refractor({ index }: RefractorProps) {
   });
 
   return (
-    <mesh onUpdate={(self) => self.geometry.center()} ref={model} geometry={nodes.refractor.geometry} position={[0, 0, 100]} scale={scale}>
+    <mesh
+      onUpdate={(self) => self.geometry.center()}
+      ref={model}
+      geometry={nodes.refractor.geometry}
+      position={[0, 0, 100]}
+      scale={scale}
+    >
       <meshBasicMaterial />
     </mesh>
   );

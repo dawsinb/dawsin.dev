@@ -25,4 +25,4 @@ type AnimatedValue<T> = import('@react-spring/core').Interpolation<any, T>;
 type GLTF = import('three-stdlib').GLTF & {
   nodes: Record<string, import('three').Mesh>;
   materials: Record<string, import('three').Material>;
-}
+};
