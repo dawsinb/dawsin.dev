@@ -69,8 +69,8 @@ const TextContainer = styled(animated.div)<TextContainerProps>`
   writing-mode: ${({ $isVertical }) => ($isVertical ? 'vertical-lr' : 'horizontal-lr')};
   text-orientation: ${({ $isVertical }) => ($isVertical ? 'upright' : 'horizontal')};
   // position from right if horizontal; from bottom if vertical
-  right: ${({ $isVertical, $size }) => ($isVertical ? 0 : $size * 5)}px;
-  bottom: ${({ $isVertical, $size }) => ($isVertical ? $size * 5 : 0)}px;
+  right: ${({ $isVertical, $size }) => ($isVertical ? 0 : $size * 5.5)}px;
+  bottom: ${({ $isVertical, $size }) => ($isVertical ? $size * 5.5 : 0)}px;
   // apply transforms
   transform: 
     // center
