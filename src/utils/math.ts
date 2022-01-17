@@ -1,5 +1,5 @@
 /**
- * Utility functions to re-use common functionality
+ * Utility functions to reuse common functionality
  * @module Utils
  * @mergeTarget
  */
