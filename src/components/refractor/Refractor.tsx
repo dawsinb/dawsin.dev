@@ -13,13 +13,14 @@ import { useTransientScroll } from 'utils/hooks/useTransientScroll';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {
-  /** Index of section refractor is in; used to prevent unnecessary computations when off screen */
+  /** Index of section the {@link Refractor refractor} is in; used to prevent unnecessary computations when off screen */
   index: number;
 }
 /**
  * Refractor used in {@link Title} to create shifting/splitting effect.
  *
  * *Objects should be placed on layer 1 in order to be affected by the refractor*
+ * @param props
  * @category Component
  */
 function Refractor({ index }: RefractorProps) {
