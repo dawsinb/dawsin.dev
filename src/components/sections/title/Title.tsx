@@ -15,7 +15,9 @@ import { Refractor } from 'Components/sections/title/refractor/Refractor';
 
 /** Props for {@link Title} */
 interface TitleProps {
+  /** Index of the {@link Section section} */
   index: number;
+  /** Parallax of the {@link Section section} */
   parallax?: number;
 }
 /**
