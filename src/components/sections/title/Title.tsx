@@ -4,13 +4,14 @@
  */
 
 import { useEffect, useRef } from 'react';
+import { Group, Mesh, Vector3 } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
+import { useFont } from 'Hooks/useFont';
 import { useTheme } from 'Stores/theme';
+import { lerp } from 'Utils/math';
 import { Section, SectionItem } from 'Components/sections/Section';
 import { Refractor } from 'Components/sections/title/refractor/Refractor';
-import { useFont } from 'Hooks/useFont';
-import { Group, Mesh, Vector3 } from 'three';
 
 /** Props for {@link Title} */
 interface TitleProps {
@@ -61,9 +62,15 @@ function Title({ index, parallax }: TitleProps) {
   }, []);
 
   // rotate text to look at mouse position
+  const mouseX = useRef<number>(0)
+  const mouseY = useRef<number>(0)
   useFrame(({ mouse }) => {
     if (textGroupRef.current) {
-      textGroupRef.current.lookAt(mouse.x * size.width, mouse.y * size.height, 4000);
+      // lerp position values to mouse position to smooth movement
+      mouseX.current = lerp(mouseX.current, mouse.x, 0.07);
+      mouseY.current = lerp(mouseY.current, mouse.y, 0.07);
+      // set rotation
+      textGroupRef.current.lookAt(mouseX.current * size.width, mouseY.current * size.height, 4000);
     }
   });
 
