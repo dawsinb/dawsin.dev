@@ -93,4 +93,5 @@ function Refractor({ index }: RefractorProps) {
   );
 }
 
-export default Refractor;
+export { Refractor };
+export type { RefractorProps };

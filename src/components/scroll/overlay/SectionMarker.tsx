@@ -9,7 +9,7 @@ import { animated, SpringValue } from '@react-spring/web';
 import { useScroll } from 'Utils/stores/scroll';
 import { Circle } from 'Components/scroll/overlay/Circle';
 import { Square } from 'Components/scroll/overlay/Square';
-import { SetValue } from 'Utils/hooks/useStateCallback';
+import { SetValueCallback } from 'Utils/hooks/useStateCallback';
 import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
 
 /** Props for {@link Container} */
@@ -98,7 +98,7 @@ interface SectionMarkerProps {
   /** The spring toggle for this marker's text */
   textToggle: SpringValue<number>;
   /** Function to set the jump direction used by {@link PositionMarker} to determine spin while rotating */
-  setJumpDirection: SetValue<number>;
+  setJumpDirection: SetValueCallback<number>;
   /** Timeout id to reset {@link PositionMarker} from using jump rotation after user is done jumping sections */
   timeoutRef: React.MutableRefObject<NodeJS.Timeout | undefined>;
 }

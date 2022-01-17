@@ -1,6 +1,15 @@
+/**
+ * @module Hooks
+ * @mergeTarget
+ */
+
 import { useRef, useEffect } from 'react';
 import { useScroll } from 'Utils/stores/scroll';
 
+/**
+ * Creates a transient subscription to the scroll position of {@link useScroll} to allow for tracking of the scroll position without causing a rerender
+ * @returns A react ref containing the scroll position
+ */
 function useTransientScroll() {
   // store scroll position in a ref so that it is preserved on rerender and doesn't cause a rerender itself
   const scrollRef = useRef(useScroll.getState().scrollPosition);

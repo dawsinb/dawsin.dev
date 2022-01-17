@@ -62,7 +62,7 @@ exports[`ScrollHandler Tests Render 1`] = `
         </svg>
       </div>
       <div
-        class="sc-hKwDye jUTviT"
+        class="sc-hKwDye cnVMpZ"
         style="--opacity: 0; --shift: 80px;"
       />
     </div>
@@ -91,7 +91,7 @@ exports[`ScrollHandler Tests Render 1`] = `
         </svg>
       </div>
       <div
-        class="sc-hKwDye jUTviT"
+        class="sc-hKwDye cnVMpZ"
         style="--opacity: 0; --shift: 80px;"
       />
     </div>
@@ -121,7 +121,7 @@ exports[`ScrollHandler Tests Render 1`] = `
         </svg>
       </div>
       <div
-        class="sc-hKwDye jUTviT"
+        class="sc-hKwDye cnVMpZ"
         style="--opacity: 0; --shift: 80px;"
       />
     </div>
