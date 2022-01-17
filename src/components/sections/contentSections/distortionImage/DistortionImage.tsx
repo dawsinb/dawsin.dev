@@ -12,12 +12,15 @@ import { useTransientScroll } from 'Hooks/useTransientScroll';
 
 /** Props for {@link DistortionImage} */
 interface DistortionImageProps {
+  /** Width of the image */
   width: number;
+  /** Height of the image */
   height: number;
+  /** Texture to use for the image */
   texture: Texture;
 }
 /**
- * TODO: add documentation
+ * Displays a texture on a plane with a custom shader to distort around the users mouse position
  * @param props
  * @returns
  */

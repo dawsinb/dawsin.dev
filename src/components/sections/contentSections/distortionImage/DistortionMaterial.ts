@@ -7,7 +7,7 @@
 import { extend } from '@react-three/fiber';
 import { ShaderMaterial, Vector2, GLSL3, Texture } from 'three';
 
-/** TODO: Add documentation */
+/** Creates distortion effect centered at mouse position */
 class DistortionMaterial extends ShaderMaterial {
   constructor() {
     super({
