@@ -3,9 +3,6 @@ import { act } from 'react-dom/test-utils';
 import useScroll from 'Utils/stores/scroll';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 
-// TODO: Fix store not updating
-// TODO: Fix cancelAnimationFrame bug
-
 describe('ScrollHandler Tests', () => {
   // define window size
   Object.defineProperty(window, 'innerWidth', { value: 1920 });
@@ -18,14 +15,15 @@ describe('ScrollHandler Tests', () => {
   // single mouse wheel has delta of 100 positive or negative
   const deltaY = 100;
 
+  // switch to fake timers
+  jest.useFakeTimers();
+
   // render component
   const { container } = render(
     <ScrollHandler numSections={3} wheelStrength={wheelStrength} touchStrength={touchStrength} />
   );
 
   beforeEach(() => {
-    // switch to fake timers
-    jest.useFakeTimers();
     // reset scroll
     useScroll.setState({ scrollPosition: 0 });
   });

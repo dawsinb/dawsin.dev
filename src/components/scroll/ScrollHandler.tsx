@@ -52,9 +52,9 @@ function ScrollHandler({
   let timeout: NodeJS.Timeout;
 
   /* scrolling via mouse wheel */
-
+  
   const handleWheel = (event: WheelEvent) => {
-    console.log('test');
+    
     // adjust scroll position
     applyScrollDelta((event.deltaY / 100) * wheelStrength);
 
@@ -107,13 +107,6 @@ function ScrollHandler({
     window.addEventListener('touchstart', handleTouchstart);
     window.addEventListener('touchmove', handleTouchmove);
     window.addEventListener('touchend', handleTouchend);
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchstart);
-      window.removeEventListener('touchmove', handleTouchmove);
-      window.removeEventListener('touchend', handleTouchend);
-    };
   }, []);
 
   return <ScrollOverlay numSections={numSections} sectionNames={sectionNames} />;
