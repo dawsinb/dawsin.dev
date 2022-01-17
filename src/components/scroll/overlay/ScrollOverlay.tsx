@@ -19,7 +19,7 @@ interface ScrollOverlayContextInterface {
   isVertical: boolean;
 }
 /**
- * Creates a react context to expose common variables to children. See {@link ScrollOverlayContextInterface} for the variables it provides
+ * Provides a react context to expose common variables to all scroll overlay components. See {@link ScrollOverlayContextInterface} for the variables it provides
  */
 const ScrollOverlayContext = createContext<ScrollOverlayContextInterface>({ isVertical: false });
 
