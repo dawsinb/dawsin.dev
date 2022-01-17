@@ -69,7 +69,7 @@ function Title({ index, parallax }) {
       </SectionItem>
 
       <SectionItem parallax={20}>
-        <Refractor />
+        <Refractor index={index} />
       </SectionItem>
     </Section>
   );

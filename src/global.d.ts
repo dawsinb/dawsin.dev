@@ -20,3 +20,9 @@ type CssProperties = import('csstype').Properties;
 // workaround for interpolated values having an ambiguous In type that is uneeded
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnimatedValue<T> = import('@react-spring/core').Interpolation<any, T>;
+
+// workaround to add node/material type support to r3f gltf loader
+type GLTF = import('three-stdlib').GLTF & {
+  nodes: Record<string, import('three').Mesh>;
+  materials: Record<string, import('three').Material>;
+}
