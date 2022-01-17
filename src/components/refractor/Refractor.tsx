@@ -7,9 +7,9 @@ import { useMemo, useRef } from 'react';
 import { Mesh, WebGLRenderTarget } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
+import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { BackfaceMaterial } from 'Components/refractor/shaders/BackfaceMaterial';
 import { RefractionMaterial } from 'Components/refractor/shaders/RefractionMaterial';
-import { useTransientScroll } from 'utils/hooks/useTransientScroll';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {

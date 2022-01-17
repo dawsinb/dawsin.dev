@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import { useScroll } from 'Utils/stores/scroll';
+import { useScroll } from 'Stores/scroll';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 
 describe('ScrollHandler Tests', () => {

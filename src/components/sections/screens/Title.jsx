@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
-import { useTheme } from 'Utils/stores/theme';
+import { useTheme } from 'Stores/theme';
 import { Section, SectionItem } from 'Components/sections/Section';
 import { Refractor } from 'Components/refractor/Refractor';
-import { useFont } from 'Utils/hooks/useFont';
+import { useFont } from 'Hooks/useFont';
 
 function Title({ index, parallax }) {
   // calculate base width and height

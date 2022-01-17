@@ -5,6 +5,8 @@
     "baseUrl": "src",
     "paths": {
       "Components": ["components"],
+      "Hooks": ["hooks"],
+      "Stores": ["stores"],
       "Utils": ["utils"]
     },
     "forceConsistentCasingInFileNames": false,

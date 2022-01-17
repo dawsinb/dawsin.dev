@@ -4,7 +4,7 @@
  */
 
 import { useRef, useEffect } from 'react';
-import { useScroll } from 'Utils/stores/scroll';
+import { useScroll } from 'Stores/scroll';
 
 /**
  * Creates a transient subscription to the scroll position of {@link useScroll} to allow for tracking of the scroll position without causing a rerender

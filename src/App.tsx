@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import styled from 'styled-components';
-import { useLayout } from 'Utils/stores/layout';
+import { useLayout } from 'Stores/layout';
 import Title from 'Components/sections/screens/Title';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 

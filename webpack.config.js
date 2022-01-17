@@ -14,6 +14,8 @@ const config = {
     modules: [path.join(__dirname, '/src'), 'node_modules'],
     alias: {
       Components: path.join(__dirname, '/src/components/'),
+      Hooks: path.join(__dirname, '/src/hooks/'),
+      Stores: path.join(__dirname, '/src/stores/'),
       Utils: path.join(__dirname, '/src/utils/')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg']

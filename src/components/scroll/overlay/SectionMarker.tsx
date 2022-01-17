@@ -6,10 +6,10 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { animated, SpringValue } from '@react-spring/web';
-import { useScroll } from 'Utils/stores/scroll';
+import { useScroll } from 'Stores/scroll';
+import { SetValueCallback } from 'Hooks/useStateCallback';
 import { Circle } from 'Components/scroll/overlay/Circle';
 import { Square } from 'Components/scroll/overlay/Square';
-import { SetValueCallback } from 'Utils/hooks/useStateCallback';
 import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
 
 /** Props for {@link Container} */
