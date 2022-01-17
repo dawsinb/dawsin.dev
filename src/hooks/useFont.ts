@@ -1,4 +1,5 @@
 /**
+ * Custom hooks to provide utility within react components
  * @module Hooks
  * @mergeTarget
  */
