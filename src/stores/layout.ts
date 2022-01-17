@@ -13,6 +13,16 @@ interface LayoutState {
    *  An event listener in {@link App} updates this value on resize to check if screen width < height
    */
   isVertical: boolean;
+  /**
+   * Percentage of the screen used for horizontal margins.
+   * Used to create a margin of `(marginX / 2) * width` on both sides of the page
+   */
+  marginX: number;
+  /**
+   * Percentage of the screen used for vertical margins.
+   * Used to creates a margin of `(marginY / 2) * height` on both ends of the page
+   */
+  marginY: number;
 }
 
 /**
@@ -22,7 +32,9 @@ interface LayoutState {
  * @category Store
  */
 const useLayout = create<LayoutState>(() => ({
-  isVertical: false
+  isVertical: false,
+  marginX: 0,
+  marginY: 0
 }));
 
 export { useLayout };

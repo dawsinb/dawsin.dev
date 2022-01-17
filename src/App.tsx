@@ -2,8 +2,9 @@ import { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import styled from 'styled-components';
 import { useLayout } from 'Stores/layout';
-import { Title } from 'components/sections/index';
+import { Title } from 'Components/sections/index';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
+import { ContentSectionLayout } from 'Components/sections/contentSections/ContentSectionLayout';
 
 const AppContainer = styled('div')`
   width: 100vw;
@@ -22,8 +23,12 @@ const CanvasContainer = styled('div')`
  * @category Component
  */
 function App() {
-  // switch to vertical layout if height > width
+  // set layout variables
   useEffect(() => {
+    // set margins
+    useLayout.setState({ marginX: 0.1, marginY: 0.05 });
+
+    // switch to vertical layout if height > width
     useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
     window.addEventListener('resize', () => {
       useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
