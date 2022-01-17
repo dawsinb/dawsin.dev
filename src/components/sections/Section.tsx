@@ -1,5 +1,4 @@
 /**
- * Test
  * @module Components/Section
  * @mergeTarget
  */
