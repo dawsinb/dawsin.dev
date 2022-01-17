@@ -56,19 +56,40 @@ const Content = styled('div')<ContentProps>`
 
 /** Props for {@link ContentSectionLayout} */
 interface ContentSectionLayoutProps {
+  /** Index of the {@link Section section} */
   index: number;
-  alternate: boolean;
-  image: string;
-  bgText: string;
-  header: string;
+  /** Parallax of the {@link Section section} */
+  parallax?: number;
+  /** Url of the image to display */
+  imageUrl: string;
+  /** Background text content */
+  backgroundText: string;
+  /** Header text content */
+  headerText: string;
+  /** Determines whether to use the primary or secondary color as the main color; Set to true to use secondary */
+  alternateColor: boolean;
+  /** Determines whether to align left or right; Set to true to align right */
+  alternatePosition: boolean;
+  /** Children in the html container  */
   children: ReactNode;
 }
 /**
- * TODO: add documentation
+ * Layout for html content with an image, header, and background text. Use the `alternateColor` and `alternatePosition` to vary each section
+ *
+ * The image uses {@link DistortionImage} to apply a distortion effeft that follows the mouse
  * @param props
  * @returns
  */
-function ContentSectionLayout({ index, alternate, image, bgText, header, children }: ContentSectionLayoutProps) {
+function ContentSectionLayout({
+  index,
+  parallax,
+  imageUrl,
+  backgroundText,
+  headerText,
+  alternateColor,
+  alternatePosition,
+  children
+}: ContentSectionLayoutProps) {
   const { size } = useThree();
 
   // use mobile layout if vertical orientation
@@ -80,17 +101,18 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
   const marginY = useLayout((state) => state.marginY);
   const height = size.height * (1 - marginY);
 
-  // alternate colors
+  // get color palette
   const primary = useTheme((state) => state.primaryColor);
   const primaryBright = useTheme((state) => state.primaryBright);
   const secondary = useTheme((state) => state.secondaryColor);
   const secondaryBright = useTheme((state) => state.secondaryBright);
-  const color = alternate ? primary : secondary;
-  const colorBright = alternate ? primaryBright : secondaryBright;
-  const altColorBright = alternate ? secondaryBright : primaryBright;
+  // determine colors
+  const color = alternateColor ? primary : secondary;
+  const colorBright = alternateColor ? primaryBright : secondaryBright;
+  const altColorBright = alternateColor ? secondaryBright : primaryBright;
 
   // load image
-  const imageTexture = useLoader(TextureLoader, image);
+  const imageTexture = useLoader(TextureLoader, imageUrl);
   useMemo(() => (imageTexture.minFilter = LinearFilter), [imageTexture]);
 
   /* Calculate Positions / sizes */
@@ -102,7 +124,7 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
   const imageHeight = isMobile ? height * 0.3 : height * 0.7;
   const imageWidth = isMobile ? width : width / 1.8;
   // calculate image position
-  const imageX = isMobile ? 0 : (width / 2 - imageWidth / 2) * (alternate ? -1 : 1);
+  const imageX = isMobile ? 0 : (width / 2 - imageWidth / 2) * (alternatePosition ? -1 : 1);
   const imageY = isMobile ? height / 4 : -height * 0.05;
   const imagePosition = new Vector3(imageX, imageY, 1);
 
@@ -110,18 +132,18 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
   const htmlHeight = isMobile ? (height - imageHeight) * 0.75 : imageHeight;
   const htmlWidth = isMobile ? width : width - imageWidth - padding;
   // calculate image position (uses top-left coords instead of centered)
-  const htmlX = isMobile || !alternate ? -width / 2 : imageX + imageWidth / 2 + padding;
+  const htmlX = isMobile || !alternatePosition ? -width / 2 : imageX + imageWidth / 2 + padding;
   const htmlY = isMobile ? imageY - imageHeight / 2 - padding : imageY + imageHeight / 2;
   const htmlPosition = new Vector3(htmlX, htmlY, 10);
 
   // calculate header position and size
-  const headerX = (width / 2) * (alternate ? -1 : 1);
+  const headerX = (width / 2) * (alternatePosition ? -1 : 1);
   const headerY = imageHeight / 2 + imageY + padding;
   const headerPosition = new Vector3(headerX, headerY, -1);
   const headerFontSize = isMobile ? width / 20 : width / 25;
 
   // calculate bg text position and size
-  const bgTextX = (width / 2) * (alternate ? 1 : -1);
+  const bgTextX = (width / 2) * (alternatePosition ? 1 : -1);
   const bgTextY = isMobile ? height / 2.2 : height / 4;
   const bgTextPosition = new Vector3(bgTextX, bgTextY, -10);
   const bgTextFontSize = width / 10;
@@ -134,14 +156,14 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
       if (headerTextRef.current) {
         // create text geometry
         const config = { font: font, size: headerFontSize, height: 1 };
-        headerTextRef.current.geometry = new TextGeometry(header, config);
+        headerTextRef.current.geometry = new TextGeometry(headerText, config);
       }
     });
     useFont('/assets/fonts/ModeNine.json', (font) => {
       if (backgroundTextRef.current) {
         // create text geometry
         const config = { font: font, size: bgTextFontSize, height: 1 };
-        backgroundTextRef.current.geometry = new TextGeometry(bgText, config);
+        backgroundTextRef.current.geometry = new TextGeometry(backgroundText, config);
       }
     });
   }, []);
@@ -151,7 +173,7 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
   const backgroundTextParentRef = useRef<Group>();
   useLayoutEffect(() => {
     // right align background text when alternate
-    if (alternate && backgroundTextRef.current) {
+    if (alternatePosition && backgroundTextRef.current) {
       backgroundTextRef.current.geometry.computeBoundingBox();
       if (backgroundTextRef.current.geometry.boundingBox && backgroundTextParentRef.current) {
         backgroundTextParentRef.current.position.x =
@@ -159,7 +181,7 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
       }
     }
     // right align header text when not alternate
-    if (!alternate && headerTextRef.current) {
+    if (!alternatePosition && headerTextRef.current) {
       headerTextRef.current.geometry.computeBoundingBox();
       if (headerTextRef.current.geometry.boundingBox && headerTextParentRef.current) {
         headerTextParentRef.current.position.x =
@@ -169,7 +191,7 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
   }, [size]);
 
   return (
-    <Section index={index} parallax={1 + (isMobile || !alternate ? 0 : 0.5)}>
+    <Section index={index} parallax={parallax}>
       {/* html content*/}
       <SectionItem parallax={0}>
         <Html style={{ width: htmlWidth, height: htmlHeight }} position={htmlPosition} zIndexRange={[0, 0]}>
@@ -187,7 +209,7 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
       </SectionItem>
 
       {/* header */}
-      <SectionItem parallax={1.0}>
+      <SectionItem parallax={1}>
         <group ref={headerTextParentRef}>
           <mesh ref={headerTextRef} position={headerPosition}>
             <meshBasicMaterial color={color} />
@@ -196,7 +218,7 @@ function ContentSectionLayout({ index, alternate, image, bgText, header, childre
       </SectionItem>
 
       {/* bg text */}
-      <SectionItem parallax={-2.0}>
+      <SectionItem parallax={-2}>
         <group ref={backgroundTextParentRef}>
           <mesh ref={backgroundTextRef} position={bgTextPosition}>
             <meshBasicMaterial transparent color={'#ffffff'} opacity={0.04} />

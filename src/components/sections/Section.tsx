@@ -76,7 +76,7 @@ interface SectionItemProps {
   /**
    *  Parallax factor which determines how fast the section will scroll in relative to the parent parallax. Can be set to a negative number to scroll backwards
    *
-   *  *defaults to 1, which matches the parent scroll speed*
+   *  *defaults to 0, which matches the parent scroll speed*
    */
   parallax?: number;
   /** Children contained within the sub-section */
@@ -87,7 +87,7 @@ interface SectionItemProps {
  * @param props
  * @category Component
  */
-function SectionItem({ parallax = 1, children }: SectionItemProps) {
+function SectionItem({ parallax = 0, children }: SectionItemProps) {
   // get screen size
   const { size } = useThree();
 
