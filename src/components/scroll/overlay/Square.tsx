@@ -1,14 +1,20 @@
 /**
- * Test
  * @module Components/ScrollOverlay
  * @mergeTarget
  */
 
+/** Props for {@link Square} */
 interface SquareProps {
+  /** Side length of the square relative to the stroke width */
   sideLength?: number;
+  /** Size of the outline of the circle relative to the side length */
   strokeWidth?: number;
 }
-
+/**
+ * Svg square element of {@link ScrollOverlay}. Has a white outline and translucent fill
+ * @param props
+ * @category Component
+ */
 function Square({ sideLength = 100, strokeWidth = 2 }: SquareProps) {
   return (
     <svg
@@ -31,4 +37,5 @@ function Square({ sideLength = 100, strokeWidth = 2 }: SquareProps) {
   );
 }
 
-export default Square;
+export { Square };
+export type { SquareProps };

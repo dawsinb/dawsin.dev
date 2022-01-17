@@ -1,12 +1,11 @@
 /**
- * Test
  * @module Components/ScrollHandler
  * @mergeTarget
  */
 
 import { useEffect } from 'react';
 import useScroll from 'Utils/stores/scroll';
-import ScrollOverlay from 'Components/scroll/overlay/ScrollOverlay';
+import { ScrollOverlay } from 'Components/scroll/overlay/ScrollOverlay';
 
 /** Props for {@link ScrollHandler} */
 interface ScrollHandlerProps {
@@ -55,6 +54,7 @@ function ScrollHandler({
   /* scrolling via mouse wheel */
 
   const handleWheel = (event: WheelEvent) => {
+    console.log('test');
     // adjust scroll position
     applyScrollDelta((event.deltaY / 100) * wheelStrength);
 
@@ -120,3 +120,4 @@ function ScrollHandler({
 }
 
 export { ScrollHandler };
+export type { ScrollHandlerProps };

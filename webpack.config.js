@@ -69,8 +69,4 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-//if (process.env.NODE_ENV !== 'test') {
-//  config.module.rules[0].exclude.push(path.join(__dirname, '/src/tests.d.ts'))
-//}
-
 module.exports = config

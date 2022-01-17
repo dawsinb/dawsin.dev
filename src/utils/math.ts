@@ -1,14 +1,26 @@
 /**
- * Linearlly interpolates between the given values
+ * Linearlly interpolates between the given values.
+ *
+ *
  *
  * @param start the number to start from
  * @param end the number to progress to
  * @param progress the amount progressed as a number in the range [0, 1]
- * @returns the result of a linear interpolation between `start` and `end` at the given `progress` percent
+ * @returns
+ * the result of a linear interpolation between `start` and `end` at the given `progress` percent.
+ *
+ * *To prevent an infinite loop in a recursive lerp if `start` is within 0.0001 of `end` it will return `end`*
  * @category Util
  */
 function lerp(start: number, end: number, progress: number) {
-  return start * (1 - progress) + end * progress;
+  // jump to end if start is very close to prevent an inifinite loop in a recursive lerp
+  if (start < end + 0.0001 && start > end - 0.0001) {
+    return end;
+  }
+  // else execute regular lerp function
+  else {
+    return start * (1 - progress) + end * progress;
+  }
 }
 
 /**

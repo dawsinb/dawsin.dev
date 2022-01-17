@@ -11,7 +11,7 @@ function Refractor() {
 
   // load model
   const { nodes } = useGLTF('/assets/models/refractor.glb');
-  console.log(nodes);
+
   const model = useRef();
   // calculate size
   const scale = Math.max(size.width, size.height) / 2;

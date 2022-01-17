@@ -23,7 +23,7 @@ function useStateCallback<T>(initialValue: T) {
     callbackRef.current = callback;
 
     if (newValue instanceof Function) {
-      setValue(newValue());
+      setValue((prevValue) => newValue(prevValue));
     } else {
       setValue(newValue);
     }

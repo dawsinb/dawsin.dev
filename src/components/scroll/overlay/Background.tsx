@@ -1,38 +1,70 @@
 /**
- * Test
  * @module Components/ScrollOverlay
  * @mergeTarget
  */
 
+import { useContext } from 'react';
 import styled from 'styled-components';
-import { animated } from '@react-spring/web';
-import { MutableRefObject, useRef } from 'react';
+import { animated, SpringValue } from '@react-spring/web';
+import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
 
-/** Props for {@link Background} */
-interface BackgroundProps {
-  /** Determines if vertical layout should be used */
+/** Props for {@link BackgroundHandler} */
+interface BackgroundHandlerProps {
   $isVertical: boolean;
-  /** Handles css variables for animating css */
+  $expansionFactor: number;
   style: CssProperties & {
-    /** test */
-    '--size': AnimatedValue<string>;
+    '--expansion': AnimatedValue<number>;
     '--opacity': AnimatedValue<number>;
   };
 }
-/**
- * style handler for {@link Background}
- * @category Style Provider
- */
-const Background = styled(animated.div)<BackgroundProps>`
+/** Style handler for {@link Background} */
+const BackgroundHandler = styled(animated.div)<BackgroundHandlerProps>`
   position: absolute;
-  right: ${({ $isVertical }) => ($isVertical ? 'auto' : 0)};
+  // position right if horizontal, bottom if vertical
   bottom: ${({ $isVertical }) => ($isVertical ? 0 : 'auto')};
-  height: ${({ $isVertical }) => ($isVertical ? 'var(--size, 100%)' : '100%')};
-  width: ${({ $isVertical }) => ($isVertical ? '100%' : 'var(--size, 100%)')};
+  right: ${({ $isVertical }) => ($isVertical ? 'auto' : 0)};
+  // handle size expansion; expand width if horizonal, height if vertical
+  width: ${({ $isVertical, $expansionFactor }) =>
+    $isVertical ? '100%' : `calc(100% + var(--expansion) * 100% * ${$expansionFactor})`};
+  height: ${({ $isVertical, $expansionFactor }) =>
+    $isVertical ? `calc(100% + var(--expansion) * 100% * ${$expansionFactor})` : '100%'};
+  // handle opacity fade in/out
   opacity: var(--opacity);
+  // set color to semi-transparent black with a blur effect
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(7px);
 `;
 
-export default Background;
+/** Props for {@link Background} */
+interface BackgroundProps {
+  /** Maximum length of a title; used to determine how much the background should expand */
+  maxTitleLength: number;
+  /** Toggle to handle the background expand & fade animation */
+  toggle: SpringValue<number>;
+}
+/**
+ * Animated background of {@link ScrollOverlay}. Becomes visible and expands on mouse over / touch
+ * @param props
+ * @category Component
+ */
+function Background({ maxTitleLength, toggle }: BackgroundProps) {
+  // switch to vertical layout if screen size is vertical
+  const { isVertical } = useContext(ScrollOverlayContext);
+
+  // multiply expansion by constant factor depending on layout to get proper size
+  const expansionFactor = isVertical ? 0.3 : 0.2;
+
+  return (
+    <BackgroundHandler
+      $isVertical={isVertical}
+      $expansionFactor={expansionFactor}
+      style={{
+        '--expansion': toggle.to({ output: [0, maxTitleLength] }),
+        '--opacity': toggle.to({ output: [0, 1] })
+      }}
+    />
+  );
+}
+
+export { Background };
 export type { BackgroundProps };
