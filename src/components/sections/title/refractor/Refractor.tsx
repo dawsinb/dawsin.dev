@@ -1,5 +1,5 @@
 /**
- * @module Components/Title
+ * @module Components/Sections/Title
  * @mergeTarget
  */
 
@@ -8,8 +8,8 @@ import { Mesh, WebGLRenderTarget } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { useTransientScroll } from 'Hooks/useTransientScroll';
-import { BackfaceMaterial } from 'Components/refractor/shaders/BackfaceMaterial';
-import { RefractionMaterial } from 'Components/refractor/shaders/RefractionMaterial';
+import { BackfaceMaterial } from 'Components/sections/title/refractor/shaders/BackfaceMaterial';
+import { RefractionMaterial } from 'Components/sections/title/refractor/shaders/RefractionMaterial';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {

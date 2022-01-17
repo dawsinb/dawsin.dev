@@ -1,6 +1,7 @@
 {
   "entryPoints": ["./src"],
   "entryPointStrategy": "expand",
+  "exclude": "**/*+(index).ts",
   "out": "docs",
   "mergeModulesMergeMode": "module"
 }

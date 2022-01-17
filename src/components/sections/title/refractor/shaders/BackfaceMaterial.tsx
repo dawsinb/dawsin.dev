@@ -1,5 +1,5 @@
 /**
- * @module Components/Title
+ * @module Components/Sections/Title
  * @mergeTarget
  */
 
