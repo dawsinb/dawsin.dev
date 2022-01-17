@@ -5,7 +5,7 @@
 
 import { useRef, useState } from 'react';
 import { Texture, Vector2 } from 'three';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame, useThree, extend } from '@react-three/fiber';
 import { lerp } from 'Utils/math';
 import { DistortionMaterial } from './DistortionMaterial';
 import { useTransientScroll } from 'Hooks/useTransientScroll';
@@ -25,6 +25,9 @@ interface DistortionImageProps {
  * @returns
  */
 function DistortionImage({ width, height, texture, ...props }: DistortionImageProps) {
+  // register shader in r3f
+  extend({ DistortionMaterial });
+  // create ref to shader material
   const materialRef = useRef<DistortionMaterial>();
 
   // set up transient subscription to the scroll position

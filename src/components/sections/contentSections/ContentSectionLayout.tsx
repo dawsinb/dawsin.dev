@@ -14,6 +14,7 @@ import { useLayout } from 'Stores/layout';
 import { useTheme } from 'Stores/theme';
 import { Section, SectionItem } from 'Components/sections/Section';
 import { DistortionImage } from 'Components/sections/contentSections/distortionImage/DistortionImage';
+import { DynamicText } from 'Components/DynamicText';
 
 /** Props for {@link Content} */
 interface ContentProps {
@@ -60,19 +61,21 @@ interface ContentSectionLayoutProps {
   index: number;
   /** Parallax of the {@link Section section} */
   parallax?: number;
-  /** Url of the image to display */
-  imageUrl: string;
-  /** Background text content */
-  backgroundText: string;
   /** Header text content */
   headerText: string;
+  /** Background text content */
+  backgroundText: string;
+  /** Url of the image to display */
+  imageUrl: string;
   /** Determines whether to use the primary or secondary color as the main color; Set to true to use secondary */
-  alternateColor: boolean;
+  alternateColor?: boolean;
   /** Determines whether to align left or right; Set to true to align right */
-  alternatePosition: boolean;
+  alternatePosition?: boolean;
   /** Children in the html container  */
   children: ReactNode;
 }
+/** Reduced set of props for components using {@link ContentSectionLayout} */
+type ContentSectionProps = Omit<ContentSectionLayoutProps, 'imageUrl' | 'backgroundText' | 'headerText' | 'children'>;
 /**
  * Layout for html content with an image, header, and background text. Use the `alternateColor` and `alternatePosition` to vary each section
  *
@@ -196,7 +199,7 @@ function ContentSectionLayout({
       <SectionItem parallax={0}>
         <Html style={{ width: htmlWidth, height: htmlHeight }} position={htmlPosition} zIndexRange={[0, 0]}>
           <Content $emphasisColor={colorBright} $highlightColor={altColorBright}>
-            {children}
+            <DynamicText>{children}</DynamicText>
           </Content>
         </Html>
       </SectionItem>
@@ -230,4 +233,4 @@ function ContentSectionLayout({
 }
 
 export { ContentSectionLayout };
-export type { ContentSectionLayoutProps };
+export type { ContentSectionLayoutProps, ContentSectionProps };

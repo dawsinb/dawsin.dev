@@ -141,5 +141,3 @@ class DistortionMaterial extends ShaderMaterial {
 
 export { DistortionMaterial };
 
-// register element in r3f
-extend({ DistortionMaterial });
