@@ -3,8 +3,8 @@
  * @mergeTarget
  */
 
-/** 
- * Template string tag to enable code highlighting in glsl strings 
+/**
+ * Template string tag to enable code highlighting in glsl strings
  * @category Shader
  */
 const glsl = (x: TemplateStringsArray) => x.toString();
