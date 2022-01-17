@@ -52,9 +52,8 @@ function ScrollHandler({
   let timeout: NodeJS.Timeout;
 
   /* scrolling via mouse wheel */
-  
+
   const handleWheel = (event: WheelEvent) => {
-    
     // adjust scroll position
     applyScrollDelta((event.deltaY / 100) * wheelStrength);
 
