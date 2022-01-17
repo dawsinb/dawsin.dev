@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import useScroll from 'Utils/stores/scroll';
+import { useScroll } from 'Utils/stores/scroll';
 
 function useTransientScroll() {
   // store scroll position in a ref so that it is preserved on rerender and doesn't cause a rerender itself
@@ -16,4 +16,4 @@ function useTransientScroll() {
   return scrollRef;
 }
 
-export default useTransientScroll;
+export { useTransientScroll };

@@ -7,7 +7,7 @@
 import { createContext, useRef, useContext, ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { lerp } from 'Utils/math';
-import useScroll from 'utils/hooks/useTransientScroll';
+import { useTransientScroll } from 'utils/hooks/useTransientScroll';
 import { Group } from 'three';
 
 /**
@@ -51,7 +51,7 @@ function Section({ index, parallax = 1, children }: SectionProps) {
   // set up a ref to the sub group so that we can scroll it relative to the position
   const subgroupRef = useRef<Group>();
   // set up transient subscription to the scroll position
-  const scrollRef = useScroll();
+  const scrollRef = useTransientScroll();
   // lerp y position to scroll position for a smooth scroll effect
   useFrame(() => {
     if (subgroupRef.current) {
@@ -99,7 +99,7 @@ function SectionItem({ parallax = 1, children }: SectionItemProps) {
   // set up a ref to the sub group so that we can scroll it relative to the position
   const subgroupRef = useRef<Group>();
   // set up transient subscription to the scroll position
-  const scrollRef = useScroll();
+  const scrollRef = useTransientScroll();
   // lerp y position to scroll position (adjusted for parallax) for a smooth scroll effect
   useFrame(() => {
     if (subgroupRef.current) {

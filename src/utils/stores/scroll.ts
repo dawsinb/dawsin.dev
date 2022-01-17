@@ -33,4 +33,4 @@ const useScroll = create(
   }))
 );
 
-export default useScroll;
+export { useScroll };

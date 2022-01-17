@@ -8,4 +8,4 @@ const useLayout = create<LayoutState>(() => ({
   isVertical: false
 }));
 
-export default useLayout;
+export { useLayout };

@@ -6,7 +6,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { animated, SpringValue } from '@react-spring/web';
-import useScroll from 'Utils/stores/scroll';
+import { useScroll } from 'Utils/stores/scroll';
 import { Circle } from 'Components/scroll/overlay/Circle';
 import { Square } from 'Components/scroll/overlay/Square';
 import { SetValue } from 'Utils/hooks/useStateCallback';

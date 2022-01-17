@@ -4,7 +4,7 @@
  */
 
 import { useEffect } from 'react';
-import useScroll from 'Utils/stores/scroll';
+import { useScroll } from 'Utils/stores/scroll';
 import { ScrollOverlay } from 'Components/scroll/overlay/ScrollOverlay';
 
 /** Props for {@link ScrollHandler} */

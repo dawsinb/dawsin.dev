@@ -1,8 +1,6 @@
 /**
  * Linearlly interpolates between the given values.
  *
- *
- *
  * @param start the number to start from
  * @param end the number to progress to
  * @param progress the amount progressed as a number in the range [0, 1]

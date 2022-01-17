@@ -9,7 +9,7 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { BackfaceMaterial } from 'Components/refractor/shaders/BackfaceMaterial';
 import { RefractionMaterial } from 'Components/refractor/shaders/RefractionMaterial';
-import useTransientScroll from 'utils/hooks/useTransientScroll';
+import { useTransientScroll } from 'utils/hooks/useTransientScroll';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {

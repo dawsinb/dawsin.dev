@@ -18,4 +18,4 @@ const useTheme = create<ThemeState>(() => ({
   marginY: 0.05
 }));
 
-export default useTheme;
+export { useTheme };
