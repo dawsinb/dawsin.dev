@@ -4,7 +4,7 @@
  */
 
 import { useRef, ReactNode, useEffect, useState } from 'react';
-import { LinearFilter, Mesh, Group, Vector3, Texture, Material, Vector2 } from 'three';
+import { LinearFilter, Mesh, Group, Vector3, Texture, Material } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
