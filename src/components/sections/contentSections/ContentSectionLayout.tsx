@@ -227,9 +227,8 @@ function ContentSectionLayout({
       else {
         headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, 0, 0.02);
       }
-      
     }
-  })
+  });
 
   return (
     <Section index={index} parallax={parallax}>
