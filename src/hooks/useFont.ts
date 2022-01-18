@@ -25,8 +25,8 @@ function useFont(url: string, callback: (font: Font) => void) {
   else {
     fetch(url)
       .then((response) => response.json())
-      .then((fontGeometry) => {
-        loadedFonts[url] = new FontLoader().parse(fontGeometry);
+      .then((fontJson) => {
+        loadedFonts[url] = new FontLoader().parse(fontJson);
         dispatchEvent(new CustomEvent('assetLoad', { detail: url }));
 
         callback(loadedFonts[url]);
