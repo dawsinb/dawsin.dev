@@ -1,27 +1,42 @@
+/**
+ * @module Components/DynamicText
+ * @mergeTarget
+ */
+
 import { useRef, useLayoutEffect, useEffect, ReactNode, MutableRefObject } from 'react';
 import styled from 'styled-components';
 
-// create container and section div styles to handle scroll snapping
+/** Content container used to judge if text has overflown its bounds */
 const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+/** Text container used to judge bounds of text */
 const Text = styled.div`
   width: 100%;
   height: 100%;
   font-size: 1px;
 `;
 
-interface DynamicText {
+/** Props for {@link DynamicText} */
+interface DynamicTextProps {
   children: ReactNode;
 }
-function DynamicText({ children }: DynamicText) {
+/**
+ * Automatically resizes text to perfectly fit within the bounds of the containing element
+ * @param props 
+ * @category Component
+ */
+function DynamicText({ children }: DynamicTextProps) {
+  // set up refs to container div and text
   const containerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const textRef = useRef() as MutableRefObject<HTMLDivElement>;
 
+  // resizes text to just before overflow
   const resize = () => {
     // only run if div is loaded
-    if (containerRef.current && textRef.current) {
+    if ((containerRef.current && textRef.current) && containerRef.current.clientHeight !== 0) {
+
       // variable to hold incrementing font size
       let fontSize = 1;
 
@@ -48,8 +63,9 @@ function DynamicText({ children }: DynamicText) {
     }
   };
 
-  // TODO: resize text when width or height of container changes
+  // execute on initial mount
   useLayoutEffect(resize, []);
+  // add event listener to execute on resize
   useEffect(() => {
     window.addEventListener('resize', () => {
       resize();
@@ -64,3 +80,4 @@ function DynamicText({ children }: DynamicText) {
 }
 
 export { DynamicText };
+export type { DynamicTextProps };

@@ -3,13 +3,14 @@
  * @mergeTarget
  */
 
-import { useMemo, useLayoutEffect, useRef, ReactNode, useEffect } from 'react';
-import { TextureLoader, LinearFilter, Mesh, Group, Vector3 } from 'three';
+import { useRef, ReactNode, useEffect, useState } from 'react';
+import { LinearFilter, Mesh, Group, Vector3, Texture } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { useThree, useLoader } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import styled from 'styled-components';
 import { useFont } from 'Hooks/useFont';
+import { useTexture } from 'Hooks/useTexture';
 import { useLayout } from 'Stores/layout';
 import { useTheme } from 'Stores/theme';
 import { Section, SectionItem } from 'Components/sections/Section';
@@ -110,15 +111,11 @@ function ContentSectionLayout({
   const secondary = useTheme((state) => state.secondaryColor);
   const secondaryBright = useTheme((state) => state.secondaryBright);
   // determine colors
-  const color = alternateColor ? primary : secondary;
-  const colorBright = alternateColor ? primaryBright : secondaryBright;
-  const altColorBright = alternateColor ? secondaryBright : primaryBright;
+  const color = alternateColor ? secondary : primary;
+  const colorBright = alternateColor ? secondaryBright : primaryBright;
+  const altColorBright = alternateColor ? primaryBright : secondaryBright;
 
-  // load image
-  const imageTexture = useLoader(TextureLoader, imageUrl);
-  useMemo(() => (imageTexture.minFilter = LinearFilter), [imageTexture]);
-
-  /* Calculate Positions / sizes */
+  /* Calculate Positions / Sizes */
 
   // padding between image and html
   const padding = isMobile ? height * 0.02 : width * 0.03;
@@ -127,7 +124,7 @@ function ContentSectionLayout({
   const imageHeight = isMobile ? height * 0.3 : height * 0.7;
   const imageWidth = isMobile ? width : width / 1.8;
   // calculate image position
-  const imageX = isMobile ? 0 : (width / 2 - imageWidth / 2) * (alternatePosition ? -1 : 1);
+  const imageX = isMobile ? 0 : (-width / 2 + imageWidth / 2) * (alternatePosition ? -1 : 1);
   const imageY = isMobile ? height / 4 : -height * 0.05;
   const imagePosition = new Vector3(imageX, imageY, 1);
 
@@ -135,23 +132,60 @@ function ContentSectionLayout({
   const htmlHeight = isMobile ? (height - imageHeight) * 0.75 : imageHeight;
   const htmlWidth = isMobile ? width : width - imageWidth - padding;
   // calculate image position (uses top-left coords instead of centered)
-  const htmlX = isMobile || !alternatePosition ? -width / 2 : imageX + imageWidth / 2 + padding;
+  const htmlX = isMobile || alternatePosition ? -width / 2 : imageX + imageWidth / 2 + padding;
   const htmlY = isMobile ? imageY - imageHeight / 2 - padding : imageY + imageHeight / 2;
   const htmlPosition = new Vector3(htmlX, htmlY, 10);
 
   // calculate header position and size
-  const headerX = (width / 2) * (alternatePosition ? -1 : 1);
+  const headerX = (-width / 2) * (alternatePosition ? -1 : 1);
   const headerY = imageHeight / 2 + imageY + padding;
   const headerPosition = new Vector3(headerX, headerY, -1);
   const headerFontSize = isMobile ? width / 20 : width / 25;
 
   // calculate bg text position and size
-  const bgTextX = (width / 2) * (alternatePosition ? 1 : -1);
+  const bgTextX = (width / 2) * (alternatePosition ? -1 : 1);
   const bgTextY = isMobile ? height / 2.2 : height / 4;
   const bgTextPosition = new Vector3(bgTextX, bgTextY, -10);
   const bgTextFontSize = width / 10;
 
-  // load fonts and create text geometries
+  // helpfer functions to align background and header text
+  const headerTextParentRef = useRef<Group>();
+  const backgroundTextParentRef = useRef<Group>();
+  const alignHeaderText = () => {
+    // right align header text when alternate
+    if (alternatePosition && headerTextRef.current) {
+      headerTextRef.current.geometry.computeBoundingBox();
+      if (headerTextRef.current.geometry.boundingBox && headerTextParentRef.current) {
+        headerTextParentRef.current.position.x =
+          headerTextRef.current.geometry.boundingBox.min.x - headerTextRef.current.geometry.boundingBox.max.x;
+      }
+    }
+  }
+  const alignBackgroundText = () => {
+    // right align background text when not alternate
+    if (!alternatePosition && backgroundTextRef.current) {
+      backgroundTextRef.current.geometry.computeBoundingBox();
+      if (backgroundTextRef.current.geometry.boundingBox && backgroundTextParentRef.current) {
+        backgroundTextParentRef.current.position.x =
+          backgroundTextRef.current.geometry.boundingBox.min.x - backgroundTextRef.current.geometry.boundingBox.max.x; 
+      }
+    }
+  };
+
+  /* Load Content */
+
+  // load image as texture
+  const [imageTexture, setImageTexture] = useState(new Texture());
+  useEffect(() => {
+    useTexture(imageUrl, (texture: Texture) => {
+      // set min filter
+      texture.minFilter = LinearFilter;
+      // assign texture
+      setImageTexture(texture);
+    });
+  }, []);
+
+  // load fonts and create text geometries and refresh on resize
   const headerTextRef = useRef<Mesh>();
   const backgroundTextRef = useRef<Mesh>();
   useEffect(() => {
@@ -160,6 +194,9 @@ function ContentSectionLayout({
         // create text geometry
         const config = { font: font, size: headerFontSize, height: 1 };
         headerTextRef.current.geometry = new TextGeometry(headerText, config);
+
+        // align text if needed
+        alignHeaderText();
       }
     });
     useFont('/assets/fonts/ModeNine.json', (font) => {
@@ -167,30 +204,11 @@ function ContentSectionLayout({
         // create text geometry
         const config = { font: font, size: bgTextFontSize, height: 1 };
         backgroundTextRef.current.geometry = new TextGeometry(backgroundText, config);
+
+        // align text if needed
+        alignBackgroundText();
       }
     });
-  }, []);
-
-  // right align header or alternate text on size change
-  const headerTextParentRef = useRef<Group>();
-  const backgroundTextParentRef = useRef<Group>();
-  useLayoutEffect(() => {
-    // right align background text when alternate
-    if (alternatePosition && backgroundTextRef.current) {
-      backgroundTextRef.current.geometry.computeBoundingBox();
-      if (backgroundTextRef.current.geometry.boundingBox && backgroundTextParentRef.current) {
-        backgroundTextParentRef.current.position.x =
-          backgroundTextRef.current.geometry.boundingBox.min.x - backgroundTextRef.current.geometry.boundingBox.max.x;
-      }
-    }
-    // right align header text when not alternate
-    if (!alternatePosition && headerTextRef.current) {
-      headerTextRef.current.geometry.computeBoundingBox();
-      if (headerTextRef.current.geometry.boundingBox && headerTextParentRef.current) {
-        headerTextParentRef.current.position.x =
-          headerTextRef.current.geometry.boundingBox.min.x - headerTextRef.current.geometry.boundingBox.max.x;
-      }
-    }
   }, [size]);
 
   return (
@@ -199,7 +217,9 @@ function ContentSectionLayout({
       <SectionItem parallax={0}>
         <Html style={{ width: htmlWidth, height: htmlHeight }} position={htmlPosition} zIndexRange={[0, 0]}>
           <Content $emphasisColor={colorBright} $highlightColor={altColorBright}>
-            <DynamicText>{children}</DynamicText>
+            <DynamicText>
+              {children}
+            </DynamicText>
           </Content>
         </Html>
       </SectionItem>

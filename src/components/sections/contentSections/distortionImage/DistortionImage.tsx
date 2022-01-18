@@ -67,7 +67,7 @@ function DistortionImage({ width, height, texture, ...props }: DistortionImagePr
       onPointerEnter={() => setEffectFactor(1)}
       onPointerOut={() => setEffectFactor(0)}
     >
-      <planeBufferGeometry args={[width, height]} />
+      <planeBufferGeometry args={[width, height, 32, 32]} />
       <distortionMaterial
         attach="material"
         ref={materialRef}
