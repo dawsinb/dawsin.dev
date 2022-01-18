@@ -4,15 +4,17 @@
  */
 
 import { useRef, ReactNode, useEffect, useState } from 'react';
-import { LinearFilter, Mesh, Group, Vector3, Texture } from 'three';
+import { LinearFilter, Mesh, Group, Vector3, Texture, Material, Vector2 } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { useThree } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import styled from 'styled-components';
 import { useFont } from 'Hooks/useFont';
 import { useTexture } from 'Hooks/useTexture';
+import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { useLayout } from 'Stores/layout';
 import { useTheme } from 'Stores/theme';
+import { lerp } from 'Utils/math';
 import { Section, SectionItem } from 'Components/sections/Section';
 import { DistortionImage } from 'Components/sections/contentSections/distortionImage/DistortionImage';
 import { DynamicText } from 'Components/DynamicText';
@@ -211,6 +213,24 @@ function ContentSectionLayout({
     });
   }, [size]);
 
+  // set up transient subscription to the scroll position
+  const scrollRef = useTransientScroll();
+  // fade opacity of header text in as scroll position nears index
+  const headerTextMaterialRef = useRef<Material>();
+  useFrame(() => {
+    if (headerTextMaterialRef.current) {
+      // if close fade in
+      if (scrollRef.current < index + 0.05 && scrollRef.current > index - 0.05) {
+        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, 1, 0.015);
+      }
+      // else fade out
+      else {
+        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, 0, 0.02);
+      }
+      
+    }
+  })
+
   return (
     <Section index={index} parallax={parallax}>
       {/* html content*/}
@@ -233,7 +253,7 @@ function ContentSectionLayout({
       <SectionItem parallax={1}>
         <group ref={headerTextParentRef}>
           <mesh ref={headerTextRef} position={headerPosition}>
-            <meshBasicMaterial color={color} />
+            <meshBasicMaterial ref={headerTextMaterialRef} transparent color={color} />
           </mesh>
         </group>
       </SectionItem>
