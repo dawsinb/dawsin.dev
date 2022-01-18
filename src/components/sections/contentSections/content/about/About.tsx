@@ -1,6 +1,11 @@
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
 import { AboutContent } from 'Components/sections/contentSections/content/about/AboutContent';
 
+/**
+ * About section, uses {@link ContentSection} for it's layout
+ * @param props
+ * @returns
+ */
 function About({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
   return (
     <ContentSectionLayout
