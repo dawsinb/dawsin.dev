@@ -160,14 +160,14 @@ function ContentSectionLayout({
           headerTextRef.current.geometry.boundingBox.min.x - headerTextRef.current.geometry.boundingBox.max.x;
       }
     }
-  }
+  };
   const alignBackgroundText = () => {
     // right align background text when not alternate
     if (!alternatePosition && backgroundTextRef.current) {
       backgroundTextRef.current.geometry.computeBoundingBox();
       if (backgroundTextRef.current.geometry.boundingBox && backgroundTextParentRef.current) {
         backgroundTextParentRef.current.position.x =
-          backgroundTextRef.current.geometry.boundingBox.min.x - backgroundTextRef.current.geometry.boundingBox.max.x; 
+          backgroundTextRef.current.geometry.boundingBox.min.x - backgroundTextRef.current.geometry.boundingBox.max.x;
       }
     }
   };
@@ -217,9 +217,7 @@ function ContentSectionLayout({
       <SectionItem parallax={0}>
         <Html style={{ width: htmlWidth, height: htmlHeight }} position={htmlPosition} zIndexRange={[0, 0]}>
           <Content $emphasisColor={colorBright} $highlightColor={altColorBright}>
-            <DynamicText>
-              {children}
-            </DynamicText>
+            <DynamicText>{children}</DynamicText>
           </Content>
         </Html>
       </SectionItem>

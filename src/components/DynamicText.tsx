@@ -24,7 +24,7 @@ interface DynamicTextProps {
 }
 /**
  * Automatically resizes text to perfectly fit within the bounds of the containing element
- * @param props 
+ * @param props
  * @category Component
  */
 function DynamicText({ children }: DynamicTextProps) {
@@ -35,8 +35,7 @@ function DynamicText({ children }: DynamicTextProps) {
   // resizes text to just before overflow
   const resize = () => {
     // only run if div is loaded
-    if ((containerRef.current && textRef.current) && containerRef.current.clientHeight !== 0) {
-
+    if (containerRef.current && textRef.current && containerRef.current.clientHeight !== 0) {
       // variable to hold incrementing font size
       let fontSize = 1;
 
