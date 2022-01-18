@@ -1,0 +1,1 @@
+this folder only stores uncompressed assets / source files; it is not used in any of the code or builds
