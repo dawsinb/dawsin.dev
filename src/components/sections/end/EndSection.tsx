@@ -57,7 +57,6 @@ function EndSection({ index, parallax }: EndSectionProps) {
         // center geometries
         nineGeometry.center();
         fourGeometry.center();
-
       }),
       // load japanese geometries
       loadFont('/assets/fonts/YujiSyuku.json').then((font) => {

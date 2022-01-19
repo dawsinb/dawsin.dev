@@ -59,7 +59,7 @@ function App() {
             <EndSection index={7} parallax={1.5} />
           </group>
         );
-      } 
+      }
     });
 
     // fire resize event for initial sizing

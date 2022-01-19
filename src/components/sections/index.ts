@@ -7,5 +7,4 @@ import {
   EuphonySection
 } from 'Components/sections/contentSections/index';
 
-
 export { TitleSection, EndSection, AboutSection, CommercialSection, ResearchSection, EuphonySection };
