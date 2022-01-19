@@ -12,7 +12,7 @@ const HtmlAnchor = styled('div')`
 `
 /** Props for {@link HtmlContainer} */
 interface HtmlContainerProps {
-  style?: CssProperties & {
+  style: CssProperties & {
     /** Current X position of world coordinates in px */
     '--x': string;
     /** Current Y position of world coordinates in px */
@@ -27,15 +27,17 @@ const HtmlContainer = styled('div')<HtmlContainerProps>`
     translateY(var(--y, 0px));
 `
 
-// get main root from html
-const rootElement = document.getElementById('html-root');
+// create main root and append to document body
+const rootElement = document.createElement('div');
+rootElement.setAttribute('id', 'three-html-root');
+document.body.appendChild(rootElement);
 
 /** Props for {@link Html} */
 interface HtmlProps {
   children: ReactNode
 }
 /**
- * TODO: add description
+ * Portals out HTML content to a new render tree root outside of the WebGL canvas and updates its position to match that of its parent's world position
  * @param props 
  * @returns 
  */
@@ -48,14 +50,12 @@ function Html({ children }: HtmlProps ) {
   useEffect(() => {
     // create sub root element to act as portal for html content
     const subRootElement = document.createElement('div');
-    // add sub root element to the dom
     rootElement.appendChild(subRootElement);
     // create new render tree at sub root for html content
     subRoot.current = createRoot(subRootElement);
-  }, [])
-    
+  }, [])  
 
-  // create ref to the child of the three render tree to get world coordinate information from the parent
+  // create ref to the child of the three object to get world coordinate information from the parent
   const threeChildRef = useRef<Group>()
   // vectors to track world position
   const worldPosition = new Vector3();
@@ -64,8 +64,8 @@ function Html({ children }: HtmlProps ) {
   // set up animation loop to keep position up to date
   useFrame(() => {
     // update world position
-    if (threeChildRef.current?.parent) {
-      threeChildRef.current.parent.getWorldPosition(worldPosition);
+    if (threeChildRef.current) {
+      threeChildRef.current.getWorldPosition(worldPosition);
     }
     // check if world position has changed
     if (lastWorldPosition.y !== worldPosition.y || lastWorldPosition.x !== worldPosition.x ) {
