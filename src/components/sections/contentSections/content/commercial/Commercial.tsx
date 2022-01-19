@@ -11,9 +11,9 @@ function Commercial({ index, parallax, alternateColor, alternatePosition }: Cont
     <ContentSectionLayout
       index={index}
       parallax={parallax}
-      headerText={'Commercial work'}
+      headerText={'commercial work'}
       backgroundText={'<body>'}
-      imageUrl={'/assets/images/tree.jpg'}
+      imageUrl={'/assets/textures/tree.ktx2'}
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >

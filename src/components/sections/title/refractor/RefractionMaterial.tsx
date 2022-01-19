@@ -4,7 +4,6 @@
  */
 
 import { ShaderMaterial, Texture } from 'three';
-import { glsl } from 'Utils/shaders';
 
 /** Parameters for {@link RefractionMaterial} */
 interface RefractionMaterialParams {
@@ -16,7 +15,7 @@ interface RefractionMaterialParams {
 class RefractionMaterial extends ShaderMaterial {
   constructor({ envMap, backfaceMap, resolution }: RefractionMaterialParams) {
     super({
-      vertexShader: glsl`
+      vertexShader: /* glsl */ `
         varying vec3 worldNormal;
         varying vec3 viewDirection;
         void main() {
@@ -27,7 +26,7 @@ class RefractionMaterial extends ShaderMaterial {
           gl_Position = projectionMatrix * modelViewMatrix * transformedPosition;
         }
       `,
-      fragmentShader: glsl`
+      fragmentShader: /* glsl */ `
         uniform sampler2D envMap;
         uniform sampler2D backfaceMap;
         uniform vec2 resolution;

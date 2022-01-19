@@ -3,13 +3,13 @@
  * @mergeTarget
  */
 
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Mesh, WebGLRenderTarget } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
 import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { BackfaceMaterial } from 'Components/sections/title/refractor/BackfaceMaterial';
 import { RefractionMaterial } from 'Components/sections/title/refractor/RefractionMaterial';
+import { loadGeometry } from 'loaders/loadGeometry';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {
@@ -27,9 +27,6 @@ function Refractor({ index }: RefractorProps) {
   // get three constants
   const { size, gl, scene, camera } = useThree();
 
-  // load model
-  const { nodes } = useGLTF('/assets/models/refractor.glb') as GLTF;
-
   // calculate size
   const scale = Math.max(size.width, size.height) / 2;
 
@@ -46,17 +43,17 @@ function Refractor({ index }: RefractorProps) {
     return [envFbo, backfaceFbo, backfaceMaterial, refractionMaterial];
   }, [size]);
   // create ref to model
-  const model = useRef<Mesh>();
+  const modelRef = useRef<Mesh>();
 
   // set up transient subscription to the scroll position so we can avoid computations when refractor is not on screen
   const scrollRef = useTransientScroll();
 
   useFrame(({ clock }) => {
-    if (model.current && scrollRef.current < index + 1 && scrollRef.current > index - 1) {
+    if (modelRef.current && scrollRef.current < index + 1 && scrollRef.current > index - 1) {
       // rotate model
-      model.current.rotateX(0.006);
-      model.current.rotateY(0.004);
-      model.current.rotateZ(0.005 * Math.sin(clock.getElapsedTime() / 2));
+      modelRef.current.rotateX(0.006);
+      modelRef.current.rotateY(0.004);
+      modelRef.current.rotateZ(0.005 * Math.sin(clock.getElapsedTime() / 2));
 
       // render env to fbo
       camera.layers.set(1);
@@ -64,7 +61,7 @@ function Refractor({ index }: RefractorProps) {
       gl.render(scene, camera);
       // render cube backfaces to fbo
       camera.layers.set(0);
-      model.current.material = backfaceMaterial;
+      modelRef.current.material = backfaceMaterial;
       gl.setRenderTarget(backfaceFbo);
       gl.clearDepth();
       gl.render(scene, camera);
@@ -76,18 +73,26 @@ function Refractor({ index }: RefractorProps) {
       gl.clearDepth();
       // render cube with refraction material to screen
       camera.layers.set(0);
-      model.current.material = refractionMaterial;
+      modelRef.current.material = refractionMaterial;
       gl.render(scene, camera);
     }
   });
 
+  // load model
+  useEffect(() => {
+    loadGeometry('/assets/models/refractor.drc').then(geometry => {
+      if (modelRef.current) {
+        modelRef.current.geometry = geometry;
+      }
+    }).catch(error => console.error(error))
+  })
+
   return (
     <mesh
       onUpdate={(self) => self.geometry.center()}
-      ref={model}
-      geometry={nodes.refractor.geometry}
-      position={[0, 0, 100]}
       scale={scale}
+      ref={modelRef}
+      position={[0, 0, 100]}
     >
       <meshBasicMaterial />
     </mesh>

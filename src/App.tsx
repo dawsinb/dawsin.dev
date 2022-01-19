@@ -1,19 +1,20 @@
-import { Suspense, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Suspense, useEffect, useRef } from 'react';
+import { createRoot } from '@react-three/fiber'
 import styled from 'styled-components';
 import { useLayout } from 'Stores/layout';
 import { Title, About, Commercial } from 'Components/sections/index';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
+import 'r3f-namespace';
 
 const AppContainer = styled('div')`
+  position: fixed;
   width: 100vw;
   height: 100vh;
 `;
 
-const CanvasContainer = styled('div')`
-  width: 100%;
-  height: 100%;
-`;
+const CanvasRoot = styled('canvas')`
+  position: fixed;
+`
 
 /**
  * The base app component that is rendered by react.
@@ -22,16 +23,39 @@ const CanvasContainer = styled('div')`
  * @category Component
  */
 function App() {
-  // set layout variables
-  useEffect(() => {
-    // set margins
-    useLayout.setState({ marginX: 0.1, marginY: 0.05 });
+  const canvasRootRef = useRef<HTMLCanvasElement>(null);
 
-    // switch to vertical layout if height > width
-    useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
+  // set margins
+  useLayout.setState({ marginX: 0.1, marginY: 0.05 });
+
+  // add resize event listener
+  useEffect(() => {
     window.addEventListener('resize', () => {
+      // create r3f canvas
+      if (canvasRootRef.current) {
+        createRoot(canvasRootRef.current, {
+          orthographic: true,
+          camera: { position: [0, 0, 10000], far: 20000 },
+          dpr: [1, 1],
+          linear: true,
+          flat: true
+        }).render(
+          <group>
+            <Title index={0} parallax={1} />
+            <About index={1} parallax={1.5} />
+            <Commercial index={2} parallax={1} alternateColor alternatePosition />
+          </group> 
+        )
+      }
+        
+      // determine if vertical layout
       useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
-    });
+
+      
+    });      
+
+    // fire resize event for initial sizing
+    window.dispatchEvent(new Event('resize'));
   }, []);
 
   const sectionNames = ['', 'about me', 'commercial', 'portfolio', 'research', 'euphony', 'music', ''];
@@ -39,13 +63,7 @@ function App() {
   return (
     <AppContainer>
       <Suspense fallback={null}>
-        <CanvasContainer>
-          <Canvas linear flat orthographic dpr={[1, 1]} camera={{ position: [0, 0, 10000], far: 20000 }}>
-            <Title index={0} parallax={1} />
-            <About index={1} parallax={1.5} />
-            <Commercial index={2} parallax={1} alternateColor alternatePosition/>
-          </Canvas>
-        </CanvasContainer>
+        <CanvasRoot ref={canvasRootRef} />
       </Suspense>
 
       <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} />

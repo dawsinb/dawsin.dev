@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { Group, Mesh, Vector3 } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
-import { useFont } from 'Hooks/useFont';
+import { loadFont } from 'loaders/loadFont';
 import { useTheme } from 'Stores/theme';
 import { lerp } from 'Utils/math';
 import { Section, SectionItem } from 'Components/sections/Section';
@@ -46,7 +46,7 @@ function Title({ index, parallax }: TitleProps) {
 
   // load font and create text geometries
   useEffect(() => {
-    useFont('/assets/fonts/BorisBlackBloxxDirty.json', (font) => {
+    loadFont('/assets/fonts/BorisBlackBloxxDirty.json').then(font => {
       if (textGroupRef.current && dawsinTextRef.current && devTextRef.current) {
         // create text geometries
         const config = { font: font, size: fontSize, height: 25 };
@@ -60,7 +60,7 @@ function Title({ index, parallax }: TitleProps) {
             dawsinTextRef.current.geometry.boundingBox.min.x - dawsinTextRef.current.geometry.boundingBox.max.x / 2;
         }
       }
-    });
+    }).catch(error => console.error(error));
   }, []);
 
   // rotate text to look at mouse position
@@ -94,7 +94,7 @@ function Title({ index, parallax }: TitleProps) {
 
       <SectionItem parallax={4}>
         <mesh rotation={[0, 0, Math.PI / 8]} position={[0, 0, -1000]}>
-          <planeGeometry args={[size.width * 3, size.height * 2, 32, 32]} />
+          <planeBufferGeometry args={[size.width * 3, size.height * 2, 32, 32]} />
           <meshBasicMaterial color={'#000'} />
         </mesh>
       </SectionItem>

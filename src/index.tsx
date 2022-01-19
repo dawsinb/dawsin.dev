@@ -1,23 +1,17 @@
-import ReactDOM from 'react-dom';
-import { DefaultLoadingManager } from 'three';
+import { createRoot } from 'react-dom';
 import { App } from './App';
 
 // register service worker
-if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').catch((error) => console.log(error));
-  });
-}
+//if ('serviceWorker' in navigator) {
+//  window.addEventListener('load', () => {
+//    navigator.serviceWorker.register('/service-worker.js').catch((error) => console.log(error));
+//  });
+//}
 
-// get url on load start
-let currentUrl = '';
-DefaultLoadingManager.onStart = (url: string) => {
-  currentUrl = url;
-};
-// send load event on load to progress loading animation
-DefaultLoadingManager.onLoad = () => {
-  dispatchEvent(new CustomEvent('assetLoad', { detail: currentUrl }));
-};
+// set root of the app
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
+const root = createRoot(rootElement);
 
 // render the app
-ReactDOM.render(<App />, document.getElementById('root'));
+root.render(<App />);

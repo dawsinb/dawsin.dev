@@ -4,13 +4,12 @@
  */
 
 import { ShaderMaterial, BackSide } from 'three';
-import { glsl } from 'Utils/shaders';
 
 /** Shader used by {@link Refractor} for rendering cube backfaces */
 class BackfaceMaterial extends ShaderMaterial {
   constructor() {
     super({
-      vertexShader: glsl`
+      vertexShader: /* glsl */ `
         varying vec3 worldNormal;
         void main() {
           vec4 transformedNormal = vec4(normal, 0.);
@@ -19,7 +18,7 @@ class BackfaceMaterial extends ShaderMaterial {
           gl_Position = projectionMatrix * modelViewMatrix * transformedPosition;
         }
       `,
-      fragmentShader: glsl`
+      fragmentShader: /* glsl */ `
         varying vec3 worldNormal;
         void main() {
           gl_FragColor = vec4(worldNormal, 1.0);

@@ -13,7 +13,7 @@ function About({ index, parallax, alternateColor, alternatePosition }: ContentSe
       parallax={parallax}
       headerText={'about me'}
       backgroundText={'<main>'}
-      imageUrl={'/assets/images/self.jpg'}
+      imageUrl={'/assets/textures/self.ktx2'}
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >

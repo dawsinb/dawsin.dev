@@ -4,20 +4,31 @@
  */
 
 import { useRef, ReactNode, useEffect, useState } from 'react';
-import { LinearFilter, Mesh, Group, Vector3, Texture, Material } from 'three';
+import { Mesh, Group, Vector3, Texture, Material } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
 import styled from 'styled-components';
-import { useFont } from 'Hooks/useFont';
-import { useTexture } from 'Hooks/useTexture';
+import { loadFont } from 'loaders/loadFont'
 import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { useLayout } from 'Stores/layout';
 import { useTheme } from 'Stores/theme';
 import { lerp } from 'Utils/math';
 import { Section, SectionItem } from 'Components/sections/Section';
 import { DistortionImage } from 'Components/sections/contentSections/distortionImage/DistortionImage';
+import { Html } from 'Components/Html';
 import { DynamicText } from 'Components/DynamicText';
+import { loadTexture } from '../../../loaders/loadTexture';
+
+/** Props for {@link ContentContainer} */
+interface ContentContainerProps {
+  $width: number;
+  $height: number;
+}
+/** Container for html content of {@link ContentSection} */
+const ContentContainer = styled('div')<ContentContainerProps>`
+  width: ${({ $width }) => $width}px;
+  height: ${({ $height }) => $height}px;
+`
 
 /** Props for {@link Content} */
 interface ContentProps {
@@ -175,23 +186,20 @@ function ContentSectionLayout({
   };
 
   /* Load Content */
-
-  // load image as texture
+  const { gl } = useThree();
+  // load texture
   const [imageTexture, setImageTexture] = useState(new Texture());
   useEffect(() => {
-    useTexture(imageUrl, (texture: Texture) => {
-      // set min filter
-      texture.minFilter = LinearFilter;
-      // assign texture
+    loadTexture(imageUrl, gl).then(texture => {
       setImageTexture(texture);
-    });
-  }, []);
+    }).catch(error => console.error(error))
+  }, [])
 
   // load fonts and create text geometries and refresh on resize
   const headerTextRef = useRef<Mesh>();
   const backgroundTextRef = useRef<Mesh>();
   useEffect(() => {
-    useFont('/assets/fonts/MontHeavy.json', (font) => {
+    loadFont('/assets/fonts/MontHeavy.json').then(font => {
       if (headerTextRef.current) {
         // create text geometry
         const config = { font: font, size: headerFontSize, height: 1 };
@@ -200,8 +208,8 @@ function ContentSectionLayout({
         // align text if needed
         alignHeaderText();
       }
-    });
-    useFont('/assets/fonts/ModeNine.json', (font) => {
+    }).catch(error => console.error(error));
+    loadFont('/assets/fonts/ModeNine.json').then(font => {
       if (backgroundTextRef.current) {
         // create text geometry
         const config = { font: font, size: bgTextFontSize, height: 1 };
@@ -210,7 +218,7 @@ function ContentSectionLayout({
         // align text if needed
         alignBackgroundText();
       }
-    });
+    }).catch(error => console.error(error));
   }, [size]);
 
   // set up transient subscription to the scroll position
@@ -234,11 +242,15 @@ function ContentSectionLayout({
     <Section index={index} parallax={parallax}>
       {/* html content*/}
       <SectionItem parallax={0}>
-        <Html style={{ width: htmlWidth, height: htmlHeight }} position={htmlPosition} zIndexRange={[0, 0]}>
-          <Content $emphasisColor={colorBright} $highlightColor={altColorBright}>
-            <DynamicText>{children}</DynamicText>
-          </Content>
-        </Html>
+        <group position={htmlPosition}>
+          <Html>
+            <ContentContainer $width={htmlWidth} $height={htmlHeight}>
+              <Content $emphasisColor={colorBright} $highlightColor={altColorBright}>
+                <DynamicText>{children}</DynamicText>
+              </Content>
+            </ContentContainer>
+          </Html>
+        </group>
       </SectionItem>
 
       {/* image */}

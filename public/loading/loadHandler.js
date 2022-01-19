@@ -7,6 +7,7 @@ window.addEventListener('load', () => {
 const loadedAssets = [];
 window.addEventListener('assetLoad', (event) => {
   loadedAssets.push(event.detail)
+  console.log(event.detail)
 });
 
 // load asset map
@@ -18,7 +19,7 @@ fetch('/loading/assetMap.json')
     for (const asset in assetMap) {
       totalBytes += assetMap[asset];
     }
-
+    console.log(assetMap)
     const processAssets = () => {
       // calculate how many bytes have been loaded
       let loadedBytes = 0;
