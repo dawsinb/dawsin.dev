@@ -2,7 +2,13 @@ import { Suspense, useEffect, useRef } from 'react';
 import { createRoot } from '@react-three/fiber';
 import styled from 'styled-components';
 import { useLayout } from 'Stores/layout';
-import { Title, About, Commercial } from 'Components/sections/index';
+import {
+  TitleSection,
+  AboutSection,
+  CommercialSection,
+  ResearchSection,
+  EuphonySection
+} from 'Components/sections/index';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 import 'r3f-namespace';
 
@@ -41,9 +47,11 @@ function App() {
           flat: true
         }).render(
           <group>
-            <Title index={0} parallax={1} />
-            <About index={1} parallax={1.5} />
-            <Commercial index={2} parallax={1} alternateColor alternatePosition />
+            <TitleSection index={0} parallax={1} />
+            <AboutSection index={1} parallax={1.5} />
+            <CommercialSection index={2} parallax={1} alternateColor alternatePosition />
+            <ResearchSection index={3} parallax={1.5} />
+            <EuphonySection index={4} parallax={1} alternateColor alternatePosition />
           </group>
         );
       }

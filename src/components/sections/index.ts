@@ -1,4 +1,9 @@
 import { TitleSection } from 'components/sections/title/TitleSection';
-import { AboutSection, CommercialSection } from 'Components/sections/contentSections/index';
+import {
+  AboutSection,
+  CommercialSection,
+  ResearchSection,
+  EuphonySection
+} from 'Components/sections/contentSections/index';
 
-export { TitleSection, AboutSection, CommercialSection };
+export { TitleSection, AboutSection, CommercialSection, ResearchSection, EuphonySection };
