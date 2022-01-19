@@ -1,4 +1,4 @@
-/** HTML content for {@link Commercial} */
+/** HTML content for {@link CommercialSection} */
 const CommercialContent = (
   <div>
     I’m available for freelance/contract work or also permanent positions at the moment. Feel free to contact me at{' '}

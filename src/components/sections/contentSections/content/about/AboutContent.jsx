@@ -1,4 +1,4 @@
-/** HTML content for {@link About} */
+/** HTML content for {@link AboutSection} */
 const AboutContent = (
   <div>
     Hello, as you may have guessed from the name of the site, my name is <em>Dawsin</em>. I’m a programmer and artist
