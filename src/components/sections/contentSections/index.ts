@@ -1,4 +1,4 @@
-import { About } from 'Components/sections/contentSections/content/about/About';
-import { Commercial } from 'Components/sections/contentSections/content/commercial/Commercial';
+import { AboutSection } from 'components/sections/contentSections/content/about/AboutSection';
+import { CommercialSection } from 'components/sections/contentSections/content/commercial/CommercialSection';
 
-export { About, Commercial };
+export { AboutSection, CommercialSection };

@@ -25,7 +25,7 @@ interface TitleProps {
  * @param props
  * @returns
  */
-function Title({ index, parallax }: TitleProps) {
+function TitleSection({ index, parallax }: TitleProps) {
   // calculate base width and height
   const { size } = useThree();
 
@@ -108,5 +108,5 @@ function Title({ index, parallax }: TitleProps) {
   );
 }
 
-export { Title };
+export { TitleSection };
 export type { TitleProps };

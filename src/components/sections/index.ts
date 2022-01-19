@@ -1,4 +1,4 @@
-import { Title } from 'Components/sections/title/Title';
-import { About, Commercial } from 'Components/sections/contentSections/index';
+import { TitleSection } from 'components/sections/title/TitleSection';
+import { AboutSection, CommercialSection } from 'Components/sections/contentSections/index';
 
-export { Title, About, Commercial };
+export { TitleSection, AboutSection, CommercialSection };

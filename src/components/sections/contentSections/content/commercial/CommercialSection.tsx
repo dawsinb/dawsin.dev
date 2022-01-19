@@ -6,7 +6,7 @@ import { AboutContent } from 'Components/sections/contentSections/content/about/
  * @param props
  * @returns
  */
-function Commercial({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
+function CommercialSection({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
   return (
     <ContentSectionLayout
       index={index}
@@ -22,4 +22,4 @@ function Commercial({ index, parallax, alternateColor, alternatePosition }: Cont
   );
 }
 
-export { Commercial };
+export { CommercialSection };
