@@ -35,7 +35,7 @@ function DynamicText({ children }: DynamicTextProps) {
   // resizes text to just before overflow
   const resize = () => {
     // only run if div is loaded
-    if (containerRef.current && textRef.current && containerRef.current.clientHeight !== 0) {
+    if (containerRef.current && textRef.current) {
       // variable to hold incrementing font size
       let fontSize = 1;
 
@@ -55,10 +55,6 @@ function DynamicText({ children }: DynamicTextProps) {
 
       // revert to last state where no overflow happened:
       textRef.current.style.fontSize = `${fontSize - 0.5}px`;
-    }
-    // retry in 100 ms if div isnt loaded
-    else {
-      setTimeout(resize, 100);
     }
   };
 
