@@ -7,7 +7,8 @@ import {
   AboutSection,
   CommercialSection,
   ResearchSection,
-  EuphonySection
+  EuphonySection,
+  EndSection
 } from 'Components/sections/index';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 import 'r3f-namespace';
@@ -37,6 +38,9 @@ function App() {
   // add resize event listener
   useEffect(() => {
     window.addEventListener('resize', () => {
+      // determine if vertical layout
+      useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
+
       // create r3f canvas
       if (canvasRootRef.current) {
         createRoot(canvasRootRef.current, {
@@ -50,14 +54,12 @@ function App() {
             <TitleSection index={0} parallax={1} />
             <AboutSection index={1} parallax={1.5} />
             <CommercialSection index={2} parallax={1} alternateColor alternatePosition />
-            <ResearchSection index={3} parallax={1.5} />
-            <EuphonySection index={4} parallax={1} alternateColor alternatePosition />
+            <ResearchSection index={4} parallax={1.5} />
+            <EuphonySection index={5} parallax={1} alternateColor alternatePosition />
+            <EndSection index={7} parallax={1.5} />
           </group>
         );
-      }
-
-      // determine if vertical layout
-      useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
+      } 
     });
 
     // fire resize event for initial sizing

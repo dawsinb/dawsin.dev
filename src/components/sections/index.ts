@@ -1,4 +1,5 @@
 import { TitleSection } from 'components/sections/title/TitleSection';
+import { EndSection } from 'components/sections/end/EndSection';
 import {
   AboutSection,
   CommercialSection,
@@ -6,4 +7,5 @@ import {
   EuphonySection
 } from 'Components/sections/contentSections/index';
 
-export { TitleSection, AboutSection, CommercialSection, ResearchSection, EuphonySection };
+
+export { TitleSection, EndSection, AboutSection, CommercialSection, ResearchSection, EuphonySection };
