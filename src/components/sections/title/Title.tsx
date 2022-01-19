@@ -46,21 +46,23 @@ function Title({ index, parallax }: TitleProps) {
 
   // load font and create text geometries
   useEffect(() => {
-    loadFont('/assets/fonts/BorisBlackBloxxDirty.json').then(font => {
-      if (textGroupRef.current && dawsinTextRef.current && devTextRef.current) {
-        // create text geometries
-        const config = { font: font, size: fontSize, height: 25 };
-        dawsinTextRef.current.geometry = new TextGeometry('dawsin', config);
-        devTextRef.current.geometry = new TextGeometry('.dev', config);
+    loadFont('/assets/fonts/BorisBlackBloxxDirty.json')
+      .then((font) => {
+        if (textGroupRef.current && dawsinTextRef.current && devTextRef.current) {
+          // create text geometries
+          const config = { font: font, size: fontSize, height: 25 };
+          dawsinTextRef.current.geometry = new TextGeometry('dawsin', config);
+          devTextRef.current.geometry = new TextGeometry('.dev', config);
 
-        // center texts together
-        dawsinTextRef.current.geometry.computeBoundingBox();
-        if (dawsinTextRef.current.geometry.boundingBox) {
-          textGroupRef.current.position.x =
-            dawsinTextRef.current.geometry.boundingBox.min.x - dawsinTextRef.current.geometry.boundingBox.max.x / 2;
+          // center texts together
+          dawsinTextRef.current.geometry.computeBoundingBox();
+          if (dawsinTextRef.current.geometry.boundingBox) {
+            textGroupRef.current.position.x =
+              dawsinTextRef.current.geometry.boundingBox.min.x - dawsinTextRef.current.geometry.boundingBox.max.x / 2;
+          }
         }
-      }
-    }).catch(error => console.error(error));
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   // rotate text to look at mouse position

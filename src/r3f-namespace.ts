@@ -1,14 +1,9 @@
-import { extend } from '@react-three/fiber'
-import { 
-  Group,
-  Mesh,
-  MeshBasicMaterial,
-  PlaneBufferGeometry 
-} from 'three'
+import { extend } from '@react-three/fiber';
+import { Group, Mesh, MeshBasicMaterial, PlaneBufferGeometry } from 'three';
 
-extend({ 
+extend({
   Group,
   Mesh,
   MeshBasicMaterial,
   PlaneBufferGeometry
-})
+});

@@ -5,7 +5,6 @@
  */
 
 import { Font, FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
- 
 
 // create loader and set path to WASM transcoder and JS wraper
 const loader = new FontLoader();
@@ -14,11 +13,11 @@ const loader = new FontLoader();
 const loadedFonts: Dictionary<Font> = {};
 // track pending fonts so we dont start two loads at the same time
 const pendingFonts: string[] = [];
-// create bus to await 
+// create bus to await
 const bus = new EventTarget();
 
 function loadFont(url: string): Promise<Font> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     // if url is already loaded just return from cache
     if (url in loadedFonts) {
       resolve(loadedFonts[url]);
@@ -30,23 +29,25 @@ function loadFont(url: string): Promise<Font> {
     // otherwise load the font
     else {
       // push url to pending list
-      pendingFonts.push(url)
+      pendingFonts.push(url);
 
       // fetch the font
-      loader.loadAsync(url).then(geometry => {
-        // cache the font
-        loadedFonts[url] = geometry;
+      loader
+        .loadAsync(url)
+        .then((geometry) => {
+          // cache the font
+          loadedFonts[url] = geometry;
 
-        // dispatch event on bus to notify any pending listeners that the font is available
-        bus.dispatchEvent(new Event(`${url}-loaded`));
-        // dispatch global event to notify the load manager that the asset is loaded and cached
-        dispatchEvent(new CustomEvent('assetLoad', { detail: url }));
+          // dispatch event on bus to notify any pending listeners that the font is available
+          bus.dispatchEvent(new Event(`${url}-loaded`));
+          // dispatch global event to notify the load manager that the asset is loaded and cached
+          dispatchEvent(new CustomEvent('assetLoad', { detail: url }));
 
-        resolve(loadedFonts[url]);
-      })
-      .catch(error => console.error(error))
+          resolve(loadedFonts[url]);
+        })
+        .catch((error) => console.error(error));
     }
-  })
+  });
 }
 
 export { loadFont };

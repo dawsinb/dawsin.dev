@@ -8,7 +8,7 @@ import { Mesh, Group, Vector3, Texture, Material } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useFrame, useThree } from '@react-three/fiber';
 import styled from 'styled-components';
-import { loadFont } from 'loaders/loadFont'
+import { loadFont } from 'loaders/loadFont';
 import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { useLayout } from 'Stores/layout';
 import { useTheme } from 'Stores/theme';
@@ -28,7 +28,7 @@ interface ContentContainerProps {
 const ContentContainer = styled('div')<ContentContainerProps>`
   width: ${({ $width }) => $width}px;
   height: ${({ $height }) => $height}px;
-`
+`;
 
 /** Props for {@link Content} */
 interface ContentProps {
@@ -190,35 +190,41 @@ function ContentSectionLayout({
   // load texture
   const [imageTexture, setImageTexture] = useState(new Texture());
   useEffect(() => {
-    loadTexture(imageUrl, gl).then(texture => {
-      setImageTexture(texture);
-    }).catch(error => console.error(error))
-  }, [])
+    loadTexture(imageUrl, gl)
+      .then((texture) => {
+        setImageTexture(texture);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   // load fonts and create text geometries and refresh on resize
   const headerTextRef = useRef<Mesh>();
   const backgroundTextRef = useRef<Mesh>();
   useEffect(() => {
-    loadFont('/assets/fonts/MontHeavy.json').then(font => {
-      if (headerTextRef.current) {
-        // create text geometry
-        const config = { font: font, size: headerFontSize, height: 1 };
-        headerTextRef.current.geometry = new TextGeometry(headerText, config);
+    loadFont('/assets/fonts/MontHeavy.json')
+      .then((font) => {
+        if (headerTextRef.current) {
+          // create text geometry
+          const config = { font: font, size: headerFontSize, height: 1 };
+          headerTextRef.current.geometry = new TextGeometry(headerText, config);
 
-        // align text if needed
-        alignHeaderText();
-      }
-    }).catch(error => console.error(error));
-    loadFont('/assets/fonts/ModeNine.json').then(font => {
-      if (backgroundTextRef.current) {
-        // create text geometry
-        const config = { font: font, size: bgTextFontSize, height: 1 };
-        backgroundTextRef.current.geometry = new TextGeometry(backgroundText, config);
+          // align text if needed
+          alignHeaderText();
+        }
+      })
+      .catch((error) => console.error(error));
+    loadFont('/assets/fonts/ModeNine.json')
+      .then((font) => {
+        if (backgroundTextRef.current) {
+          // create text geometry
+          const config = { font: font, size: bgTextFontSize, height: 1 };
+          backgroundTextRef.current.geometry = new TextGeometry(backgroundText, config);
 
-        // align text if needed
-        alignBackgroundText();
-      }
-    }).catch(error => console.error(error));
+          // align text if needed
+          alignBackgroundText();
+        }
+      })
+      .catch((error) => console.error(error));
   }, [size]);
 
   // set up transient subscription to the scroll position

@@ -1,6 +1,6 @@
 import { createRoot, Root } from 'react-dom';
-import { useRef, useEffect, ReactNode } from "react"
-import { Group, Vector3 } from "three"
+import { useRef, useEffect, ReactNode } from 'react';
+import { Group, Vector3 } from 'three';
 import styled from 'styled-components';
 import { useFrame } from '@react-three/fiber';
 
@@ -9,7 +9,7 @@ const HtmlAnchor = styled('div')`
   position: fixed;
   top: calc(50%);
   left: calc(50%);
-`
+`;
 /** Props for {@link HtmlContainer} */
 interface HtmlContainerProps {
   style: CssProperties & {
@@ -17,15 +17,13 @@ interface HtmlContainerProps {
     '--x': string;
     /** Current Y position of world coordinates in px */
     '--y': string;
-  }
+  };
 }
 /** Container for {@link Html} content to apply CSS transforms for positioning */
 const HtmlContainer = styled('div')<HtmlContainerProps>`
   position: fixed;
-  transform: 
-    translateX(var(--x, 0px))
-    translateY(var(--y, 0px));
-`
+  transform: translateX(var(--x, 0px)) translateY(var(--y, 0px));
+`;
 
 // create main root and append to document body
 const rootElement = document.createElement('div');
@@ -34,14 +32,14 @@ document.body.appendChild(rootElement);
 
 /** Props for {@link Html} */
 interface HtmlProps {
-  children: ReactNode
+  children: ReactNode;
 }
 /**
  * Portals out HTML content to a new render tree root outside of the WebGL canvas and updates its position to match that of its parent's world position
- * @param props 
- * @returns 
+ * @param props
+ * @returns
  */
-function Html({ children }: HtmlProps ) {
+function Html({ children }: HtmlProps) {
   // throw error if no root element was found
   if (!rootElement) throw new Error('Failed to find the root element');
 
@@ -53,10 +51,10 @@ function Html({ children }: HtmlProps ) {
     rootElement.appendChild(subRootElement);
     // create new render tree at sub root for html content
     subRoot.current = createRoot(subRootElement);
-  }, [])  
+  }, []);
 
   // create ref to the child of the three object to get world coordinate information from the parent
-  const threeChildRef = useRef<Group>()
+  const threeChildRef = useRef<Group>();
   // vectors to track world position
   const worldPosition = new Vector3();
   const lastWorldPosition = new Vector3();
@@ -68,7 +66,7 @@ function Html({ children }: HtmlProps ) {
       threeChildRef.current.getWorldPosition(worldPosition);
     }
     // check if world position has changed
-    if (lastWorldPosition.y !== worldPosition.y || lastWorldPosition.x !== worldPosition.x ) {
+    if (lastWorldPosition.y !== worldPosition.y || lastWorldPosition.x !== worldPosition.x) {
       // update previous world position
       lastWorldPosition.copy(worldPosition);
 
@@ -80,12 +78,12 @@ function Html({ children }: HtmlProps ) {
               {children}
             </HtmlContainer>
           </HtmlAnchor>
-        )
+        );
       }
     }
-  })
+  });
 
-  return <group ref={threeChildRef} />
+  return <group ref={threeChildRef} />;
 }
 
 export { Html };

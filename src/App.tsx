@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef } from 'react';
-import { createRoot } from '@react-three/fiber'
+import { createRoot } from '@react-three/fiber';
 import styled from 'styled-components';
 import { useLayout } from 'Stores/layout';
 import { Title, About, Commercial } from 'Components/sections/index';
@@ -14,7 +14,7 @@ const AppContainer = styled('div')`
 
 const CanvasRoot = styled('canvas')`
   position: fixed;
-`
+`;
 
 /**
  * The base app component that is rendered by react.
@@ -44,15 +44,13 @@ function App() {
             <Title index={0} parallax={1} />
             <About index={1} parallax={1.5} />
             <Commercial index={2} parallax={1} alternateColor alternatePosition />
-          </group> 
-        )
+          </group>
+        );
       }
-        
+
       // determine if vertical layout
       useLayout.setState({ isVertical: window.innerHeight > window.innerWidth });
-
-      
-    });      
+    });
 
     // fire resize event for initial sizing
     window.dispatchEvent(new Event('resize'));

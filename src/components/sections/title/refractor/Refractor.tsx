@@ -80,20 +80,17 @@ function Refractor({ index }: RefractorProps) {
 
   // load model
   useEffect(() => {
-    loadGeometry('/assets/models/refractor.drc').then(geometry => {
-      if (modelRef.current) {
-        modelRef.current.geometry = geometry;
-      }
-    }).catch(error => console.error(error))
-  })
+    loadGeometry('/assets/models/refractor.drc')
+      .then((geometry) => {
+        if (modelRef.current) {
+          modelRef.current.geometry = geometry;
+        }
+      })
+      .catch((error) => console.error(error));
+  });
 
   return (
-    <mesh
-      onUpdate={(self) => self.geometry.center()}
-      scale={scale}
-      ref={modelRef}
-      position={[0, 0, 100]}
-    >
+    <mesh onUpdate={(self) => self.geometry.center()} scale={scale} ref={modelRef} position={[0, 0, 100]}>
       <meshBasicMaterial />
     </mesh>
   );

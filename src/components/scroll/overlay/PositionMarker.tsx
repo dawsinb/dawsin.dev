@@ -55,8 +55,7 @@ const Marker = styled(animated.div)<MarkerProps>`
     // If horizontal shift vertically; if vertical shift horizontally
     translate(${({ $isVertical }) => ($isVertical ? `var(--shift, 0px), 0px` : `0px, var(--shift, 0px)`)})
     // Handle rotation
-    rotateZ(var(--rotate, 0rad)) 
-    // Scale
+    rotateZ(var(--rotate, 0rad)) // Scale
     scale(${({ $scaleFactor }) => $scaleFactor});
 `;
 
