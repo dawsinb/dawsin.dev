@@ -1,5 +1,5 @@
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { AboutContent } from 'Components/sections/contentSections/content/about/AboutContent';
+import { CommercialContent } from 'Components/sections/contentSections/content/commercial/CommercialContent';
 
 /**
  * Commercial work section, uses {@link ContentSection} for it's layout
@@ -17,7 +17,7 @@ function CommercialSection({ index, parallax, alternateColor, alternatePosition 
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >
-      {AboutContent}
+      {CommercialContent}
     </ContentSectionLayout>
   );
 }
