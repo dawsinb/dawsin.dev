@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef } from 'react';
-import { Group, Mesh, Vector3 } from 'three';
+import { Euler, Group, Mesh, Vector3 } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
 import { loadFont } from 'loaders/loadFont';
@@ -39,47 +39,82 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
   const titleY = 0;
   const titlePosition = new Vector3(titleX, titleY, 1);
 
+  const laptopFrameRef = useRef<Mesh>();
+  const laptopScreenRef = useRef<Mesh>();
+  const laptopKeyboardRef = useRef<Mesh>();
+
   const phoneFrameRef = useRef<Mesh>();
   const phoneScreenRef = useRef<Mesh>();
   const phoneBezelRef = useRef<Mesh>();
   const phoneCameraRef = useRef<Mesh>();
 
-  // load model
+  // load models
   useEffect(() => {
-    loadGeometry('/assets/models/phone/phone_frame.drc')
-      .then((geometry) => {
-        if (phoneFrameRef.current) {
-          phoneFrameRef.current.geometry = geometry;
-        }
-      })
-      .catch((error) => console.error(error));
-    loadGeometry('/assets/models/phone/phone_screen.drc')
-      .then((geometry) => {
-        if (phoneScreenRef.current) {
-          phoneScreenRef.current.geometry = geometry;
-        }
-      })
-      .catch((error) => console.error(error));
-    loadGeometry('/assets/models/phone/phone_bezel.drc')
-      .then((geometry) => {
-        if (phoneBezelRef.current) {
-          phoneBezelRef.current.geometry = geometry;
-        }
-      })
-      .catch((error) => console.error(error));
-    loadGeometry('/assets/models/phone/phone_camera.drc')
-      .then((geometry) => {
-        if (phoneCameraRef.current) {
-          phoneCameraRef.current.geometry = geometry;
-        }
-      })
-      .catch((error) => console.error(error));
+    Promise.all([
+      // laptop
+      loadGeometry('/assets/models/laptop/laptop_frame.drc')
+        .then((geometry) => {
+          if (laptopFrameRef.current) {
+            laptopFrameRef.current.geometry = geometry;
+          }
+        }),
+      loadGeometry('/assets/models/laptop/laptop_screen.drc')
+        .then((geometry) => {
+          if (laptopScreenRef.current) {
+            laptopScreenRef.current.geometry = geometry;
+          }
+        }),
+      loadGeometry('/assets/models/laptop/laptop_keyboard.drc')
+        .then((geometry) => {
+          if (laptopKeyboardRef.current) {
+            laptopKeyboardRef.current.geometry = geometry;
+          }
+        }),
+
+      // phone
+      loadGeometry('/assets/models/phone/phone_frame.drc')
+        .then((geometry) => {
+          if (phoneFrameRef.current) {
+            phoneFrameRef.current.geometry = geometry;
+          }
+        }),
+      loadGeometry('/assets/models/phone/phone_screen.drc')
+        .then((geometry) => {
+          if (phoneScreenRef.current) {
+            phoneScreenRef.current.geometry = geometry;
+          }
+        }),
+      loadGeometry('/assets/models/phone/phone_bezel.drc')
+        .then((geometry) => {
+          if (phoneBezelRef.current) {
+            phoneBezelRef.current.geometry = geometry;
+          }
+        }),
+      loadGeometry('/assets/models/phone/phone_camera.drc')
+        .then((geometry) => {
+          if (phoneCameraRef.current) {
+            phoneCameraRef.current.geometry = geometry;
+          }
+        })
+    ]).catch(error => console.log(error))
   }, []);
 
   return (
     <Section index={index} parallax={parallax}>
       <SectionItem parallax={2}>
-        <group scale={size.width * 2}>
+        <group position={new Vector3(-size.width / 3, 0, 0)} rotation={new Euler(Math.PI / 10, 0, 0)} scale={size.width * 0.03}>
+          <mesh ref={laptopFrameRef}>
+            <meshBasicMaterial color={'#ff0000'} />
+          </mesh>
+          <mesh ref={laptopScreenRef}>
+            <meshBasicMaterial color={'#ffffff'} />
+          </mesh>
+          <mesh ref={laptopKeyboardRef}>
+            <meshBasicMaterial color={'#000000'} />
+          </mesh>
+        </group>
+
+        <group position={new Vector3(size.width / 3, 0, 0)} scale={size.width * 2}>
           <mesh ref={phoneFrameRef}>
             <meshBasicMaterial color={'#ff0000'} />
           </mesh>
