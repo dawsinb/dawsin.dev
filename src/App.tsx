@@ -6,6 +6,7 @@ import {
   TitleSection,
   AboutSection,
   CommercialSection,
+  PortfolioSection,
   ResearchSection,
   EuphonySection,
   EndSection
@@ -54,9 +55,10 @@ function App() {
             <TitleSection index={0} parallax={1} />
             <AboutSection index={1} parallax={1.5} />
             <CommercialSection index={2} parallax={1} alternateColor alternatePosition />
-            <ResearchSection index={4} parallax={1.5} />
-            <EuphonySection index={5} parallax={1} alternateColor alternatePosition />
-            <EndSection index={7} parallax={1.5} />
+            <PortfolioSection index={3} parallax={1.5} />
+            <ResearchSection index={4} parallax={1} />
+            <EuphonySection index={5} parallax={1.5} alternateColor alternatePosition />
+            <EndSection index={7} parallax={1} />
           </group>
         );
       }
