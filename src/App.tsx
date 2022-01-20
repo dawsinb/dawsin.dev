@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef } from 'react';
-import { createRoot } from '@react-three/fiber';
+import { createRoot, events } from '@react-three/fiber';
 import styled from 'styled-components';
 import { useLayout } from 'Stores/layout';
 import {
@@ -49,7 +49,8 @@ function App() {
           camera: { position: [0, 0, 10000], far: 20000 },
           dpr: [1, 1],
           linear: true,
-          flat: true
+          flat: true,
+          events
         }).render(
           <group>
             <TitleSection index={0} parallax={1} />
