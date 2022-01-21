@@ -6,6 +6,8 @@ import { useFrame } from '@react-three/fiber';
 
 /** Anchor to place {@link Html} content in the center to match with the threejs coordinate system */
 const HtmlAnchor = styled('div')`
+  // position below other content
+  z-index: -10;
   position: fixed;
   top: calc(50%);
   left: calc(50%);
