@@ -33,10 +33,11 @@ type GLTF = import('three-stdlib').GLTF & {
   materials: Record<string, import('three').Material>;
 };
 
-// in order to register custom shaders with typescript we have to add them to the JSX namespace
 /** @ignore */
 declare namespace JSX {
   interface IntrinsicElements {
+    // in order to register custom shaders with typescript we have to add them to the JSX namespace
     distortionMaterial: ReactThreeFiber.Object3DNode<CustomMaterial, typeof CustomMaterial>;
+    textureFader: ReactThreeFiber.Object3DNode<CustomMaterial, typeof CustomMaterial>;
   }
 }

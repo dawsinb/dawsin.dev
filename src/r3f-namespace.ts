@@ -1,9 +1,26 @@
 import { extend } from '@react-three/fiber';
-import { Group, Mesh, MeshBasicMaterial, PlaneBufferGeometry } from 'three';
-
-extend({
+import {
+  Object3D,
   Group,
   Mesh,
   MeshBasicMaterial,
-  PlaneBufferGeometry
+  MeshStandardMaterial,
+  MeshPhysicalMaterial,
+  PlaneBufferGeometry,
+  AmbientLight,
+  DirectionalLight,
+  SpotLight
+} from 'three';
+
+extend({
+  Object3D,
+  Group,
+  Mesh,
+  MeshBasicMaterial,
+  MeshStandardMaterial,
+  MeshPhysicalMaterial,
+  PlaneBufferGeometry,
+  AmbientLight,
+  DirectionalLight,
+  SpotLight
 });

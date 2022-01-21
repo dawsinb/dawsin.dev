@@ -55,9 +55,8 @@ function Html({ children }: HtmlProps) {
 
   // create ref to the child of the three object to get world coordinate information from the parent
   const threeChildRef = useRef<Group>();
-  // vectors to track world position
+  // vector to track world position
   const worldPosition = new Vector3();
-  const lastWorldPosition = new Vector3();
 
   // set up animation loop to keep position up to date
   useFrame(() => {
@@ -65,21 +64,16 @@ function Html({ children }: HtmlProps) {
     if (threeChildRef.current) {
       threeChildRef.current.getWorldPosition(worldPosition);
     }
-    // check if world position has changed
-    if (lastWorldPosition.y !== worldPosition.y || lastWorldPosition.x !== worldPosition.x) {
-      // update previous world position
-      lastWorldPosition.copy(worldPosition);
 
-      // re-render html content
-      if (subRoot.current) {
-        subRoot.current.render(
-          <HtmlAnchor>
-            <HtmlContainer style={{ '--x': `${worldPosition.x}px`, '--y': `${-worldPosition.y}px` }}>
-              {children}
-            </HtmlContainer>
-          </HtmlAnchor>
-        );
-      }
+    // re-render html content
+    if (subRoot.current) {
+      subRoot.current.render(
+        <HtmlAnchor>
+          <HtmlContainer style={{ '--x': `${worldPosition.x}px`, '--y': `${-worldPosition.y}px` }}>
+            {children}
+          </HtmlContainer>
+        </HtmlAnchor>
+      );
     }
   });
 
