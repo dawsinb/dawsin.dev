@@ -12,6 +12,7 @@ import {
   EndSection
 } from 'Components/sections/index';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
+import { Background } from 'components/background';
 import 'r3f-namespace';
 
 const AppContainer = styled('div')`
@@ -63,6 +64,8 @@ function App() {
             <ResearchSection index={4} parallax={1} />
             <EuphonySection index={5} parallax={1.5} alternateColor alternatePosition />
             <EndSection index={7} parallax={1} />
+
+            <Background />
           </group>
         );
       }
@@ -81,7 +84,6 @@ function App() {
           <CanvasRoot ref={canvasRootRef} />
         </Suspense>
       </AppContainer>
-      
 
       <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} />
     </>

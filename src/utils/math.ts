@@ -4,6 +4,8 @@
  * @mergeTarget
  */
 
+import seedrandom from 'seedrandom';
+
 /**
  * Linearlly interpolates between the given values.
  *
@@ -50,6 +52,11 @@ function clamp(value: number, min: number, max: number) {
  */
 function randomRange(min: number, max: number) {
   return Math.random() * (max - min) + min;
+}
+
+export function seedRandomRange(seed: string, min: number, max: number) {
+  const prng = seedrandom(seed);
+  return prng() * (max - min) + min;
 }
 
 export { lerp, clamp, randomRange };
