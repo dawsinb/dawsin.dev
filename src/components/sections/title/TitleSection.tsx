@@ -33,14 +33,11 @@ function TitleSection({ index, parallax }: TitleProps) {
   const primary = useTheme((state) => state.primaryColor);
   const secondary = useTheme((state) => state.secondaryColor);
 
-  // calculate Positions and sizes
-  const titleX = 0;
-  const titleY = 0;
-  const titlePosition = new Vector3(titleX, titleY, 1);
+  // calculate font size
   const fontSize = size.width / 10;
 
   // create refs for text geometries
-  const textGroupRef = useRef<Group>();
+  const textRef = useRef<Group>();
   const dawsinTextRef = useRef<Mesh>();
   const devTextRef = useRef<Mesh>();
 
@@ -48,7 +45,7 @@ function TitleSection({ index, parallax }: TitleProps) {
   useEffect(() => {
     loadFont('/assets/fonts/BorisBlackBloxxDirty.json')
       .then((font) => {
-        if (textGroupRef.current && dawsinTextRef.current && devTextRef.current) {
+        if (textRef.current && dawsinTextRef.current && devTextRef.current) {
           // create text geometries
           const config = { font: font, size: fontSize, height: 25 };
           dawsinTextRef.current.geometry = new TextGeometry('dawsin', config);
@@ -57,7 +54,7 @@ function TitleSection({ index, parallax }: TitleProps) {
           // center texts together
           dawsinTextRef.current.geometry.computeBoundingBox();
           if (dawsinTextRef.current.geometry.boundingBox) {
-            textGroupRef.current.position.x =
+            textRef.current.position.x =
               dawsinTextRef.current.geometry.boundingBox.min.x - dawsinTextRef.current.geometry.boundingBox.max.x / 2;
           }
         }
@@ -66,6 +63,7 @@ function TitleSection({ index, parallax }: TitleProps) {
   }, []);
 
   // rotate text to look at mouse position
+  const textGroupRef = useRef<Group>();
   const mouseX = useRef<number>(0);
   const mouseY = useRef<number>(0);
   useFrame(({ mouse }) => {
@@ -81,8 +79,8 @@ function TitleSection({ index, parallax }: TitleProps) {
   return (
     <Section index={index} parallax={parallax}>
       <SectionItem parallax={2}>
-        <group position={titlePosition}>
-          <group ref={textGroupRef}>
+        <group ref={textGroupRef}>
+          <group ref={textRef}>
             <mesh ref={dawsinTextRef} layers={1}>
               <meshBasicMaterial color={primary} />
             </mesh>
