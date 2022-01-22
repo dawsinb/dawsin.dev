@@ -79,7 +79,7 @@ function Background() {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, -1000]}>
+    <group ref={groupRef} position={[0, 0, -size.width]}>
       {brushSections.map((brushSection, index) => (
         <group key={index} position={[0, -size.height * index, 0]}>
           {brushSection.map((brush, index) => (
