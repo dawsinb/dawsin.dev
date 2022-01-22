@@ -15,13 +15,16 @@ import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 import 'r3f-namespace';
 
 const AppContainer = styled('div')`
-  position: fixed;
+  z-index: 1;
   width: 100vw;
   height: 100vh;
 `;
 
 const CanvasRoot = styled('canvas')`
+  index: 0;
   position: fixed;
+  width: 100vw;
+  height: 100vh;
 `;
 
 /**
@@ -72,13 +75,16 @@ function App() {
   const sectionNames = ['', 'about me', 'commercial', 'portfolio', 'research', 'euphony', 'music', ''];
 
   return (
-    <AppContainer>
-      <Suspense fallback={null}>
-        <CanvasRoot ref={canvasRootRef} />
-      </Suspense>
+    <>
+      <AppContainer>
+        <Suspense fallback={null}>
+          <CanvasRoot ref={canvasRootRef} />
+        </Suspense>
+      </AppContainer>
+      
 
       <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} />
-    </AppContainer>
+    </>
   );
 }
 
