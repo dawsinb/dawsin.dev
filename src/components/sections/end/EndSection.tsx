@@ -27,12 +27,9 @@ function EndSection({ index, parallax }: EndSectionProps) {
   const primary = useTheme((state) => state.primaryColor);
   const secondary = useTheme((state) => state.secondaryColor);
 
-  // calculate positions and sizes
-
+  // calculate font sizes
   const fontSize = size.width / 10;
-  const textX = 0;
-  const textY = fontSize / 2;
-  const textPosition = new Vector3(textX, textY, 0);
+  const fontSizeJp = size.width / 8;
 
   // load fonts and create text geometries and refresh on resize
   const nineTextRef = useRef<Mesh>();
@@ -61,7 +58,7 @@ function EndSection({ index, parallax }: EndSectionProps) {
       // load japanese geometries
       loadFont('/assets/fonts/YujiSyuku.json').then((font) => {
         // create text geometry
-        const config = { font: font, size: fontSize, height: 1 };
+        const config = { font: font, size: fontSizeJp, height: 1 };
         nineGeometryJp = new TextGeometry('九', config);
         fourGeometryJp = new TextGeometry('四', config);
 
@@ -119,8 +116,8 @@ function EndSection({ index, parallax }: EndSectionProps) {
     if (nineTextRef.current?.morphTargetInfluences && fourTextRef.current?.morphTargetInfluences) {
       // apply sin function to the influence strength
       const time = clock.getElapsedTime() / 4;
-      const hoverInfluenceNine = Math.sin(time) * 0.05 + 0.5;
-      const hoverInfluenceFour = Math.cos(time) * 0.05 + 0.5;
+      const hoverInfluenceNine = Math.sin(time * 2.1 + 0.2) * 0.1 + 0.5;
+      const hoverInfluenceFour = Math.cos(time * 1.9 - 0.1) * 0.1 + 0.5;
 
       // when hovered influence is 0.5 (plus some noise); when not hovered settle to state
       nineTextRef.current.morphTargetInfluences[0] = lerp(
@@ -139,9 +136,9 @@ function EndSection({ index, parallax }: EndSectionProps) {
   return (
     <Section index={index} parallax={parallax}>
       <SectionItem parallax={2}>
-        <group position={textPosition}>
+        <group>
           {/* nine text */}
-          <group>
+          <group position={[0, fontSize / 1.5, 0.1]}>
             <mesh ref={nineTextRef}>
               <meshBasicMaterial color={secondary} />
             </mesh>
@@ -155,13 +152,13 @@ function EndSection({ index, parallax }: EndSectionProps) {
                 setNineHovered(false);
               }}
             >
-              <planeBufferGeometry args={[fontSize * 4, fontSize * 1.5]} />
+              <planeBufferGeometry args={[fontSize * 4, fontSize * 2]} />
               <meshBasicMaterial transparent opacity={0} />
             </mesh>
           </group>
 
           {/* four text */}
-          <group position={[0, -fontSize / 1.3, 1]}>
+          <group position={[0, -fontSize / 1.5, 0]}>
             <mesh ref={fourTextRef}>
               <meshBasicMaterial color={primary} />
             </mesh>
@@ -175,7 +172,7 @@ function EndSection({ index, parallax }: EndSectionProps) {
                 setFourHovered(false);
               }}
             >
-              <planeBufferGeometry args={[fontSize * 4, fontSize * 1.5]} />
+              <planeBufferGeometry args={[fontSize * 4, fontSize * 2]} />
               <meshBasicMaterial transparent opacity={0} />
             </mesh>
           </group>
