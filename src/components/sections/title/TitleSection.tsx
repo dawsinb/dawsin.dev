@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef } from 'react';
-import { Group, Mesh, Vector3 } from 'three';
+import { Group, Mesh } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
 import { loadFont } from 'loaders/loadFont';
