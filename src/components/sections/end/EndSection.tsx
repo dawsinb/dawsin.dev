@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { BufferAttribute, Mesh, Vector3 } from 'three';
+import { BufferAttribute, Mesh } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { Section, SectionItem } from 'components/sections/Section';
 import { lerp } from 'utils/math';
