@@ -1,3 +1,9 @@
+/**
+ * Components for music section with audio playback and a visualizer
+ * @module Components/Sections/Music
+ * @mergeTarget
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { PlaybackSvg } from './PlaybackSvg';

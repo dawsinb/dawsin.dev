@@ -1,3 +1,9 @@
+/**
+ * Components for music section with audio playback and a visualizer
+ * @module Components/Sections/Music
+ * @mergeTarget
+ */
+
 import { useRef, useEffect, useState } from 'react';
 import { BufferAttribute, BufferGeometry, Line, Vector3 } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';

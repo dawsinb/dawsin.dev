@@ -1,3 +1,9 @@
+/**
+ * Components used for end section with morphing text
+ * @module Components/Sections/End
+ * @mergeTarget
+ */
+
 import { useRef, useEffect, useState } from 'react';
 import { BufferAttribute, Mesh } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
