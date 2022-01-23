@@ -1,6 +1,12 @@
+/**
+ * Components used for the portfolio section of the app
+ * @module Components/Sections/Portfolio
+ * @mergeTarget
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import { extend, useFrame, useThree } from '@react-three/fiber';
-import { NearestFilter, Mesh, Texture, Vector3, Euler, Vector2 } from 'three';
+import { NearestFilter, Mesh, Texture, Euler, Vector2 } from 'three';
 import { TextureFader } from './TextureFader';
 import { loadGeometry } from 'loaders/loadGeometry';
 import { loadTexture } from 'loaders/loadTexture';
@@ -9,16 +15,28 @@ import { lerp } from 'Utils/math';
 // register shader in r3f
 extend({ TextureFader });
 
+/** Props for {@link Laptop} */
 interface LaptopProps {
+  /** Current index of image to display */
   imageIndex: number;
+  /** Index of previous image to fade from */
   prevImageIndex: number;
+  /** Direction of the displacement */
   direction: Vector2;
+  /** Urls of images to use as diffuse textures */
   imageTextureUrls: string[];
+  /** Url of displacement map texture */
   displacementTextureUrl: string;
+  /** Url of noise texture */
   noiseTextureUrl: string;
+  /** scale of the phone */
   scale: number;
 }
-
+/**
+ * 3D model of a laptop that can fade between display textures
+ * @param props
+ * @returns
+ */
 function Laptop({
   imageIndex,
   prevImageIndex,
@@ -28,8 +46,8 @@ function Laptop({
   noiseTextureUrl,
   scale
 }: LaptopProps) {
-  // get size of canvas and the underlying renderer
-  const { size, gl } = useThree();
+  // get underlying renderer for texture loading
+  const { gl } = useThree();
 
   // create refs to device meshes
   const laptopFrameRef = useRef<Mesh>();
@@ -148,3 +166,4 @@ function Laptop({
 }
 
 export { Laptop };
+export type { LaptopProps };

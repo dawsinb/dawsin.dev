@@ -1,4 +1,5 @@
 /**
+ * Components for handling layout of the different sections of the app as well as the scroll speed of sections and section items
  * @module Components/Section
  * @mergeTarget
  */

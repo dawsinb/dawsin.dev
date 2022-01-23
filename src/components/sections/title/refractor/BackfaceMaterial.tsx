@@ -1,4 +1,5 @@
 /**
+ * Components used for the title section of the app
  * @module Components/Sections/Title
  * @mergeTarget
  */

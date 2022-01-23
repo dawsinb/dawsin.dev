@@ -1,14 +1,14 @@
 /**
- * @module Components/Sections/Title
+ * Components used for the portfolio section of the app
+ * @module Components/Sections/Portfolio
  * @mergeTarget
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Group, Vector2, Vector3 } from 'three';
+import { Group, Vector2 } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useTheme } from 'Stores/theme';
 import { useLayout } from 'Stores/layout';
-import { lerp } from 'Utils/math';
 import { Section, SectionItem } from 'Components/sections/Section';
 import { Laptop } from './Laptop';
 import { Phone } from './Phone';
@@ -22,10 +22,12 @@ import { animated } from '@react-spring/three';
 // fix for typescript bug with react-spring/styled-components see https://github.com/pmndrs/react-spring/issues/1515
 const AnimatedAmbientLight = styled(animated.ambientLight)<{ color: AnimatedValue<string> }>``;
 
+/** Props for {@link ArrowContainer} */
 interface ArrowContainerProps {
   $isLeft?: boolean;
   $isVertical?: boolean;
 }
+/** Container for left and right arrows for {@link PortfolioSection} */
 const ArrowContainer = styled('div')<ArrowContainerProps>`
   position: absolute;
   left: ${({ $isLeft }) => ($isLeft ? '-35vw' : '35vw')};
@@ -34,6 +36,7 @@ const ArrowContainer = styled('div')<ArrowContainerProps>`
   transform: translate(-50%, 50%);
 `;
 
+/** Container for device slider for {@link PortfolioSection} */
 const SliderContainer = styled('div')`
   position: absolute;
   bottom: -42vh;
@@ -48,7 +51,7 @@ interface PortfolioProps {
   parallax?: number;
 }
 /**
- * Title screen of the app. Contains the title text alongside a {@link Refractor refractor} to apply a shifting effect
+ * Portfolio section of the app. Contains 3d models of a laptop and phone with an image gallery in them
  * @param props
  * @returns
  */

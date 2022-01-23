@@ -1,10 +1,13 @@
+/**
+ * Components used for the portfolio section of the app
+ * @module Components/Sections/Portfolio
+ * @mergeTarget
+ */
+
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { ShaderMaterial, Vector2, GLSL3, Texture } from 'three';
 
-// fades between the image at prevIndex to the image at index
-// fade progress controlled by effectFactor
-// note: numTextures is passed as an argument rather than a define due to a limitation with loop unrolling
-
+/** Shader used by {@link PortfolioSection} to fade between image textures */
 class TextureFader extends ShaderMaterial {
   constructor(numTextures: number) {
     super({
