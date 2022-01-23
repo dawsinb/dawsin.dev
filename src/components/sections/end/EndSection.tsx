@@ -191,3 +191,4 @@ function EndSection({ index, parallax }: EndSectionProps) {
 }
 
 export { EndSection };
+export type { EndSectionProps };
