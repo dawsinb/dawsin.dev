@@ -1,3 +1,9 @@
+/**
+ * Content sections with html text and an image
+ * @module Components/Sections/ContentSections
+ * @mergeTarget
+ */
+
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
 import { ResearchContent } from 'Components/sections/contentSections/content/research/ResearchContent';
 

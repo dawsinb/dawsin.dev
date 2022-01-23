@@ -1,3 +1,9 @@
+/**
+ * Content sections with html text and an image
+ * @module Components/Sections/ContentSections
+ * @mergeTarget
+ */
+
 /** HTML content for {@link EuphonySection} */
 const EuphonyContent = (
   <div>

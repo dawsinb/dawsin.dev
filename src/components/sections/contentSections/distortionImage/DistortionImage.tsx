@@ -1,4 +1,5 @@
 /**
+ * Content sections with html text and an image
  * @module Components/Sections/ContentSections
  * @mergeTarget
  */

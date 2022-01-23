@@ -1,3 +1,9 @@
+/**
+ * Content sections with html text and an image
+ * @module Components/Sections/ContentSections
+ * @mergeTarget
+ */
+
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
 import { EuphonyContent } from 'Components/sections/contentSections/content/euphony/EuphonyContent';
 
