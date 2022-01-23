@@ -9,6 +9,7 @@ import {
   PortfolioSection,
   ResearchSection,
   EuphonySection,
+  MusicSection,
   EndSection
 } from 'Components/sections/index';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
@@ -63,8 +64,8 @@ function App() {
             <PortfolioSection index={3} parallax={1.5} />
             <ResearchSection index={4} parallax={1} />
             <EuphonySection index={5} parallax={1.5} alternateColor alternatePosition />
+            <MusicSection index={6} parallax={1} />
             <EndSection index={7} parallax={1} />
-
             <Background />
           </group>
         );

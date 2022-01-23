@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "@ninefour/euphony": "^1.0.0",
     "@react-spring/core": "^9.4.2",
     "@react-spring/three": "^9.4.2",
     "@react-spring/web": "^9.4.2",

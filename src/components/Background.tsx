@@ -51,11 +51,7 @@ function Background() {
       // generate rotation
       const rotation = new Euler(0, 0, Math.PI * seedRandomRange(`40${i * 100 + j}`, -0.3, 0.3));
       // generate scale
-      const scale = [
-        seedRandomRange(`0${i * 100 + j}`, 0.5, 1.1),
-        seedRandomRange(`0${i * 100 + j}`, 0.5, 1.1),
-        0
-      ];
+      const scale = [seedRandomRange(`0${i * 100 + j}`, 0.5, 1.1), seedRandomRange(`0${i * 100 + j}`, 0.5, 1.1), 0];
 
       brushes.push({
         index: index,
