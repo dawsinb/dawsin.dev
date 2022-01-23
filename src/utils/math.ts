@@ -54,6 +54,15 @@ function randomRange(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
+/**
+ * Generates a psuedo-random value within the given range. Value will always be the same with the given seed
+ *
+ * @param seed the seed to use for generating the random value
+ * @param min the minimum value of the range
+ * @param progress the maximum value of the range
+ * @returns a seeded random value within the range `[min, max)`
+ * @category Math
+ */
 export function seedRandomRange(seed: string, min: number, max: number) {
   const prng = seedrandom(seed);
   return prng() * (max - min) + min;

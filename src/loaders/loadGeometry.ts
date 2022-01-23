@@ -1,5 +1,5 @@
 /**
- * Custom hooks to provide utility within react components
+ * Loaders to handle the loading of assets; these loaders cache assets to prevent wasteful re-computations
  * @module Loaders
  * @mergeTarget
  */
@@ -19,6 +19,11 @@ const pendingGeometries: string[] = [];
 // create bus to await
 const bus = new EventTarget();
 
+/**
+ * Loads a geometry from a compressed Draco mesh
+ * @param url the url of the draco file
+ * @returns a promise which resolves to a geometry decoded from the draco file
+ */
 function loadGeometry(url: string): Promise<BufferGeometry> {
   return new Promise((resolve) => {
     // if url is already loaded just return from cache

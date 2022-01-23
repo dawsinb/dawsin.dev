@@ -1,5 +1,5 @@
 /**
- * Custom hooks to provide utility within react components
+ * Loaders to handle the loading of assets; these loaders cache assets to prevent wasteful re-computations
  * @module Loaders
  * @mergeTarget
  */
@@ -16,6 +16,11 @@ const pendingFonts: string[] = [];
 // create bus to await
 const bus = new EventTarget();
 
+/**
+ * Loads a 3D font face from a Facetype.js JSON
+ * @param url the url of the Factetype.js JSON
+ * @returns a promise which resolves to a font generated from the JSON
+ */
 function loadFont(url: string): Promise<Font> {
   return new Promise((resolve) => {
     // if url is already loaded just return from cache

@@ -1,5 +1,5 @@
 /**
- * Custom hooks to provide utility within react components
+ * Loaders to handle the loading of assets; these loaders cache assets to prevent wasteful re-computations
  * @module Loaders
  * @mergeTarget
  */
@@ -16,6 +16,11 @@ const pendingSvgs: string[] = [];
 // create bus to await
 const bus = new EventTarget();
 
+/**
+ * Loads a geometry from the given SVG
+ * @param url the url of the svg
+ * @returns a promise which resolves to a geometry generated from the SVG
+ */
 function loadSvg(url: string): Promise<ShapeBufferGeometry> {
   return new Promise((resolve) => {
     // if url is already loaded just return from cache

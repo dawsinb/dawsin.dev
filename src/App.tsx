@@ -16,12 +16,14 @@ import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 import { Background } from 'components/background';
 import 'r3f-namespace';
 
+/** Container for the application itself */
 const AppContainer = styled('div')`
   z-index: 1;
   width: 100vw;
   height: 100vh;
 `;
 
+/** Container for the WebGL canvas */
 const CanvasRoot = styled('canvas')`
   index: 0;
   position: fixed;

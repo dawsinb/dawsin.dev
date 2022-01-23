@@ -1,5 +1,5 @@
 /**
- * Custom hooks to provide utility within react components
+ * Loaders to handle the loading of assets; these loaders cache assets to prevent wasteful re-computations
  * @module Loaders
  * @mergeTarget
  */
@@ -20,6 +20,12 @@ const pendingTextures: string[] = [];
 // create bus to await
 const bus = new EventTarget();
 
+/**
+ * Loads a KTX2 compressed texture of the given url
+ * @param url the url of the texture
+ * @param renderer the webGL renderer; used to detect hardware support for various texture features
+ * @returns a promise which resolves to the decoded texture
+ */
 function loadTexture(url: string, renderer: WebGLRenderer): Promise<Texture> {
   // detect hardware support if we haven't already
   if (!supportDetected) {
