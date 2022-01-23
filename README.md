@@ -4,7 +4,7 @@ To see the actual site itself go to [dawsin.dev](https://dawsin.dev/), or [docs.
 
 ## Overview
 
-This site is built using [React](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/) as the framework. A few libraries are used, most importantly [React Three Fiber](https://github.com/pmndrs/react-three-fiber) for creation of 3D scenes, [Zustand](https://github.com/pmndrs/zustand) for state management, [Styled Components](https://styled-components.com/) for CSS-in-JS, and [Euphony](https://github.com/dawsinb/euphony) for audio management. In addition, [Drei](https://github.com/pmndrs/drei) and [React PostProcessing](https://github.com/pmndrs/react-postprocessing) are used for some helpful React Three Fiber helpers, and [React Spring](https://github.com/pmndrs/react-spring) is used for the handling of some animations. 
+This site is built using [React](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/) as the framework. A few libraries are used, most importantly [React Three Fiber](https://github.com/pmndrs/react-three-fiber) for creation of 3D scenes, [Zustand](https://github.com/pmndrs/zustand) for state management, [Styled Components](https://styled-components.com/) for CSS-in-JS, [Euphony](https://github.com/dawsinb/euphony) for audio management, and [React Spring](https://github.com/pmndrs/react-spring) is used for the handling of some animations. 
 
 Testing is done via [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for unit testing, and [ESLint](https://eslint.org/) for static analysis.
 
@@ -35,7 +35,7 @@ As such, all loading should be handled by a properly implemented loader. If you 
 A proprietary load handler neccessitates proprietary loaders. In this case a loader must do three things:
 
 1. Fire an `assetLoad` event with the url of the asset as the detail once an asset has finished loading
-2. Cache assets to prevent an asset being downloaded multiple times
+2. Cache assets to prevent an asset from being processed multiple times
 3. In addition to caching maintain a list of pending assets to prevent multiple fetchs being started
 
 Because fetching is an asynchronous option loaders should be implemented as async functions that return a promise which resolves to the requested asset.
@@ -46,14 +46,23 @@ Most assets you would need already have loader implementations, but if you have 
 | ------------------------------------- | :-------------------------------------------: | :--------------------------------------------------: | ----- |
 | `loadTexture`                         | KTX 2.0<br> [`.ktx2`]                         | Textures                                             | KTX 2.0 (Khronos Texture 2.0) is a compression algorithm and file format for GPU textures. Use this for importing textures instead of `.jpg` or `.png` files.<br><br> *See: [github.com/KhronosGroup/KTX-Software](https://github.com/KhronosGroup/KTX-Software) for more information* |
 | `loadGeometry`                        | Draco<br> [`.drc`]                            | Geometries                                           | Draco is a compression algorithm and file format for 3D geometries. Use this for importing 3D models instead of `.obj` or `.ply` files.<br><br> *See: [github.com/google/draco](https://github.com/google/draco) for more information* |
-| `loadGLTF`                            | GLTF<br> [`.gltf`, `.glb`]                    | GLTF Scenes                                          | ***NOT IMPLEMENTED YET*** |
 | `loadFont`                            | 3D Font<br> [`.json`]                         | 3D Text Geometries                                   | Font JSONs are generated from `.ttf` or `.otf` files through [Facetype.js](https://gero3.github.io/facetype.js/). Make sure to restrict the character set to only those you need in order to save space. |
-| `loadAudio`                           | Audio<br> [`.mp3`]                            | [Euphony](https://github.com/dawsinb/euphony) Audio  | ***NOT IMPLEMENTED YET***
+| `loadSvg`                             | SVG<br> [`.svg`]                              | SVG Geometries                                       | Generates a geometry from an SVG file
 
-## scroll handler
-scrolling is handled manually to allow for interactivity with the webgl canvas while maintaing the ability scroll
-to access the scroll position use the `useScroll` hook which provides a ref to the current scroll position
-the scroll position is expressed as an integer which each whole number representing the top of the next "page"
+## Mixing WebGL and HTML
 
-## image compression
-all images are compressed using KTX2
+The 3D content rendered in a canvas element is seperate from the regular HTML dom which poses a few problems to getting regular HTML content onto the canvas.
+
+### Projecting HTML Content
+
+Since HTML elements can't be rendered in a canvas we have to portal the elements to a new render tree outside of the WebGL render tree. This is done by creating a root with the id `three-html-root` om the HTML body and creating a new sub root under that for each HTML component. In order to line up with the WebGL canvas the world coordinates of the parent are read and the HTML is then projected to the correct position using CSS transforms.
+
+### Scrolling
+
+Because there isn't really a dom scrolling must be handled manually. This allows for interactivity with the WebGL canvas while maintaining the ability to scroll. Custom event handlers are registered via the `ScrollHandler` component which handles both mouse and touch scrolling. The scroll position is kept as a number in the global store with each whole number representing a full page scroll.
+
+The scroll store can be accessed via `useScroll`, or a transient subscription can be set up with the `useTransientScroll` hook. A transient subscription is useful as it allows the scroll position to be tracked without causing a rerender.
+
+## Acknowledgements
+
+A huge shoutout to the team at [Poimandres](https://github.com/pmndrs) for their suite of libraries that were used in the making of this app. And a particular shoutout to this [demo](https://codesandbox.io/s/moksha-f1ixt) which served as the inspiration for the theme.
