@@ -1,3 +1,9 @@
+/**
+ * Component to mix HTML content from within a WebGL canvas
+ * @module Components/Html
+ * @mergeTarget
+ */
+
 import { createRoot, Root } from 'react-dom';
 import { useRef, useEffect, ReactNode } from 'react';
 import { Group, Vector3 } from 'three';

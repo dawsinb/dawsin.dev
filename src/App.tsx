@@ -38,10 +38,14 @@ const CanvasRoot = styled('canvas')`
  * @category Component
  */
 function App() {
-  const canvasRootRef = useRef<HTMLCanvasElement>(null);
-
   // set margins
   useLayout.setState({ marginX: 0.1, marginY: 0.05 });
+
+  // names of sections to use for overlay (also used to determine total number of sections)
+  const sectionNames = ['', 'about me', 'commercial', 'portfolio', 'research', 'euphony', 'music', ''];
+
+  // create ref to root element of the canvas so we can create a R3F render tree from it
+  const canvasRootRef = useRef<HTMLCanvasElement>(null);
 
   // add resize event listener
   useEffect(() => {
@@ -68,7 +72,7 @@ function App() {
             <EuphonySection index={5} parallax={1.5} alternateColor alternatePosition />
             <MusicSection index={6} parallax={1} />
             <EndSection index={7} parallax={1} />
-            <Background />
+            <Background numSections={sectionNames.length} />
           </group>
         );
       }
@@ -77,8 +81,6 @@ function App() {
     // fire resize event for initial sizing
     window.dispatchEvent(new Event('resize'));
   }, []);
-
-  const sectionNames = ['', 'about me', 'commercial', 'portfolio', 'research', 'euphony', 'music', ''];
 
   return (
     <>

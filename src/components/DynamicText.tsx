@@ -1,4 +1,5 @@
 /**
+ * Component to automatically size text
  * @module Components/DynamicText
  * @mergeTarget
  */

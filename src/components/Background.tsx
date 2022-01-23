@@ -1,3 +1,9 @@
+/**
+ * Component to provide the background of the app
+ * @module Components/Background
+ * @mergeTarget
+ */
+
 import { useEffect, useRef, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { lerp, seedRandomRange } from 'utils/math';
@@ -5,9 +11,20 @@ import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { Euler, Group, ShapeBufferGeometry, Vector3 } from 'three';
 import { loadSvg } from 'loaders/loadSvg';
 
-function Background() {
+interface BackgroundProps {
+  /** Number of sections to generate background content for */
+  numSections: number;
+}
+/**
+ * Generates a background of brush strokes
+ * @param props
+ * @returns
+ */
+function Background({ numSections }: BackgroundProps) {
+  // get size of the canvas
   const { size } = useThree();
 
+  // urls of svgs to use
   const svgUrls = [
     '/assets/svg/brush1.svg',
     '/assets/svg/brush2.svg',
@@ -16,9 +33,11 @@ function Background() {
     '/assets/svg/brush5.svg',
     '/assets/svg/brush6.svg'
   ];
+
+  // load geometries from url
   const [svgGeometries, setSvgGeometries] = useState<ShapeBufferGeometry[]>([]);
   useEffect(() => {
-    // load image textures
+    // load image geometries from svgs
     const buffer: ShapeBufferGeometry[] = [];
     Promise.all(
       svgUrls.map((url, index) => {
@@ -34,7 +53,6 @@ function Background() {
   }, []);
 
   // generate a brush section for each section
-  const numSections = 8;
   const brushSections = [];
   for (let i = 0; i < numSections; i++) {
     // generate 1 to 3 brushes
@@ -53,6 +71,7 @@ function Background() {
       // generate scale
       const scale = [seedRandomRange(`0${i * 100 + j}`, 0.5, 1.1), seedRandomRange(`0${i * 100 + j}`, 0.5, 1.1), 0];
 
+      // push brush to list of brushes for this section
       brushes.push({
         index: index,
         position: position,
@@ -61,6 +80,7 @@ function Background() {
       });
     }
 
+    // push list of brushes to this section of brushes
     brushSections[i] = brushes;
   }
   // set up a ref to the sub group so that we can scroll it relative to the position
@@ -90,3 +110,4 @@ function Background() {
 }
 
 export { Background };
+export type { BackgroundProps };
