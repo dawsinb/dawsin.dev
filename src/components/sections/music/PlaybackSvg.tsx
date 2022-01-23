@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
+/** SVG styles for {@link PlaybackSvg} */
 const PlaySvg = styled('svg')`
   transform: scale(${(props) => props.scale});
   .ring {
@@ -20,21 +21,34 @@ const PlaySvg = styled('svg')`
   }
 `;
 
+/** Props for {@link PlaybackSvg} */
 interface PlaybackSvgProps {
+  /** Color of the ring */
   color: string;
+  /** Determines whether to display the play or pause icon; true for pause icon, false for play */
   isPlaying: boolean;
+  /** Progress of playback as a number in the range [0, 1] with 1 being the end of the playback */
   progress: number;
+  /** Diameter of the SVG in relation to the stroke width; defaults to 100 */
+  diameter?: number;
+  /** Stroke width of the ring in relation to the diameter; defaults to 4 */
+  strokeWidth?: number;
 }
-function PlaybackSvg({ color, isPlaying, progress }: PlaybackSvgProps) {
-  const diameter = 100;
-  const strokeWidth = 4;
-
+/**
+ * Playback svg which contains a play/pause icon and a ring to display playback progress
+ * @param Props
+ * @returns
+ */
+function PlaybackSvg({ color, isPlaying, progress, diameter = 100, strokeWidth = 4 }: PlaybackSvgProps) {
+  // calculate offset for displaying progress
   const circumference = diameter * Math.PI;
   const strokeDashoffset = circumference - (Math.min(progress, 1) - 1) * circumference;
 
+  // refs to handle icon transition animation
   const playToStop = useRef<SVGAnimateElement>(null);
   const stopToPlay = useRef<SVGAnimateElement>(null);
 
+  // when playing status changes toggle the icon
   useEffect(() => {
     if (playToStop.current && stopToPlay.current) {
       if (isPlaying) {
@@ -88,3 +102,4 @@ function PlaybackSvg({ color, isPlaying, progress }: PlaybackSvgProps) {
 }
 
 export { PlaybackSvg };
+export type { PlaybackSvgProps };

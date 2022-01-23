@@ -1,41 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
-import { BufferAttribute, BufferGeometry, Line, Mesh, Vector3 } from 'three';
+import { BufferAttribute, BufferGeometry, Line, Vector3 } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
-import { Section, SectionItem } from 'components/sections/Section';
-import { useTheme } from 'Stores/theme';
-import { PlaybackSvg } from './PlaybackSvg';
-import { SongPlayer } from './SongPlayer';
-import { Html } from 'Components/Html';
 import styled from 'styled-components';
 import { Analyser, Playback } from '@ninefour/euphony';
 import { lerp } from 'Utils/math';
-
-const Container = styled('div')`
-  width: 10vh;
-  height: 10vh;
-`;
-
-interface MusicContainerProps {
-  $size: number;
-}
-const MusicContainer = styled('div')<MusicContainerProps>`
-  position: fixed;
-  left: -22.5vw;
-  top: 10vh;
-  width: 60vw;
-  height: ${({ $size }) => $size * 2}px;
-  row-gap: ${({ $size }) => $size / 4}px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const MusicItem = styled('div')`
-  flex-basis: 50%;
-  width: 50%;
-  height: 50%;
-`;
+import { useTheme } from 'Stores/theme';
+import { Section, SectionItem } from 'components/sections/Section';
+import { Html } from 'Components/Html';
+import { SongPlayer } from './SongPlayer';
 
 // create audio nodes
 const pm836 = new Playback();
@@ -49,14 +21,7 @@ desire.connect(analyser);
 kakin.connect(analyser);
 hydrogen.connect(analyser);
 
-// load audio
-Promise.all([
-  pm836.load('/music/836pm.mp3'),
-  desire.load('/music/desire.mp3'),
-  kakin.load('/music/kakin.mp3'),
-  hydrogen.load('/music/hydrogen.wav')
-]).catch((error) => console.error(error));
-
+// create objects for referring to players
 const songs = [
   {
     playback: pm836,
@@ -80,49 +45,94 @@ const songs = [
   }
 ];
 
-/** Props for {@link EndSection} */
-interface EndSectionProps {
+/** Props for {@link MusicContainer} */
+interface MusicContainerProps {
+  $size: number;
+}
+/** Container for html content of {@link MusicSection} */
+const MusicContainer = styled('div')<MusicContainerProps>`
+  position: fixed;
+  left: -22.5vw;
+  top: 10vh;
+  width: 60vw;
+  height: ${({ $size }) => $size * 2}px;
+  row-gap: ${({ $size }) => $size / 4}px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+`;
+/** Flex item sub container for {@link MusicContainer} */
+const MusicItem = styled('div')`
+  flex-basis: 50%;
+  width: 50%;
+  height: 50%;
+`;
+
+/** Props for {@link MusicSection} */
+interface MusicSectionProps {
   /** Index of the {@link Section section} */
   index: number;
   /** Parallax of the {@link Section section} */
   parallax?: number;
 }
 /**
- * End section which contains text that morphs when moused over
+ * Music section which contains song playback buttons and a visualizer that reacts to the audio playing
  * @param props
  * @returns
  */
-function MusicSection({ index, parallax }: EndSectionProps) {
+function MusicSection({ index, parallax }: MusicSectionProps) {
   // get size of canvas
   const { size } = useThree();
+
+  // calculate size of html content
+  const htmlSize = size.width / 14;
+  // calculate vertical scale factor of visualizer
+  const scaleFactor = size.height / 4;
 
   // get colors
   const primary = useTheme((state) => state.primaryColor);
   const secondary = useTheme((state) => state.secondaryColor);
+  // extract hex values
+  const primaryHexValues = primary.match(/[0-9|a-f|A-F]{1,2}/g);
+  const secondaryHexValues = secondary.match(/[0-9|a-f|A-F]{1,2}/g);
+  if (!primaryHexValues || !secondaryHexValues) throw new Error('hex values not found');
+  // convert hex to rgb
+  const primaryRgb: number[] = primaryHexValues.map((hex) => parseInt(hex, 16) / 255);
+  const secondaryRgb: number[] = secondaryHexValues.map((hex) => parseInt(hex, 16) / 255);
 
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+  // load audio
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    // load audio
+    Promise.all([
+      pm836.load('/music/836pm.mp3'),
+      desire.load('/music/desire.mp3'),
+      kakin.load('/music/kakin.mp3'),
+      hydrogen.load('/music/hydrogen.wav')
+    ])
+      .then(() => setIsLoaded(true))
+      .catch((error) => console.error(error));
+  }, []);
 
+  // start/pause playback of given id and stop all others
   const updateCurrentlyPlaying = (id: string) => {
-    // if song is already playing find the playback and stop it
-    if (currentlyPlaying === id) {
+    if (isLoaded) {
       songs.forEach((song) => {
+        // if requested song
         if (song.id === id) {
-          song.playback.stop();
-          setCurrentlyPlaying(null);
+          // if currently playing pause it
+          if (song.playback.isPlaying) {
+            song.playback.pause();
+          }
+          // otherwise begin playback
+          else {
+            song.playback.play();
+          }
         }
-      });
-    }
-    // otherwise stop any other song that is playing and play this one
-    else {
-      songs.forEach((song) => {
-        // if it is the song thats currently playing stop it
-        if (song.id === currentlyPlaying) {
+        // not the requested song just stop it
+        else {
           song.playback.stop();
-        }
-        // if its the song requested play it
-        if (song.id === id) {
-          song.playback.play();
-          setCurrentlyPlaying(id);
         }
       });
     }
@@ -133,28 +143,35 @@ function MusicSection({ index, parallax }: EndSectionProps) {
   useEffect(() => {
     // number of points for a waveform is equal to the fft size
     const numPoints = analyser.fftSize;
-    console.log(analyser.fftSize, analyser.frequencyBinCount);
 
     // generate even distribution of points across the screen
     const points: Vector3[] = [];
-    const color: Vector3[] = [];
     for (let i = 0; i < numPoints; i++) {
       points.push(new Vector3((i / numPoints - 0.5) * size.width, 0, 0));
-      color.push(new Vector3(0, 0, 0));
     }
+
+    // generate vertex colors
+    const colors = new Float32Array(numPoints * 3);
+    for (let i = 0; i < numPoints * 3; i += 3) {
+      colors[i] = secondaryRgb[0];
+      colors[i + 1] = secondaryRgb[1];
+      colors[i + 2] = secondaryRgb[2];
+    }
+
     // create geometry from points
     const geometry = new BufferGeometry().setFromPoints(points);
-    geometry.setAttribute('color', new BufferAttribute(new Float32Array(numPoints * 3), 3));
+    // set vertex colors
+    geometry.setAttribute('color', new BufferAttribute(colors, 3));
+    geometry.getAttribute('color').needsUpdate = true;
 
-    // set geometry
+    // attach geometry
     if (lineRef.current) {
       lineRef.current.geometry = geometry;
     }
   }, []);
 
-  const scaleFactor = size.height / 4;
   useFrame(() => {
-    if (currentlyPlaying && lineRef.current?.geometry) {
+    if (lineRef.current?.geometry) {
       // update waveform and frequency data
       analyser.updateWaveform();
       analyser.updateFrequency();
@@ -170,9 +187,9 @@ function MusicSection({ index, parallax }: EndSectionProps) {
       const midPoint = points.count / 2;
       for (let i = 0; i < points.count / 2; i++) {
         // calculate rgb values
-        const r = lerp(42, 230, Math.min(analyser.frequency[i] * 2, 1)) / 255;
-        const g = lerp(209, 0, Math.min(analyser.frequency[i] * 2, 1)) / 255;
-        const b = lerp(175, 80, Math.min(analyser.frequency[i] * 2, 1)) / 255;
+        const r = lerp(secondaryRgb[0], primaryRgb[0], Math.min(analyser.frequency[i] * 2, 1));
+        const g = lerp(secondaryRgb[1], primaryRgb[1], Math.min(analyser.frequency[i] * 2, 1));
+        const b = lerp(secondaryRgb[2], primaryRgb[2], Math.min(analyser.frequency[i] * 2, 1));
         // set left and right color
         color.setXYZ(midPoint + i, r, g, b);
         color.setXYZ(midPoint - i, r, g, b);
@@ -184,15 +201,15 @@ function MusicSection({ index, parallax }: EndSectionProps) {
     }
   });
 
-  const htmlSize = size.width / 14;
-
   return (
     <Section index={index} parallax={parallax}>
       <SectionItem>
+        {/* @ts-expect-error line conflicts with the svg namespace */}
         <line ref={lineRef} position={new Vector3(0, size.height / 8, 0)}>
           <meshBasicMaterial vertexColors />
         </line>
       </SectionItem>
+
       <SectionItem parallax={1}>
         <Html>
           <MusicContainer $size={htmlSize}>
@@ -203,8 +220,8 @@ function MusicSection({ index, parallax }: EndSectionProps) {
                   playback={song.playback}
                   id={song.id}
                   title={song.title}
-                  handler={(id) => updateCurrentlyPlaying(id)}
-                  color={primary}
+                  handler={updateCurrentlyPlaying}
+                  color={isLoaded ? primary : '#808080'}
                 />
               </MusicItem>
             ))}
@@ -216,3 +233,4 @@ function MusicSection({ index, parallax }: EndSectionProps) {
 }
 
 export { MusicSection };
+export type { MusicSectionProps };
