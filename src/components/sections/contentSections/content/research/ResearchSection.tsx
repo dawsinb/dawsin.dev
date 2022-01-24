@@ -5,7 +5,11 @@
  */
 
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { ResearchContent } from 'Components/sections/contentSections/content/research/ResearchContent';
+import {
+  ResearchContent,
+  ResearchContentJp
+} from 'Components/sections/contentSections/content/research/ResearchContent';
+import { useLanguage } from 'stores/language';
 
 /**
  * Research section, uses {@link ContentSection} for it's layout
@@ -13,6 +17,9 @@ import { ResearchContent } from 'Components/sections/contentSections/content/res
  * @returns
  */
 function ResearchSection({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
+  // determine which language to use
+  const isJapanese = useLanguage((state) => state.isJapanese);
+
   return (
     <ContentSectionLayout
       index={index}
@@ -23,7 +30,7 @@ function ResearchSection({ index, parallax, alternateColor, alternatePosition }:
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >
-      {ResearchContent}
+      {isJapanese ? ResearchContentJp : ResearchContent}
     </ContentSectionLayout>
   );
 }

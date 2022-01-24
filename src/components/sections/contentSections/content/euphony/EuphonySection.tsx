@@ -5,7 +5,8 @@
  */
 
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { EuphonyContent } from 'Components/sections/contentSections/content/euphony/EuphonyContent';
+import { EuphonyContent, EuphonyContentJp } from 'Components/sections/contentSections/content/euphony/EuphonyContent';
+import { useLanguage } from 'stores/language';
 
 /**
  * Euphony project section, uses {@link ContentSection} for it's layout
@@ -13,6 +14,9 @@ import { EuphonyContent } from 'Components/sections/contentSections/content/euph
  * @returns
  */
 function EuphonySection({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
+  // determine which language to use
+  const isJapanese = useLanguage((state) => state.isJapanese);
+
   return (
     <ContentSectionLayout
       index={index}
@@ -23,7 +27,7 @@ function EuphonySection({ index, parallax, alternateColor, alternatePosition }: 
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >
-      {EuphonyContent}
+      {isJapanese ? EuphonyContentJp : EuphonyContent}
     </ContentSectionLayout>
   );
 }

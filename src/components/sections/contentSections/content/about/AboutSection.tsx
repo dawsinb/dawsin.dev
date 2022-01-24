@@ -5,7 +5,8 @@
  */
 
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { AboutContent } from 'Components/sections/contentSections/content/about/AboutContent';
+import { AboutContent, AboutContentJp } from 'Components/sections/contentSections/content/about/AboutContent';
+import { useLanguage } from 'stores/language';
 
 /**
  * About section, uses {@link ContentSection} for it's layout
@@ -13,6 +14,9 @@ import { AboutContent } from 'Components/sections/contentSections/content/about/
  * @returns
  */
 function AboutSection({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
+  // determine which language to use
+  const isJapanese = useLanguage((state) => state.isJapanese);
+
   return (
     <ContentSectionLayout
       index={index}
@@ -23,7 +27,7 @@ function AboutSection({ index, parallax, alternateColor, alternatePosition }: Co
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >
-      {AboutContent}
+      {isJapanese ? AboutContentJp : AboutContent}
     </ContentSectionLayout>
   );
 }

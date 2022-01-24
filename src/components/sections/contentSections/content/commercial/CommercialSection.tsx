@@ -5,7 +5,11 @@
  */
 
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { CommercialContent } from 'Components/sections/contentSections/content/commercial/CommercialContent';
+import {
+  CommercialContent,
+  CommercialContentJp
+} from 'Components/sections/contentSections/content/commercial/CommercialContent';
+import { useLanguage } from 'stores/language';
 
 /**
  * Commercial work section, uses {@link ContentSection} for it's layout
@@ -13,6 +17,9 @@ import { CommercialContent } from 'Components/sections/contentSections/content/c
  * @returns
  */
 function CommercialSection({ index, parallax, alternateColor, alternatePosition }: ContentSectionProps) {
+  // determine which language to use
+  const isJapanese = useLanguage((state) => state.isJapanese);
+
   return (
     <ContentSectionLayout
       index={index}
@@ -23,7 +30,7 @@ function CommercialSection({ index, parallax, alternateColor, alternatePosition 
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}
     >
-      {CommercialContent}
+      {isJapanese ? CommercialContentJp : CommercialContent}
     </ContentSectionLayout>
   );
 }

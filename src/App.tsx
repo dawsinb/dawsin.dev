@@ -12,9 +12,11 @@ import {
   MusicSection,
   EndSection
 } from 'Components/sections/index';
-import { ScrollHandler } from 'Components/scroll/ScrollHandler';
 import { Background } from 'components/background';
+import { ScrollHandler } from 'Components/scroll/ScrollHandler';
+import { LanguageSvg } from 'components/language/LanguageSvg';
 import 'r3f-namespace';
+import { useLanguage } from 'stores/language';
 
 /** Container for the application itself */
 const AppContainer = styled('div')`
@@ -29,6 +31,16 @@ const CanvasRoot = styled('canvas')`
   position: fixed;
   width: 100vw;
   height: 100vh;
+`;
+
+/** Container for language selector */
+const LanguageContainer = styled('div')`
+  position: fixed;
+  top: 1.25vh;
+  right: 1.25vh;
+  width: 3vh;
+  height: 3vh;
+  cursor: pointer;
 `;
 
 /**
@@ -91,6 +103,9 @@ function App() {
       </AppContainer>
 
       <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} />
+      <LanguageContainer onClick={() => useLanguage.setState({ isJapanese: !useLanguage.getState().isJapanese })}>
+        <LanguageSvg color="white" />
+      </LanguageContainer>
     </>
   );
 }
