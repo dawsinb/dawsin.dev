@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { animated, SpringValue } from '@react-spring/web';
 import { SetValueCallback } from 'Hooks/useStateCallback';
 import { useScroll } from 'Stores/scroll';
+import { useLanguage } from 'stores/language';
 import { Circle } from 'Components/scroll/overlay/Circle';
 import { Square } from 'Components/scroll/overlay/Square';
 import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
@@ -91,6 +92,8 @@ interface SectionMarkerProps {
   offset: number;
   /** Title of the section */
   title: string;
+  /** Japanese translation of title of the section */
+  titleJp: string;
   /** Index of the section; used for updating the scroll position when jumping */
   index: number;
   /** Determines if the marker is interactable; used to prevent touches from jumping to a section when opening the menu */
@@ -113,6 +116,7 @@ function SectionMarker({
   offset,
   index,
   title,
+  titleJp,
   active,
   textToggle,
   setJumpDirection,
@@ -120,9 +124,11 @@ function SectionMarker({
 }: SectionMarkerProps) {
   // switch to vertical layout if screen size is vertical
   const { isVertical } = useContext(ScrollOverlayContext);
+  // determine if to use japanese text
+  const isJapanese = useLanguage((state) => state.isJapanese);
 
   // calculate font size
-  const fontSize = Math.round((isVertical ? 0.8 : 0.9) * markerSize);
+  const fontSize = Math.round((isVertical && !isJapanese ? 0.8 : 0.9) * markerSize);
 
   // update scroll position and positionMarker spin on click
   const handleClick = () => {
@@ -177,7 +183,7 @@ function SectionMarker({
           '--shift': textToggle.to({ output: [markerSize * 2, 0] }).to((value) => `${value}px`)
         }}
       >
-        {title}
+        {isJapanese ? titleJp : title}
       </TextContainer>
     </Container>
   );

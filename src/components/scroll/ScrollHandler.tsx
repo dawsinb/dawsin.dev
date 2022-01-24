@@ -13,6 +13,8 @@ interface ScrollHandlerProps {
   numSections: number;
   /** Optional list of titles for each section to be displayed in {@link ScrollOverlay} */
   sectionNames?: string[];
+  /** Optional list of japanese titles for each section to be displayed in {@link ScrollOverlay} */
+  sectionNamesJp?: string[];
   /** Amount of the page a single movement of the scroll wheel scrolls
    *
    *  *defaults to 0.1*
@@ -38,6 +40,7 @@ interface ScrollHandlerProps {
 function ScrollHandler({
   numSections,
   sectionNames = [],
+  sectionNamesJp = [],
   wheelStrength = 0.1,
   touchStrength = 3.5
 }: ScrollHandlerProps) {
@@ -108,7 +111,7 @@ function ScrollHandler({
     window.addEventListener('touchend', handleTouchend);
   }, []);
 
-  return <ScrollOverlay numSections={numSections} sectionNames={sectionNames} />;
+  return <ScrollOverlay numSections={numSections} sectionNames={sectionNames} sectionNamesJp={sectionNamesJp} />;
 }
 
 export { ScrollHandler };

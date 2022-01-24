@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { animated, SpringValue } from '@react-spring/web';
 import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
+import { useLanguage } from 'stores/language';
 
 /** Props for {@link BackgroundHandler} */
 interface BackgroundHandlerProps {
@@ -50,14 +51,17 @@ interface BackgroundProps {
 function Background({ maxTitleLength, toggle }: BackgroundProps) {
   // switch to vertical layout if screen size is vertical
   const { isVertical } = useContext(ScrollOverlayContext);
+  // alter size if japanese text is used
+  const isJapanese = useLanguage((state) => state.isJapanese);
 
   // multiply expansion by constant factor depending on layout to get proper size
   const expansionFactor = isVertical ? 0.3 : 0.2;
+  const expansionFactorJp = 0.25;
 
   return (
     <BackgroundHandler
       $isVertical={isVertical}
-      $expansionFactor={expansionFactor}
+      $expansionFactor={isJapanese ? expansionFactorJp : expansionFactor}
       style={{
         '--expansion': toggle.to({ output: [0, maxTitleLength] }),
         '--opacity': toggle.to({ output: [0, 1] })

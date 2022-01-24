@@ -54,6 +54,8 @@ interface ScrollOverlayProps {
   numSections: number;
   /** Optional list of section names to display alongside their respective markers */
   sectionNames?: string[];
+  /** Optional list of japanese section names to display alongside their respective markers */
+  sectionNamesJp?: string[];
 }
 /**
  * Scroll overlay which displays page sections and shows current scroll position.
@@ -65,7 +67,7 @@ interface ScrollOverlayProps {
  * @param props
  * @category Component
  */
-function ScrollOverlay({ numSections, sectionNames = [] }: ScrollOverlayProps) {
+function ScrollOverlay({ numSections, sectionNames = [], sectionNamesJp = [] }: ScrollOverlayProps) {
   // switch to vertical layout if screen size is vertical
   const isVertical = useLayout((state) => state.isVertical);
 
@@ -162,6 +164,7 @@ function ScrollOverlay({ numSections, sectionNames = [] }: ScrollOverlayProps) {
               index={index}
               active={active}
               title={sectionNames[index]}
+              titleJp={sectionNamesJp[index]}
               textToggle={textToggles[index]}
               setJumpDirection={setJumpDirection}
               timeoutRef={timeoutRef}

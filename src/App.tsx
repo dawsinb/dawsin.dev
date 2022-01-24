@@ -55,6 +55,17 @@ function App() {
 
   // names of sections to use for overlay (also used to determine total number of sections)
   const sectionNames = ['', 'about me', 'commercial', 'portfolio', 'research', 'euphony', 'music', ''];
+  // japanese translations of section names
+  const sectionNamesJp = [
+    '',
+    '私について',
+    '商業作品',
+    'ポートフォリオ',
+    'リサーチ',
+    'ユーフォニー',
+    'ミュージック',
+    ''
+  ];
 
   // create ref to root element of the canvas so we can create a R3F render tree from it
   const canvasRootRef = useRef<HTMLCanvasElement>(null);
@@ -102,7 +113,7 @@ function App() {
         </Suspense>
       </AppContainer>
 
-      <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} />
+      <ScrollHandler numSections={sectionNames.length} sectionNames={sectionNames} sectionNamesJp={sectionNamesJp} />
       <LanguageContainer onClick={() => useLanguage.setState({ isJapanese: !useLanguage.getState().isJapanese })}>
         <LanguageSvg color="white" />
       </LanguageContainer>
