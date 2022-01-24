@@ -94,7 +94,10 @@ interface ContentSectionLayoutProps {
   children: ReactNode;
 }
 /** Reduced set of props for components using {@link ContentSectionLayout} */
-type ContentSectionProps = Omit<ContentSectionLayoutProps, 'imageUrl' | 'backgroundText' | 'headerText' | 'children'>;
+type ContentSectionProps = Omit<
+  ContentSectionLayoutProps,
+  'imageUrl' | 'backgroundText' | 'headerText' | 'headerTextJp' | 'children'
+>;
 /**
  * Layout for html content with an image, header, and background text. Use the `alternateColor` and `alternatePosition` to vary each section
  *
