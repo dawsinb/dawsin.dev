@@ -17,7 +17,7 @@ interface ScrollHandlerProps {
   sectionNamesJp?: string[];
   /** Amount of the page a single movement of the scroll wheel scrolls
    *
-   *  *defaults to 0.1*
+   *  *defaults to 1 / 12*
    */
   wheelStrength?: number;
   /**
@@ -41,7 +41,7 @@ function ScrollHandler({
   numSections,
   sectionNames = [],
   sectionNamesJp = [],
-  wheelStrength = 0.1,
+  wheelStrength = 1 / 14,
   touchStrength = 3.5
 }: ScrollHandlerProps) {
   // update scroll store with number of sections
