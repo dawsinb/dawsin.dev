@@ -14,6 +14,7 @@ import { useTheme } from 'Stores/theme';
 import { Section, SectionItem } from 'components/sections/Section';
 import { Html } from 'Components/Html';
 import { SongPlayer } from './SongPlayer';
+import { useLayout } from 'Stores/layout';
 
 // create audio nodes
 const pm836 = new Playback();
@@ -54,6 +55,7 @@ const songs = [
 /** Props for {@link MusicContainer} */
 interface MusicContainerProps {
   $size: number;
+  $isVertical: boolean;
 }
 /** Container for html content of {@link MusicSection} */
 const MusicContainer = styled('div')<MusicContainerProps>`
@@ -67,6 +69,8 @@ const MusicContainer = styled('div')<MusicContainerProps>`
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+  // scale up if vertical
+  transform: scale(${({ $isVertical }) => ($isVertical ? 1.5 : 1)});
 `;
 /** Flex item sub container for {@link MusicContainer} */
 const MusicItem = styled('div')`
@@ -90,6 +94,8 @@ interface MusicSectionProps {
 function MusicSection({ index, parallax }: MusicSectionProps) {
   // get size of canvas
   const { size } = useThree();
+  // change sizing depending on if vertical layout
+  const isVertical = useLayout((state) => state.isVertical);
 
   // calculate size of html content
   const htmlSize = size.width / 14;
@@ -218,7 +224,7 @@ function MusicSection({ index, parallax }: MusicSectionProps) {
 
       <SectionItem parallax={1}>
         <Html>
-          <MusicContainer $size={htmlSize}>
+          <MusicContainer $size={htmlSize} $isVertical={isVertical}>
             {songs.map((song, index) => (
               <MusicItem key={index}>
                 <SongPlayer
