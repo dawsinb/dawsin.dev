@@ -64,7 +64,8 @@ function DynamicText({ children }: DynamicTextProps) {
   // add event listener to execute on resize
   useEffect(() => {
     window.addEventListener('resize', () => {
-      resize();
+      // add short delay to allow text to update their containers first
+      setTimeout(() => resize(), 100);
     });
   }, []);
 
