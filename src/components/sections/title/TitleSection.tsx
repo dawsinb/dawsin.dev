@@ -61,7 +61,7 @@ function TitleSection({ index, parallax }: TitleProps) {
         }
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [fontSize]);
 
   // rotate text to look at mouse position
   const textGroupRef = useRef<Group>();
