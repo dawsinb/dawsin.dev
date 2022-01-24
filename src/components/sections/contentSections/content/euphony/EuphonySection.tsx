@@ -22,6 +22,7 @@ function EuphonySection({ index, parallax, alternateColor, alternatePosition }: 
       index={index}
       parallax={parallax}
       headerText={'euphony'}
+      headerTextJp={'ユーフォニー'}
       backgroundText={'<script>'}
       imageUrl={'/assets/textures/piano.ktx2'}
       alternateColor={alternateColor}

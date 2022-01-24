@@ -25,6 +25,7 @@ function ResearchSection({ index, parallax, alternateColor, alternatePosition }:
       index={index}
       parallax={parallax}
       headerText={'research'}
+      headerTextJp={'リサーチ'}
       backgroundText={'<data>'}
       imageUrl={'/assets/textures/building.ktx2'}
       alternateColor={alternateColor}

@@ -19,6 +19,8 @@ import { DistortionImage } from 'Components/sections/contentSections/distortionI
 import { Html } from 'Components/Html';
 import { DynamicText } from 'Components/DynamicText';
 import { loadTexture } from '../../../loaders/loadTexture';
+import { useLanguage } from 'stores/language';
+import { Font } from 'three/examples/jsm/loaders/FontLoader';
 
 /** Props for {@link ContentContainer} */
 interface ContentContainerProps {
@@ -78,6 +80,8 @@ interface ContentSectionLayoutProps {
   parallax?: number;
   /** Header text content */
   headerText: string;
+  /** Japanese translation of header text content */
+  headerTextJp: string;
   /** Background text content */
   backgroundText: string;
   /** Url of the image to display */
@@ -104,6 +108,7 @@ function ContentSectionLayout({
   imageUrl,
   backgroundText,
   headerText,
+  headerTextJp,
   alternateColor,
   alternatePosition,
   children
@@ -198,17 +203,32 @@ function ContentSectionLayout({
       .catch((error) => console.error(error));
   }, []);
 
+  // determine which language to use
+  const isJapanese = useLanguage((state) => state.isJapanese);
   // load fonts and create text geometries and refresh on resize
   const headerTextRef = useRef<Mesh>();
   const backgroundTextRef = useRef<Mesh>();
   useEffect(() => {
-    loadFont('/assets/fonts/MontHeavy.json')
-      .then((font) => {
+    // load header fonts
+    let headerFont: Font;
+    let headerFontJp: Font;
+    Promise.all([
+      loadFont('/assets/fonts/MPlusRounded.json').then((font) => {
+        headerFontJp = font;
+      }),
+      loadFont('/assets/fonts/MontHeavy.json').then((font) => {
+        headerFont = font;
+      })
+    ])
+      .then(() => {
         if (headerTextRef.current) {
-          // create text geometry
-          const config = { font: font, size: headerFontSize, height: 1 };
-          headerTextRef.current.geometry = new TextGeometry(headerText, config);
-
+          if (isJapanese) {
+            const config = { font: headerFontJp, size: headerFontSize, height: 1 };
+            headerTextRef.current.geometry = new TextGeometry(headerTextJp, config);
+          } else {
+            const config = { font: headerFont, size: headerFontSize, height: 1 };
+            headerTextRef.current.geometry = new TextGeometry(headerText, config);
+          }
           // align text if needed
           alignHeaderText();
         }
@@ -226,7 +246,7 @@ function ContentSectionLayout({
         }
       })
       .catch((error) => console.error(error));
-  }, [size]);
+  }, [size, isJapanese]);
 
   // set up transient subscription to the scroll position
   const scrollRef = useTransientScroll();

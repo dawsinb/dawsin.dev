@@ -23,6 +23,7 @@ function AboutSection({ index, parallax, alternateColor, alternatePosition }: Co
       parallax={parallax}
       headerText={'about me'}
       backgroundText={'<main>'}
+      headerTextJp={'私について'}
       imageUrl={'/assets/textures/self.ktx2'}
       alternateColor={alternateColor}
       alternatePosition={alternatePosition}

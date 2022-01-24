@@ -25,6 +25,7 @@ function CommercialSection({ index, parallax, alternateColor, alternatePosition 
       index={index}
       parallax={parallax}
       headerText={'commercial work'}
+      headerTextJp={'商業作品'}
       backgroundText={'<body>'}
       imageUrl={'/assets/textures/tree.ktx2'}
       alternateColor={alternateColor}
