@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { animated, SpringValue } from '@react-spring/web';
 import { SetValueCallback } from 'Hooks/useStateCallback';
 import { useScroll } from 'Stores/scroll';
-import { useLanguage } from 'stores/language';
+import { useLanguage } from 'Stores/language';
 import { Circle } from 'Components/scroll/overlay/Circle';
 import { Square } from 'Components/scroll/overlay/Square';
 import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
