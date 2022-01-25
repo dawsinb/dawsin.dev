@@ -58,7 +58,7 @@ function Section({ index, parallax = 1, children }: SectionProps) {
       subgroupRef.current.position.y = lerp(
         subgroupRef.current.position.y,
         scrollRef.current * size.height * parallax,
-        0.07
+        0.06
       );
     }
   });
@@ -106,7 +106,7 @@ function SectionItem({ parallax = 0, children }: SectionItemProps) {
       subgroupRef.current.position.y = lerp(
         subgroupRef.current.position.y,
         scrollRef.current * size.height * parallax * parentParallax,
-        0.07
+        0.06
       );
     }
   });
