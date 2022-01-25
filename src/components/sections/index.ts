@@ -7,7 +7,7 @@ import {
   CommercialSection,
   ResearchSection,
   EuphonySection
-} from 'Components/sections/contentSections/index';
+} from 'components/sections/contentSections/index';
 
 export {
   TitleSection,
