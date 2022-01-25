@@ -20,12 +20,16 @@ class DistortionMaterial extends ShaderMaterial {
         imageTexture: { value: undefined },
         displacementIntensity: { value: 10.0 },
         distortionIntensity: { value: 0.1 },
-        scrollIntensity: { value: 1.0 }
+        scrollIntensity: { value: 1.0 },
+        scrollDisplacementIntensity: { value: 0.0 }
       },
       vertexShader: /* glsl */ `
-        uniform vec2 mousePosition;
         uniform float effectFactor;
+        uniform vec2 mousePosition;
         uniform float displacementIntensity;
+        uniform float scrollFactor;
+        uniform float scrollIntensity;
+        uniform float scrollDisplacementIntensity;
         varying vec2 vUv;
         varying float distanceFactor;
         void main() {
@@ -49,6 +53,8 @@ class DistortionMaterial extends ShaderMaterial {
           else {
             pos.x = pos.x - (distanceFactor * displacementIntensity);
           }
+          // add scroll distortion
+          pos.y = pos.y + (sin(uv.x * 3.1415926535897932384626433832795) * -scrollFactor * scrollIntensity * scrollDisplacementIntensity);
           
           gl_Position = projectionMatrix * modelViewMatrix * vec4( pos , 1.0 );
         
@@ -136,6 +142,12 @@ class DistortionMaterial extends ShaderMaterial {
   }
   set scrollIntensity(v: number) {
     this.uniforms.scrollIntensity.value = v;
+  }
+  get scrollDisplacementIntensity(): number {
+    return this.uniforms.scrollDisplacementIntensity.value;
+  }
+  set scrollDisplacementIntensity(v: number) {
+    this.uniforms.scrollDisplacementIntensity.value = v;
   }
 }
 

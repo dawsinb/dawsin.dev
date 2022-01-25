@@ -44,7 +44,7 @@ function DistortionImage({ width, height, texture, ...props }: DistortionImagePr
   useFrame(({ mouse }) => {
     if (materialRef.current) {
       // calculate scroll delta
-      const scrollDelta = (scrollRef.current - prevScrollPosition) / size.height;
+      const scrollDelta = scrollRef.current - prevScrollPosition;
 
       // lerp direction to the direction of the mouse
       materialRef.current.direction.lerp(mouse.normalize(), 0.01).normalize();
@@ -73,8 +73,9 @@ function DistortionImage({ width, height, texture, ...props }: DistortionImagePr
         attach="material"
         ref={materialRef}
         imageTexture={texture}
-        scrollIntensity={5.0}
         displacementIntensity={20.0}
+        scrollIntensity={5.0}
+        scrollDisplacementIntensity={size.height / 2}
       />
     </mesh>
   );
