@@ -6,8 +6,8 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { animated, SpringValue } from '@react-spring/web';
-import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
-import { useLanguage } from 'Stores/language';
+import { useLanguage } from 'stores/language';
+import { ScrollOverlayContext } from './ScrollOverlay';
 
 /** Props for {@link BackgroundHandler} */
 interface BackgroundHandlerProps {

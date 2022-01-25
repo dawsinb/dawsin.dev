@@ -7,17 +7,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { Group, Vector2 } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
-import { useTheme } from 'Stores/theme';
-import { useLayout } from 'Stores/layout';
-import { Section, SectionItem } from 'Components/sections/Section';
-import { Laptop } from './Laptop';
-import { Phone } from './Phone';
-import { Html } from 'Components/Html';
-import { Arrow } from './Arrow';
 import styled from 'styled-components';
 import { useSpring } from '@react-spring/core';
-import { Slider } from './Slider';
 import { animated } from '@react-spring/three';
+import { useTheme } from 'stores/theme';
+import { useLayout } from 'stores/layout';
+import { Section, SectionItem } from 'components/sections/Section';
+import { Html } from 'components/Html';
+import { Laptop } from './Laptop';
+import { Phone } from './Phone';
+import { Arrow } from './Arrow';
+import { Slider } from './Slider';
 
 // fix for typescript bug with react-spring/styled-components see https://github.com/pmndrs/react-spring/issues/1515
 const AnimatedAmbientLight = styled(animated.ambientLight)<{ color: AnimatedValue<string> }>``;

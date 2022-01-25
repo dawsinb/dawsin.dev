@@ -7,7 +7,7 @@
 import styled from 'styled-components';
 import { useSpring } from '@react-spring/core';
 import { animated } from '@react-spring/web';
-import { useLanguage } from 'Stores/language';
+import { useLanguage } from 'stores/language';
 
 /** Props for {@link Container} */
 interface ContainerProps {

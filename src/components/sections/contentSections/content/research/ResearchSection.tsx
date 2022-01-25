@@ -4,12 +4,9 @@
  * @mergeTarget
  */
 
-import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import {
-  ResearchContent,
-  ResearchContentJp
-} from 'Components/sections/contentSections/content/research/ResearchContent';
-import { useLanguage } from 'Stores/language';
+import { useLanguage } from 'stores/language';
+import { ContentSectionLayout, ContentSectionProps } from 'components/sections/contentSections/ContentSectionLayout';
+import { ResearchContent, ResearchContentJp } from './ResearchContent';
 
 /**
  * Research section, uses {@link ContentSection} for it's layout

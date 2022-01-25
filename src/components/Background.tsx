@@ -6,10 +6,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { lerp, seedRandomRange } from 'Utils/math';
-import { useTransientScroll } from 'Hooks/useTransientScroll';
+import { lerp, seedRandomRange } from 'utils/math';
+import { useTransientScroll } from 'hooks/useTransientScroll';
+import { loadSvg } from 'loaders/loadSvg';
 import { Euler, Group, ShapeBufferGeometry, Vector3 } from 'three';
-import { loadSvg } from 'Loaders/loadSvg';
 
 interface BackgroundProps {
   /** Number of sections to generate background content for */

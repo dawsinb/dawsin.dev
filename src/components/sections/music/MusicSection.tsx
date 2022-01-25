@@ -9,12 +9,12 @@ import { BufferAttribute, BufferGeometry, Line, Vector3 } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
 import styled from 'styled-components';
 import { Analyser, Playback } from '@ninefour/euphony';
-import { lerp } from 'Utils/math';
-import { useTheme } from 'Stores/theme';
+import { lerp } from 'utils/math';
+import { useTheme } from 'stores/theme';
+import { useLayout } from 'stores/layout';
 import { Section, SectionItem } from 'components/sections/Section';
-import { Html } from 'Components/Html';
+import { Html } from 'components/Html';
 import { SongPlayer } from './SongPlayer';
-import { useLayout } from 'Stores/layout';
 
 // create audio nodes
 const pm836 = new Playback();

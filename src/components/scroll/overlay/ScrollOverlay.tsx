@@ -7,11 +7,11 @@ import { useState, useRef, useEffect, createContext } from 'react';
 import styled from 'styled-components';
 import { animated } from '@react-spring/web';
 import { useSpring, useSpringRef, useChain, SpringValue } from '@react-spring/core';
-import { useStateCallback } from 'Hooks/useStateCallback';
-import { useLayout } from 'Stores/layout';
-import { Background } from 'Components/scroll/overlay/Background';
-import { SectionMarker } from 'Components/scroll/overlay/SectionMarker';
-import { PositionMarker } from 'Components/scroll/overlay/PositionMarker';
+import { useStateCallback } from 'hooks/useStateCallback';
+import { useLayout } from 'stores/layout';
+import { Background } from './Background';
+import { SectionMarker } from './SectionMarker';
+import { PositionMarker } from './PositionMarker';
 
 /** Variables provided by {@link ScrollOverlayContext} */
 interface ScrollOverlayContextInterface {

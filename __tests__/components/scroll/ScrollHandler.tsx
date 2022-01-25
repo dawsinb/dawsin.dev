@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import { useScroll } from 'Stores/scroll';
-import { ScrollHandler } from 'Components/scroll/ScrollHandler';
+import { useScroll } from 'stores/scroll';
+import { ScrollHandler } from 'components/scroll/ScrollHandler';
 
 describe('ScrollHandler Tests', () => {
   // define window size

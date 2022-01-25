@@ -7,10 +7,10 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Mesh, WebGLRenderTarget } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
-import { useTransientScroll } from 'Hooks/useTransientScroll';
-import { BackfaceMaterial } from 'Components/sections/title/refractor/BackfaceMaterial';
-import { RefractionMaterial } from 'Components/sections/title/refractor/RefractionMaterial';
-import { loadGeometry } from 'Loaders/loadGeometry';
+import { useTransientScroll } from 'hooks/useTransientScroll';
+import { BackfaceMaterial } from 'components/sections/title/refractor/BackfaceMaterial';
+import { RefractionMaterial } from 'components/sections/title/refractor/RefractionMaterial';
+import { loadGeometry } from 'loaders/loadGeometry';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {

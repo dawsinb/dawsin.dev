@@ -6,9 +6,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { PlaybackSvg } from './PlaybackSvg';
-import { DynamicText } from 'Components/DynamicText';
 import { Playback } from '@ninefour/euphony';
+import { DynamicText } from 'components/DynamicText';
+import { PlaybackSvg } from './PlaybackSvg';
 
 /** Container to hold the SVG and Text */
 const Container = styled('div')`

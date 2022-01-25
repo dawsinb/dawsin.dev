@@ -13,11 +13,11 @@ const config = {
   resolve: {
     modules: [path.join(__dirname, '/src'), 'node_modules'],
     alias: {
-      Components: path.join(__dirname, '/src/components/'),
-      Hooks: path.join(__dirname, '/src/hooks/'),
-      Stores: path.join(__dirname, '/src/stores/'),
-      Utils: path.join(__dirname, '/src/utils/'),
-      Loaders: path.join(__dirname, '/src/loaders/')
+      components: path.join(__dirname, '/src/components/'),
+      hooks: path.join(__dirname, '/src/hooks/'),
+      stores: path.join(__dirname, '/src/stores/'),
+      utils: path.join(__dirname, '/src/utils/'),
+      loaders: path.join(__dirname, '/src/loaders/')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg']
   },

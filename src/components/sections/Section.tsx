@@ -6,8 +6,8 @@
 
 import { createContext, useRef, useContext, ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { lerp } from 'Utils/math';
-import { useTransientScroll } from 'Hooks/useTransientScroll';
+import { lerp } from 'utils/math';
+import { useTransientScroll } from 'hooks/useTransientScroll';
 import { Group } from 'three';
 
 /**

@@ -3,10 +3,10 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
-    "^Components(.*)$": "<rootDir>/src/components$1",
-    "^Hooks(.*)$": "<rootDir>/src/hooks$1",
-    "^Stores(.*)$": "<rootDir>/src/stores$1",
-    "^Utils(.*)$": "<rootDir>/src/utils$1",
-    "^Loaders(.*)$": "<rootDir>/src/loaders$1"
+    "^components(.*)$": "<rootDir>/src/components$1",
+    "^hooks(.*)$": "<rootDir>/src/hooks$1",
+    "^stores(.*)$": "<rootDir>/src/stores$1",
+    "^utils(.*)$": "<rootDir>/src/utils$1",
+    "^loaders(.*)$": "<rootDir>/src/loaders$1"
   }
 };

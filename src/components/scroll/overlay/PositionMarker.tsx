@@ -7,10 +7,10 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import { useSpring } from '@react-spring/core';
 import { animated } from '@react-spring/web';
-import { useTransientScroll } from 'Hooks/useTransientScroll';
-import { lerp } from 'Utils/math';
-import { ScrollOverlayContext } from 'Components/scroll/overlay/ScrollOverlay';
-import { Square } from 'Components/scroll/overlay/Square';
+import { useTransientScroll } from 'hooks/useTransientScroll';
+import { lerp } from 'utils/math';
+import { ScrollOverlayContext } from './ScrollOverlay';
+import { Square } from './Square';
 
 /** Props for {@link Container} */
 interface ContainerProps {

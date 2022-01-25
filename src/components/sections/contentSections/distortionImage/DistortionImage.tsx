@@ -7,9 +7,9 @@
 import { useRef, useState } from 'react';
 import { Texture, Vector2 } from 'three';
 import { useFrame, useThree, extend } from '@react-three/fiber';
-import { lerp } from 'Utils/math';
+import { lerp } from 'utils/math';
+import { useTransientScroll } from 'hooks/useTransientScroll';
 import { DistortionMaterial } from './DistortionMaterial';
-import { useTransientScroll } from 'Hooks/useTransientScroll';
 
 /** Props for {@link DistortionImage} */
 interface DistortionImageProps {

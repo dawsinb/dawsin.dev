@@ -4,9 +4,9 @@
  * @mergeTarget
  */
 
-import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { EuphonyContent, EuphonyContentJp } from 'Components/sections/contentSections/content/euphony/EuphonyContent';
-import { useLanguage } from 'Stores/language';
+import { useLanguage } from 'stores/language';
+import { ContentSectionLayout, ContentSectionProps } from 'components/sections/contentSections/ContentSectionLayout';
+import { EuphonyContent, EuphonyContentJp } from './EuphonyContent';
 
 /**
  * Euphony project section, uses {@link ContentSection} for it's layout

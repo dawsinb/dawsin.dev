@@ -4,9 +4,9 @@
  * @mergeTarget
  */
 
-import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import { AboutContent, AboutContentJp } from 'Components/sections/contentSections/content/about/AboutContent';
-import { useLanguage } from 'Stores/language';
+import { useLanguage } from 'stores/language';
+import { ContentSectionLayout, ContentSectionProps } from 'components/sections/contentSections/ContentSectionLayout';
+import { AboutContent, AboutContentJp } from './AboutContent';
 
 /**
  * About section, uses {@link ContentSection} for it's layout

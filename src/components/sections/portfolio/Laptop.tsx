@@ -7,10 +7,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { extend, useFrame, useThree } from '@react-three/fiber';
 import { NearestFilter, Mesh, Texture, Euler, Vector2 } from 'three';
+import { loadGeometry } from 'loaders/loadGeometry';
+import { loadTexture } from 'loaders/loadTexture';
+import { lerp } from 'utils/math';
 import { TextureFader } from './TextureFader';
-import { loadGeometry } from 'Loaders/loadGeometry';
-import { loadTexture } from 'Loaders/loadTexture';
-import { lerp } from 'Utils/math';
 
 // register shader in r3f
 extend({ TextureFader });

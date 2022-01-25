@@ -7,10 +7,10 @@
 import { useRef, useEffect, useState } from 'react';
 import { BufferAttribute, Mesh } from 'three';
 import { useThree, useFrame } from '@react-three/fiber';
-import { Section, SectionItem } from 'Components/sections/Section';
-import { lerp } from 'Utils/math';
-import { useTheme } from 'Stores/theme';
-import { loadFont } from 'Loaders/loadFont';
+import { Section, SectionItem } from 'components/sections/Section';
+import { lerp } from 'utils/math';
+import { useTheme } from 'stores/theme';
+import { loadFont } from 'loaders/loadFont';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 /** Props for {@link EndSection} */

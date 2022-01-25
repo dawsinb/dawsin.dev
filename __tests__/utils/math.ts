@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { lerp, clamp, randomRange } from 'Utils/math';
+import { lerp, clamp, randomRange } from 'utils/math';
 
 describe('Math Util Tests', () => {
   test('lerp', () => {

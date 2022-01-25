@@ -1,7 +1,8 @@
 import { Suspense, useEffect, useRef } from 'react';
 import { createRoot, events } from '@react-three/fiber';
 import styled from 'styled-components';
-import { useLayout } from 'Stores/layout';
+import { useLayout } from 'stores/layout';
+import { useLanguage } from 'stores/language';
 import {
   TitleSection,
   AboutSection,
@@ -11,12 +12,11 @@ import {
   EuphonySection,
   MusicSection,
   EndSection
-} from 'Components/sections/index';
-import { Background } from 'Components/background';
-import { ScrollHandler } from 'Components/scroll/ScrollHandler';
-import { LanguageSvg } from 'Components/language/LanguageSvg';
+} from 'components/sections/index';
+import { Background } from 'components/Background';
+import { ScrollHandler } from 'components/scroll/ScrollHandler';
+import { LanguageSvg } from 'components/language/LanguageSvg';
 import './r3f-namespace';
-import { useLanguage } from 'Stores/language';
 
 /** Container for the application itself */
 const AppContainer = styled('div')`

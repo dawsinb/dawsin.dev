@@ -4,12 +4,9 @@
  * @mergeTarget
  */
 
-import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
-import {
-  CommercialContent,
-  CommercialContentJp
-} from 'Components/sections/contentSections/content/commercial/CommercialContent';
-import { useLanguage } from 'Stores/language';
+import { useLanguage } from 'stores/language';
+import { ContentSectionLayout, ContentSectionProps } from 'components/sections/contentSections/ContentSectionLayout';
+import { CommercialContent, CommercialContentJp } from './CommercialContent';
 
 /**
  * Commercial work section, uses {@link ContentSection} for it's layout

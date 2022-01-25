@@ -8,11 +8,11 @@ import { useEffect, useRef } from 'react';
 import { Group, Mesh } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
-import { loadFont } from 'Loaders/loadFont';
-import { useTheme } from 'Stores/theme';
-import { lerp } from 'Utils/math';
-import { Section, SectionItem } from 'Components/sections/Section';
-import { Refractor } from 'Components/sections/title/refractor/Refractor';
+import { loadFont } from 'loaders/loadFont';
+import { useTheme } from 'stores/theme';
+import { lerp } from 'utils/math';
+import { Section, SectionItem } from 'components/sections/Section';
+import { Refractor } from 'components/sections/title/refractor/Refractor';
 
 /** Props for {@link Title} */
 interface TitleProps {

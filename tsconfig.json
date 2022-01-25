@@ -5,13 +5,13 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "paths": {
-      "Components": ["components"],
-      "Hooks": ["hooks"],
-      "Stores": ["stores"],
-      "Utils": ["utils"],
-      "Loaders": ["loaders"]
+      "components": ["components"],
+      "hooks": ["hooks"],
+      "stores": ["stores"],
+      "utils": ["utils"],
+      "loaders": ["loaders"]
     },
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],

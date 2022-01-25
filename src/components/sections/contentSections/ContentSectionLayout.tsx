@@ -7,20 +7,20 @@
 import { useRef, ReactNode, useEffect, useState } from 'react';
 import { Mesh, Group, Vector3, Texture, Material } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { Font } from 'three/examples/jsm/loaders/FontLoader';
 import { useFrame, useThree } from '@react-three/fiber';
 import styled from 'styled-components';
-import { loadFont } from 'Loaders/loadFont';
-import { useTransientScroll } from 'Hooks/useTransientScroll';
-import { useLayout } from 'Stores/layout';
-import { useTheme } from 'Stores/theme';
-import { lerp } from 'Utils/math';
-import { Section, SectionItem } from 'Components/sections/Section';
-import { DistortionImage } from 'Components/sections/contentSections/distortionImage/DistortionImage';
-import { Html } from 'Components/Html';
-import { DynamicText } from 'Components/DynamicText';
-import { loadTexture } from '../../../loaders/loadTexture';
-import { useLanguage } from 'Stores/language';
-import { Font } from 'three/examples/jsm/loaders/FontLoader';
+import { loadFont } from 'loaders/loadFont';
+import { loadTexture } from 'loaders/loadTexture';
+import { useLanguage } from 'stores/language';
+import { useLayout } from 'stores/layout';
+import { useTheme } from 'stores/theme';
+import { lerp } from 'utils/math';
+import { useTransientScroll } from 'hooks/useTransientScroll';
+import { Section, SectionItem } from 'components/sections/Section';
+import { Html } from 'components/Html';
+import { DynamicText } from 'components/DynamicText';
+import { DistortionImage } from './distortionImage/DistortionImage';
 
 /** Props for {@link ContentContainer} */
 interface ContentContainerProps {

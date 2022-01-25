@@ -4,7 +4,7 @@
  * @mergeTarget
  */
 
-import { clamp } from 'Utils/math';
+import { clamp } from 'utils/math';
 import create, { GetState, SetState } from 'zustand';
 import { subscribeWithSelector, StoreApiWithSubscribeWithSelector } from 'zustand/middleware';
 
