@@ -81,6 +81,7 @@ function App() {
         createRoot(canvasRootRef.current, {
           orthographic: true,
           camera: { position: [0, 0, 10000], far: 20000 },
+          gl: { antialias: true },
           dpr: [1, 1],
           linear: true,
           flat: true,

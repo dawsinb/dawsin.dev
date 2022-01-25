@@ -86,6 +86,7 @@ function Phone({
     Promise.all(
       imageTextureUrls.map((url, index) => {
         return loadTexture(url, gl).then((texture) => {
+          texture.minFilter = texture.magFilter = NearestFilter;
           imageTexturesBuffer[index] = texture;
         });
       })

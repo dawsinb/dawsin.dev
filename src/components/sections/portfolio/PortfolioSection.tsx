@@ -75,10 +75,16 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
   const phoneRef = useRef<Group>();
 
   const laptopImageTextureUrls = [
-    '/assets/textures/self.ktx2',
-    '/assets/textures/tree.ktx2',
-    '/assets/textures/building.ktx2',
-    '/assets/textures/piano.ktx2'
+    '/assets/textures/sites/desktop/home_light.ktx2',
+    '/assets/textures/sites/desktop/module_light.ktx2',
+    '/assets/textures/sites/desktop/home_dark.ktx2',
+    '/assets/textures/sites/desktop/module_dark.ktx2'
+  ];
+  const phoneImageTextureUrls = [
+    '/assets/textures/sites/mobile/home_light.ktx2',
+    '/assets/textures/sites/mobile/module_light.ktx2',
+    '/assets/textures/sites/mobile/home_dark.ktx2',
+    '/assets/textures/sites/mobile/module_dark.ktx2'
   ];
 
   // state to handle mouse style when hovering objects
@@ -187,8 +193,8 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
                 prevImageIndex={imageIndex.previous}
                 direction={direction}
                 imageTextureUrls={laptopImageTextureUrls}
-                displacementTextureUrl={'/assets/textures/self.ktx2'}
-                noiseTextureUrl={'/assets/textures/tree.ktx2'}
+                displacementTextureUrl={'/assets/textures/sites/displacement.ktx2'}
+                noiseTextureUrl={'/assets/textures/sites/noise.ktx2'}
                 scale={laptopScale}
               />
             </group>
@@ -204,9 +210,9 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
                 imageIndex={imageIndex.current}
                 prevImageIndex={imageIndex.previous}
                 direction={direction}
-                imageTextureUrls={laptopImageTextureUrls}
-                displacementTextureUrl={'/assets/textures/self.ktx2'}
-                noiseTextureUrl={'/assets/textures/tree.ktx2'}
+                imageTextureUrls={phoneImageTextureUrls}
+                displacementTextureUrl={'/assets/textures/sites/displacement.ktx2'}
+                noiseTextureUrl={'/assets/textures/sites/noise.ktx2'}
                 scale={phoneScale}
               />
             </group>
