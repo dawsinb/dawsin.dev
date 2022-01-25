@@ -257,13 +257,13 @@ function ContentSectionLayout({
   const headerTextMaterialRef = useRef<Material>();
   useFrame(() => {
     if (headerTextMaterialRef.current) {
-      // if close fade in
-      if (scrollRef.current < index + 0.05 && scrollRef.current > index - 0.05) {
-        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, 1, 0.015);
+      // if current section fade in
+      if (scrollRef.current === index) {
+        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, 1, 0.01);
       }
       // else fade out
       else {
-        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, 0, 0.02);
+        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, -0.2, 0.1);
       }
     }
   });
