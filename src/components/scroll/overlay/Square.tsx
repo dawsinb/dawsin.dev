@@ -18,6 +18,7 @@ interface SquareProps {
 function Square({ sideLength = 100, strokeWidth = 2 }: SquareProps) {
   return (
     <svg
+      style={{ display: 'block' }}
       viewBox={`
         ${-strokeWidth / 2} 
         ${-strokeWidth / 2} 

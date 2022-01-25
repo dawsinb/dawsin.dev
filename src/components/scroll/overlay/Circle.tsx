@@ -18,6 +18,7 @@ interface CircleProps {
 function Circle({ diameter = 100, strokeWidth = 2 }: CircleProps) {
   return (
     <svg
+      style={{ display: 'block' }}
       viewBox={`
         ${-strokeWidth} 
         ${-strokeWidth} 
