@@ -39,7 +39,6 @@ function LanguageSvg({ color, diameter = 100, strokeWidth = 2 }: LanguageSvgProp
       <line x1="0" y1="50" x2="100" y2="50" stroke={color} strokeWidth={strokeWidth} />
       <path d="M50,0 C50,0 -20,50 50,100" fill="none" stroke={color} strokeWidth={strokeWidth} />
       <path d="M50,0 C50,0 120,50 50,100" fill="none" stroke={color} strokeWidth={strokeWidth} />
-      <path d="M50,0 C50,0 120,50 50,100" fill="none" stroke={color} strokeWidth={strokeWidth} />
       <path d="M10,20 C10,20 50,50 90,20" fill="none" stroke={color} strokeWidth={strokeWidth} />
       <path d="M10,80 C10,80 50,50 90,80" fill="none" stroke={color} strokeWidth={strokeWidth} />
     </svg>
