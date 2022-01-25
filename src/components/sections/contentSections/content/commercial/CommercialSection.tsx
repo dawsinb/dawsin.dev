@@ -9,7 +9,7 @@ import {
   CommercialContent,
   CommercialContentJp
 } from 'Components/sections/contentSections/content/commercial/CommercialContent';
-import { useLanguage } from 'stores/language';
+import { useLanguage } from 'Stores/language';
 
 /**
  * Commercial work section, uses {@link ContentSection} for it's layout

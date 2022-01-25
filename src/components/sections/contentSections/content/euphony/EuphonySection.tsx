@@ -6,7 +6,7 @@
 
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
 import { EuphonyContent, EuphonyContentJp } from 'Components/sections/contentSections/content/euphony/EuphonyContent';
-import { useLanguage } from 'stores/language';
+import { useLanguage } from 'Stores/language';
 
 /**
  * Euphony project section, uses {@link ContentSection} for it's layout

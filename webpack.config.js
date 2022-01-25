@@ -16,7 +16,8 @@ const config = {
       Components: path.join(__dirname, '/src/components/'),
       Hooks: path.join(__dirname, '/src/hooks/'),
       Stores: path.join(__dirname, '/src/stores/'),
-      Utils: path.join(__dirname, '/src/utils/')
+      Utils: path.join(__dirname, '/src/utils/'),
+      Loaders: path.join(__dirname, '/src/loaders/')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg']
   },

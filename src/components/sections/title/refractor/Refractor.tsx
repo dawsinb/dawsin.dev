@@ -10,7 +10,7 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { BackfaceMaterial } from 'Components/sections/title/refractor/BackfaceMaterial';
 import { RefractionMaterial } from 'Components/sections/title/refractor/RefractionMaterial';
-import { loadGeometry } from 'loaders/loadGeometry';
+import { loadGeometry } from 'Loaders/loadGeometry';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {

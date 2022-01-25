@@ -6,7 +6,7 @@
 
 import { ContentSectionLayout, ContentSectionProps } from 'Components/sections/contentSections/ContentSectionLayout';
 import { AboutContent, AboutContentJp } from 'Components/sections/contentSections/content/about/AboutContent';
-import { useLanguage } from 'stores/language';
+import { useLanguage } from 'Stores/language';
 
 /**
  * About section, uses {@link ContentSection} for it's layout

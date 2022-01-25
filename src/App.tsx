@@ -12,11 +12,11 @@ import {
   MusicSection,
   EndSection
 } from 'Components/sections/index';
-import { Background } from 'components/background';
+import { Background } from 'Components/background';
 import { ScrollHandler } from 'Components/scroll/ScrollHandler';
-import { LanguageSvg } from 'components/language/LanguageSvg';
-import 'r3f-namespace';
-import { useLanguage } from 'stores/language';
+import { LanguageSvg } from 'Components/language/LanguageSvg';
+import './r3f-namespace';
+import { useLanguage } from 'Stores/language';
 
 /** Container for the application itself */
 const AppContainer = styled('div')`

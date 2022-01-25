@@ -9,7 +9,7 @@ import {
   ResearchContent,
   ResearchContentJp
 } from 'Components/sections/contentSections/content/research/ResearchContent';
-import { useLanguage } from 'stores/language';
+import { useLanguage } from 'Stores/language';
 
 /**
  * Research section, uses {@link ContentSection} for it's layout

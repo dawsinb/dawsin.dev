@@ -8,7 +8,8 @@
       "Components": ["components"],
       "Hooks": ["hooks"],
       "Stores": ["stores"],
-      "Utils": ["utils"]
+      "Utils": ["utils"],
+      "Loaders": ["loaders"]
     },
     "forceConsistentCasingInFileNames": false,
     "resolveJsonModule": true,

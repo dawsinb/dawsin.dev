@@ -9,7 +9,7 @@ import { Mesh, Group, Vector3, Texture, Material } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useFrame, useThree } from '@react-three/fiber';
 import styled from 'styled-components';
-import { loadFont } from 'loaders/loadFont';
+import { loadFont } from 'Loaders/loadFont';
 import { useTransientScroll } from 'Hooks/useTransientScroll';
 import { useLayout } from 'Stores/layout';
 import { useTheme } from 'Stores/theme';
@@ -19,7 +19,7 @@ import { DistortionImage } from 'Components/sections/contentSections/distortionI
 import { Html } from 'Components/Html';
 import { DynamicText } from 'Components/DynamicText';
 import { loadTexture } from '../../../loaders/loadTexture';
-import { useLanguage } from 'stores/language';
+import { useLanguage } from 'Stores/language';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
 
 /** Props for {@link ContentContainer} */
