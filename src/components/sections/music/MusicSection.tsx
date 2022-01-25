@@ -61,7 +61,7 @@ interface MusicContainerProps {
 const MusicContainer = styled('div')<MusicContainerProps>`
   position: fixed;
   left: -22.5vw;
-  top: 10vh;
+  top: 7.5vh;
   width: 60vw;
   height: ${({ $size }) => $size * 2}px;
   row-gap: ${({ $size }) => $size / 4}px;
@@ -217,7 +217,7 @@ function MusicSection({ index, parallax }: MusicSectionProps) {
     <Section index={index} parallax={parallax}>
       <SectionItem>
         {/* @ts-expect-error line conflicts with the svg namespace */}
-        <line ref={lineRef} position={new Vector3(0, size.height / 8, 0)}>
+        <line ref={lineRef} position={new Vector3(0, size.height / 6, 0)}>
           <meshBasicMaterial vertexColors />
         </line>
       </SectionItem>
