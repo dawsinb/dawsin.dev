@@ -263,7 +263,7 @@ function ContentSectionLayout({
       }
       // else fade out
       else {
-        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, -0.2, 0.1);
+        headerTextMaterialRef.current.opacity = lerp(headerTextMaterialRef.current.opacity, -0.4, 0.1);
       }
     }
   });
