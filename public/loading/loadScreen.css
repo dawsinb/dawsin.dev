@@ -12,7 +12,7 @@
   gap: 5vh;
   background-color: #000000;
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 2vh;
   font-family: "Courier New", "Courier", "Arial";
   transition: opacity ease-in-out 1.5s;
 }
