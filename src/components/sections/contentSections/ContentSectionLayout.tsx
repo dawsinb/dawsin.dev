@@ -226,7 +226,7 @@ function ContentSectionLayout({
       .then(() => {
         if (headerTextRef.current) {
           if (isJapanese) {
-            const config = { font: headerFontJp, size: headerFontSize, height: 1 };
+            const config = { font: headerFontJp, size: headerFontSize * 0.9, height: 1 };
             headerTextRef.current.geometry = new TextGeometry(headerTextJp, config);
           } else {
             const config = { font: headerFont, size: headerFontSize, height: 1 };
