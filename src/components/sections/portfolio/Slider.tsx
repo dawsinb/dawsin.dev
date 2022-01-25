@@ -7,6 +7,7 @@
 import styled from 'styled-components';
 import { useSpring } from '@react-spring/core';
 import { animated } from '@react-spring/web';
+import { useLanguage } from 'stores/language';
 
 /** Props for {@link Container} */
 interface ContainerProps {
@@ -102,6 +103,9 @@ interface SliderProps {
  * @param Props
  */
 function Slider({ toggle, size, leftColor, rightColor, onClick }: SliderProps) {
+  // check language for which text to use
+  const isJapanese = useLanguage((state) => state.isJapanese);
+
   // set up spring for the marker position
   const { markerToggle } = useSpring({
     markerToggle: Number(toggle),
@@ -131,12 +135,12 @@ function Slider({ toggle, size, leftColor, rightColor, onClick }: SliderProps) {
       }}
     >
       <Text
-        $size={size}
+        $size={size * (isJapanese ? 0.8 : 1)}
         style={{
           '--color': colorToggle.to({ output: ['#cccccc', '#000000'] })
         }}
       >
-        <b>{toggle ? 'mobile' : 'desktop'}</b>
+        <b>{toggle ? (isJapanese ? 'フォーン' : 'mobile') : isJapanese ? 'ノート' : 'desktop'}</b>
       </Text>
       <Marker
         $size={size}
