@@ -42,7 +42,7 @@ function ScrollHandler({
   sectionNames = [],
   sectionNamesJp = [],
   wheelStrength = 1 / 14,
-  touchStrength = 3.5
+  touchStrength = 1.5
 }: ScrollHandlerProps) {
   // update scroll store with number of sections
   useScroll.setState({ maxScroll: numSections - 1 });
@@ -57,12 +57,14 @@ function ScrollHandler({
   /* scrolling via mouse wheel */
 
   const handleWheel = (event: WheelEvent) => {
-    // adjust scroll position
-    applyScrollDelta((event.deltaY / 100) * wheelStrength);
+    if (Math.abs(event.deltaY) > 60) {
+      // adjust scroll position
+      applyScrollDelta((event.deltaY / 100) * wheelStrength);
 
-    // set/reset timeout
-    clearTimeout(timeout);
-    timeout = setTimeout(snapScrollPosition, 500);
+      // set/reset timeout
+      clearTimeout(timeout);
+      timeout = setTimeout(snapScrollPosition, 500);
+    }
   };
 
   /* scrolling via touch */
@@ -83,14 +85,15 @@ function ScrollHandler({
 
   // update scroll on move
   const handleTouchmove = (event: TouchEvent) => {
+    const touch = event.touches.item(0);
     // ensure we are tracking the active touch
-    if (event.touches.item(0)?.identifier === activeTouch.identifier) {
+    if (touch && touch.identifier === activeTouch.identifier) {
       // calculate and apply normalized delta
-      const scrollDelta = previousY - activeTouch.clientY;
+      const scrollDelta = previousY - touch.clientY;
       applyScrollDelta((scrollDelta / window.innerHeight) * touchStrength);
 
       // update previous position
-      previousY = activeTouch.clientY;
+      previousY = touch.clientY;
     }
   };
 
