@@ -14,9 +14,10 @@ const CommercialContent = (
     <a href="mailto:dawsinb@gmail.com">dawsinb@gmail.com</a>.
     <br />
     <br />
-    Unfortunately much of my previous work is private, but the{' '}
-    <a href="https://github.com/dawsinb/dawsin.dev">code</a> for this site is open source and I have a few more
-    examples in the section below.
+    Unfortunately much of my previous work is private, but the <a href="https://github.com/dawsinb/dawsin.dev">
+      code
+    </a>{' '}
+    for this site is open source and I have a few more examples in the section below.
   </div>
 );
 /** Japanese translation of HTML content for {@link CommercialSection} */
