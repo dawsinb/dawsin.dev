@@ -15,7 +15,7 @@ const CommercialContent = (
     <br />
     <br />
     Unfortunately much of my previous work is private, but the{' '}
-    <a href="https://github.com/dawsinb/dawsin.dev-refactor">code</a> for this site is open source and I have a few more
+    <a href="https://github.com/dawsinb/dawsin.dev">code</a> for this site is open source and I have a few more
     examples in the section below.
   </div>
 );
@@ -30,7 +30,7 @@ const CommercialContentJp = (
     <br />
     <br />
     生憎、私の前コードの多くはプライベートです。でもこのサイトは
-    <a href="https://github.com/dawsinb/dawsin.dev-refactor">オープンソース</a>
+    <a href="https://github.com/dawsinb/dawsin.dev">オープンソース</a>
     だて、次のセクションでいくつかの例サイトがあります。
   </div>
 );
