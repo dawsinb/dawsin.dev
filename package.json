@@ -1,7 +1,7 @@
 {
-  "name": "nine-four",
-  "version": "0.0.0",
-  "homepage": "https://test.dawsin.dev",
+  "name": "dawsin.dev",
+  "version": "1.0.0",
+  "homepage": "https://dawsin.dev",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --mode=development --hot",
@@ -9,8 +9,11 @@
     "build": "webpack --mode=production",
     "prebuild": "npm run assetMap",
     "assetMap": "node generateAssetMap.js assets",
-    "deploy": "echo 'test.dawsin.dev' > ./build/CNAME && gh-pages -d build",
-    "predeploy": "npm run build",
+    "doc": "typedoc",
+    "serve-build": "node serve-build.js",
+    "preserve-build": "npm run build",
+    "serve-docs": "node serve-docs.js",
+    "preserve-docs": "npm run doc",
     "format": "prettier --write \"{src,__tests__}/**/*+(.ts|.tsx|.js|.jsx|.css)\"",
     "test": "jest test --silent=false",
     "snapshot": "jest test --updateSnapshot"
