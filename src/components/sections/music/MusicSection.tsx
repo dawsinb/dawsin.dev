@@ -180,7 +180,7 @@ function MusicSection({ index, parallax }: MusicSectionProps) {
     if (lineRef.current) {
       lineRef.current.geometry = geometry;
     }
-  }, []);
+  }, [size]);
 
   useFrame(() => {
     if (lineRef.current?.geometry) {
