@@ -128,8 +128,8 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
         current: prevValue.current === 0 ? laptopImageTextureUrls.length - 1 : prevValue.current - 1
       };
     });
-    // set direction to left and slightly down
-    setDirection(new Vector2(-1, 0.1));
+    // set direction to left
+    setDirection(new Vector2(-1, 0));
 
     // switch color
     setColorToggle(!colorToggle);
@@ -142,8 +142,8 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
         current: (prevValue.current + 1) % laptopImageTextureUrls.length
       };
     });
-    // set direction to right and slightly down
-    setDirection(new Vector2(1, 0.1));
+    // set direction to right
+    setDirection(new Vector2(1, 0));
 
     // switch color
     setColorToggle(!colorToggle);
