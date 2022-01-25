@@ -4,32 +4,15 @@ import { useScroll } from 'stores/scroll';
 import { ScrollHandler } from 'components/scroll/ScrollHandler';
 
 describe('ScrollHandler Tests', () => {
-  // define window size
-  Object.defineProperty(window, 'innerWidth', { value: 1920 });
-  Object.defineProperty(window, 'innerHeight', { value: 1080 });
-
-  // scroll handler params
-  const wheelStrength = 0.1;
-  const touchStrength = 3.5;
-
-  // single mouse wheel has delta of 100 positive or negative
-  const deltaY = 100;
-
   // switch to fake timers
   jest.useFakeTimers();
 
   // render component
-  const { container } = render(
-    <ScrollHandler numSections={3} wheelStrength={wheelStrength} touchStrength={touchStrength} />
-  );
+  render(<ScrollHandler numSections={3} />);
 
   beforeEach(() => {
     // reset scroll
     useScroll.setState({ scrollPosition: 0 });
-  });
-
-  test('Render', () => {
-    expect(container.firstChild).toMatchSnapshot();
   });
 
   test('Wheel Scrolling', () => {
@@ -42,26 +25,47 @@ describe('ScrollHandler Tests', () => {
       fireEvent(
         window,
         new WheelEvent('wheel', {
-          deltaY: deltaY
+          deltaY: 100
         })
       );
-      // scroll should have happened but no snap
-      expect(useScroll.getState().scrollPosition).toBeCloseTo(1 * wheelStrength);
+      // scroll should go to next section
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(1);
 
       // fire second wheel event
       fireEvent(
         window,
         new WheelEvent('wheel', {
-          deltaY: deltaY
+          deltaY: 100
         })
       );
-      // additional scroll should have happened but no snap
-      expect(useScroll.getState().scrollPosition).toBeCloseTo(2 * wheelStrength);
+      // delay hasnt elapsed so additional scrolling shouldnt happen
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(1);
 
-      // skip snap timer
+      // skip timer
       jest.runOnlyPendingTimers();
-      // scroll should snap to nearest whole number
-      expect(useScroll.getState().scrollPosition).toBeCloseTo(Math.round(2 * wheelStrength));
+
+      // fire third wheel event
+      fireEvent(
+        window,
+        new WheelEvent('wheel', {
+          deltaY: -100
+        })
+      );
+      // scroll should go back to first section
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
+
+      // skip timer
+      jest.runOnlyPendingTimers();
+
+      // fire third wheel event
+      fireEvent(
+        window,
+        new WheelEvent('wheel', {
+          deltaY: 50
+        })
+      );
+      // scroll should be too weak to cause a scroll
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
     });
   });
 
@@ -70,7 +74,7 @@ describe('ScrollHandler Tests', () => {
     expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
 
     // create touch object
-    const touch = new Touch(1, 0);
+    const touch = new Touch(1, 100);
 
     // begin touch on screen
     act(() => {
@@ -86,11 +90,10 @@ describe('ScrollHandler Tests', () => {
       expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
     });
 
-    // move touch up screen
-    const percentageOfScreenTravelled = 1 / 8;
+    // move touch
     act(() => {
-      // update touch y
-      touch.clientY = -window.innerHeight * percentageOfScreenTravelled;
+      // update touch y to above
+      touch.clientY = 0;
 
       // fire touchmove event
       fireEvent(
@@ -99,8 +102,8 @@ describe('ScrollHandler Tests', () => {
           touches: new TouchList([touch])
         })
       );
-      // there should be scrolling now
-      expect(useScroll.getState().scrollPosition).toBeCloseTo(percentageOfScreenTravelled * touchStrength);
+      // there should be no scrolling yet
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
     });
 
     // release finger from screen
@@ -112,13 +115,62 @@ describe('ScrollHandler Tests', () => {
           touches: new TouchList([])
         })
       );
-      // there should be a delay before the snap
-      expect(useScroll.getState().scrollPosition).toBeCloseTo(percentageOfScreenTravelled * touchStrength);
+      // should scroll to the next section
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(1);
+    });
+  });
 
-      // skip snap timer
-      jest.runOnlyPendingTimers();
-      // scroll should snap to nearest whole number
-      expect(useScroll.getState().scrollPosition).toBeCloseTo(Math.round(percentageOfScreenTravelled * touchStrength));
+  test('Touch Scrolling after Delay', () => {
+    // scrolling should start at 0
+    expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
+
+    // create touch object
+    const touch = new Touch(1, 100);
+
+    // begin touch on screen
+    act(() => {
+      // fire touchstart event
+      fireEvent(
+        window,
+        new TouchEvent('touchstart', {
+          touches: new TouchList([touch])
+        })
+      );
+
+      // there should be no scrolling yet
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
+    });
+
+    // move touch
+    act(() => {
+      // update touch y to above
+      touch.clientY = 200;
+
+      // fire touchmove event
+      fireEvent(
+        window,
+        new TouchEvent('touchmove', {
+          touches: new TouchList([touch])
+        })
+      );
+      // there should be no scrolling yet
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
+    });
+
+    // skip timer
+    jest.runOnlyPendingTimers();
+
+    // release finger from screen
+    act(() => {
+      // fire touchend event
+      fireEvent(
+        window,
+        new TouchEvent('touchend', {
+          touches: new TouchList([])
+        })
+      );
+      // there should be no scrolling because the timer elapsed
+      expect(useScroll.getState().scrollPosition).toBeCloseTo(0);
     });
   });
 
@@ -132,7 +184,7 @@ describe('ScrollHandler Tests', () => {
       fireEvent(
         window,
         new WheelEvent('wheel', {
-          deltaY: -deltaY
+          deltaY: -100
         })
       );
       // scroll should be kept in bounds
@@ -148,7 +200,7 @@ describe('ScrollHandler Tests', () => {
       fireEvent(
         window,
         new WheelEvent('wheel', {
-          deltaY: deltaY
+          deltaY: 100
         })
       );
       // scroll should be kept in bounds

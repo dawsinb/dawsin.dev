@@ -3,7 +3,7 @@
  * @mergeTarget
  */
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useScroll } from 'stores/scroll';
 import { ScrollOverlay } from './overlay/ScrollOverlay';
 
@@ -15,18 +15,6 @@ interface ScrollHandlerProps {
   sectionNames?: string[];
   /** Optional list of japanese titles for each section to be displayed in {@link ScrollOverlay} */
   sectionNamesJp?: string[];
-  /** Amount of the page a single movement of the scroll wheel scrolls
-   *
-   *  *defaults to 1 / 12*
-   */
-  wheelStrength?: number;
-  /**
-   * Amount that the movement of a touch is multiplied by.
-   * In other words `1 / wheelStrength` gives the percentage of the screen that must be moved for a full page scroll
-   *
-   * *defaults to 3.5*
-   */
-  touchStrength?: number;
 }
 /**
  * Creates a scroll handler which updates the global scroll store. Can handle both mouse wheel/trackpad and touch scrolling.
@@ -37,72 +25,70 @@ interface ScrollHandlerProps {
  * @param props
  * @category Component
  */
-function ScrollHandler({
-  numSections,
-  sectionNames = [],
-  sectionNamesJp = [],
-  wheelStrength = 1 / 14,
-  touchStrength = 1.5
-}: ScrollHandlerProps) {
+function ScrollHandler({ numSections, sectionNames = [], sectionNamesJp = [] }: ScrollHandlerProps) {
   // update scroll store with number of sections
   useScroll.setState({ maxScroll: numSections - 1 });
 
-  // get update functions from the store
+  // get update function from the store
   const applyScrollDelta = useScroll((state) => state.applyScrollDelta);
-  const snapScrollPosition = useScroll((state) => state.snapScrollPosition);
-
-  // id of current timeout so old timeouts can be cleared as scrolling happens
-  let timeout: NodeJS.Timeout;
 
   /* scrolling via mouse wheel */
-
+  const scrollLock = useRef(false);
   const handleWheel = (event: WheelEvent) => {
-    if (Math.abs(event.deltaY) > 60) {
+    if (!scrollLock.current && Math.abs(event.deltaY) >= 100) {
       // adjust scroll position
-      applyScrollDelta((event.deltaY / 100) * wheelStrength);
+      applyScrollDelta(Math.sign(event.deltaY));
 
-      // set/reset timeout
-      clearTimeout(timeout);
-      timeout = setTimeout(snapScrollPosition, 500);
+      // lock scrolling for 1 second
+      scrollLock.current = true;
+      setTimeout(() => (scrollLock.current = false), 600);
     }
   };
 
   /* scrolling via touch */
 
-  // tracker for previous touch y position so we can calculate how much
-  let previousY: number;
-  let activeTouch: Touch;
+  // track scrolling of only the first (active) touch
+  const activeTouch = useRef<Touch>();
+  // track direction of scroll deltas to know which direction to scroll
+  const prevY = useRef(0);
+  const scrolDirection = useRef(0);
+  // enable scroll on start and disable after 1 sec to check for swipe gesture
+  const scrollEnable = useRef(false);
 
-  // initialize previous y on start
   const handleTouchstart = (event: TouchEvent) => {
-    // update active touch on only an initial touch event
-    if (event.touches.length === 1) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      activeTouch = event.touches.item(0)!;
-      previousY = activeTouch.clientY;
-    }
-  };
-
-  // update scroll on move
-  const handleTouchmove = (event: TouchEvent) => {
+    // get touch from event
     const touch = event.touches.item(0);
-    // ensure we are tracking the active touch
-    if (touch && touch.identifier === activeTouch.identifier) {
-      // calculate and apply normalized delta
-      const scrollDelta = previousY - touch.clientY;
-      applyScrollDelta((scrollDelta / window.innerHeight) * touchStrength);
+    // only start on first touch
+    if (touch && event.touches.length === 1) {
+      // update active touch
+      activeTouch.current = touch;
+      // reset previous y and scroll direction
+      prevY.current = touch.clientY;
+      scrolDirection.current = 0;
 
-      // update previous position
-      previousY = touch.clientY;
+      // enable scrolling for 1 second
+      scrollEnable.current = true;
+      setTimeout(() => (scrollEnable.current = false), 600);
     }
   };
 
-  // call snap function when no more touches
+  const handleTouchmove = (event: TouchEvent) => {
+    // ensure we are tracking the active touch
+    const touch = event.touches.item(0);
+    if (touch && touch.identifier === activeTouch.current?.identifier) {
+      // calculate scroll delta and add it to the scroll direction
+      const delta = prevY.current - touch.clientY;
+      scrolDirection.current += delta;
+
+      // update prev y tracker
+      prevY.current = touch.clientY;
+    }
+  };
+
   const handleTouchend = (event: TouchEvent) => {
-    if (event.touches.length === 0) {
-      // set/reset timeout
-      clearTimeout(timeout);
-      timeout = setTimeout(snapScrollPosition, 500);
+    // apply scroll delta if scrolling is enabled and no touches are left
+    if (scrollEnable.current && event.touches.length === 0) {
+      applyScrollDelta(Math.sign(scrolDirection.current));
     }
   };
 
