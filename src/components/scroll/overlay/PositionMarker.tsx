@@ -43,20 +43,22 @@ const Marker = styled(animated.div)<MarkerProps>`
   // position in front of the rest of the overlay
   z-index: 2;
   // set size
-  width: ${({ $size }) => $size}px;
-  height: ${({ $size }) => $size}px;
+  width: ${({ $size, $scaleFactor }) => Math.round($size * $scaleFactor)}px;
+  height: ${({ $size, $scaleFactor }) => Math.round($size * $scaleFactor)}px;
   // Position slightly away from left if horizontal; slightly away from top if vertical
   left: ${({ $isVertical, $size }) => ($isVertical ? 0 : -$size * 2)}px;
   top: ${({ $isVertical, $size }) => ($isVertical ? -$size * 2 : 0)}px;
   // Apply transforms
   transform: 
     // Center
-    translate(${({ $size }) => -$size / 2}px, ${({ $size }) => -$size / 2}px)
+    translate(
+      ${({ $size, $scaleFactor }) => -Math.round($size * $scaleFactor) / 2}px,
+      ${({ $size, $scaleFactor }) => -Math.round($size * $scaleFactor) / 2}px
+    )
     // If horizontal shift vertically; if vertical shift horizontally
     translate(${({ $isVertical }) => ($isVertical ? `var(--shift, 0px), 0px` : `0px, var(--shift, 0px)`)})
     // Handle rotation
-    rotateZ(var(--rotate, 0rad)) // Scale
-    scale(${({ $scaleFactor }) => $scaleFactor});
+    rotateZ(var(--rotate, 0rad));
 `;
 
 /** Props for {@link PositionMarker} */
