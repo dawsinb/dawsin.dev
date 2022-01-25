@@ -5,19 +5,19 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { GenerateSW } = require('workbox-webpack-plugin');
 
 const config = {
-  entry: path.resolve(__dirname, '/src/index.tsx'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   output: {
-    path: path.resolve(__dirname, '/build'),
+    path: path.resolve(__dirname, './build'),
     filename: 'bundle.js'
   },
   resolve: {
-    modules: [path.resolve(__dirname, '/src'), 'node_modules'],
+    modules: [path.resolve(__dirname, './src'), 'node_modules'],
     alias: {
-      Components: path.resolve(__dirname, '/src/components/'),
-      Hooks: path.resolve(__dirname, '/src/hooks/'),
-      Stores: path.resolve(__dirname, '/src/stores/'),
-      Utils: path.resolve(__dirname, '/src/utils/'),
-      Loaders: path.resolve(__dirname, '/src/loaders/')
+      Components: path.resolve(__dirname, './src/components/'),
+      Hooks: path.resolve(__dirname, './src/hooks/'),
+      Stores: path.resolve(__dirname, './src/stores/'),
+      Utils: path.resolve(__dirname, './src/utils/'),
+      Loaders: path.resolve(__dirname, './src/loaders/')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.svg']
   },
