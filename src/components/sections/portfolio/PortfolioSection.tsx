@@ -179,7 +179,7 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
       {/* spot light for highlights */}
       <spotLight intensity={0.5} position={[size.width / 2, size.height / 2, size.height / 2]} />
 
-      <SectionItem parallax={2}>
+      <SectionItem parallax={0.75}>
         <group ref={deviceGroupRef}>
           <animated.group position-x={deviceSpring.to({ output: [0, size.width] })}>
             <group
