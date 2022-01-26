@@ -8,11 +8,32 @@ import { useEffect, useRef } from 'react';
 import { Group, Mesh } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { useThree, useFrame } from '@react-three/fiber';
+import styled from 'styled-components';
+import { useSpring, easings } from '@react-spring/core';
+import { animated } from '@react-spring/web';
 import { loadFont } from 'loaders/loadFont';
 import { useTheme } from 'stores/theme';
 import { lerp } from 'utils/math';
+import { Html } from 'components/Html';
 import { Section, SectionItem } from 'components/sections/Section';
-import { Refractor } from 'components/sections/title/refractor/Refractor';
+import { Refractor } from './refractor/Refractor';
+import { Arrow } from './Arrow';
+
+/** Props for {@link ArrowContainer} */
+interface ArrowContainerProps {
+  style: CssProperties & {
+    '--shift': AnimatedValue<string>;
+  };
+}
+/** Container for left and right arrows for {@link PortfolioSection} */
+const ArrowContainer = styled(animated.div)<ArrowContainerProps>`
+  position: absolute;
+  bottom: -45vh;
+  left: 0;
+  width: 5vh;
+  height: 5vh;
+  transform: translateY(var(--shift)) translate(-2.5vh, -2.5vh);
+`;
 
 /** Props for {@link Title} */
 interface TitleProps {
@@ -77,6 +98,27 @@ function TitleSection({ index, parallax }: TitleProps) {
     }
   });
 
+  // set up spring for arrow bounce animation
+  const { arrowSpring } = useSpring({
+    from: { arrowSpring: 0 },
+    to: { arrowSpring: 1 },
+    loop: { reverse: true },
+    config: {
+      duration: 1000,
+      easing: easings.easeInOutSine
+    }
+  });
+  // set up spring for color fade animation
+  const { colorSpring } = useSpring({
+    from: { colorSpring: 0 },
+    to: { colorSpring: 1 },
+    loop: { reverse: true },
+    config: {
+      duration: 2500,
+      easing: easings.easeInOutSine
+    }
+  });
+
   return (
     <Section index={index} parallax={parallax}>
       <SectionItem parallax={2}>
@@ -102,6 +144,14 @@ function TitleSection({ index, parallax }: TitleProps) {
 
       <SectionItem parallax={20}>
         <Refractor index={index} />
+      </SectionItem>
+
+      <SectionItem parallax={4}>
+        <Html>
+          <ArrowContainer style={{ '--shift': arrowSpring.to({ output: [0, 1.5] }).to((value) => `${value}vh`) }}>
+            <Arrow color={colorSpring.to({ output: [primary, secondary] })} />
+          </ArrowContainer>
+        </Html>
       </SectionItem>
     </Section>
   );
