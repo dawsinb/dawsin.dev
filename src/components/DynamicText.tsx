@@ -4,7 +4,7 @@
  * @mergeTarget
  */
 
-import { useRef, useLayoutEffect, useEffect, ReactNode, MutableRefObject } from 'react';
+import { useRef, useEffect, ReactNode, MutableRefObject } from 'react';
 import styled from 'styled-components';
 
 /** Content container used to judge if text has overflown its bounds */
@@ -60,7 +60,16 @@ function DynamicText({ children }: DynamicTextProps) {
   };
 
   // execute on initial mount and when content changes
-  useEffect(resize, [children]);
+  const isInitialRef = useRef(true);
+  useEffect(() => {
+    // add delay on initial render
+    if (isInitialRef.current) {
+      isInitialRef.current = false;
+      setTimeout(resize, 1200);
+    } else {
+      resize();
+    }
+  }, [children]);
   // add event listener to execute on resize end
   const timeoutRef = useRef<NodeJS.Timeout>();
   useEffect(() => {
@@ -69,7 +78,7 @@ function DynamicText({ children }: DynamicTextProps) {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      timeoutRef.current = setTimeout(() => resize(), 600);
+      timeoutRef.current = setTimeout(resize, 600);
     });
   }, []);
 
