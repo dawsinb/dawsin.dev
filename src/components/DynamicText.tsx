@@ -60,7 +60,7 @@ function DynamicText({ children }: DynamicTextProps) {
   };
 
   // execute on initial mount and when content changes
-  useLayoutEffect(resize, [children]);
+  useEffect(resize, [children]);
   // add event listener to execute on resize end
   const timeoutRef = useRef<NodeJS.Timeout>();
   useEffect(() => {
