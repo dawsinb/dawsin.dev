@@ -14,10 +14,13 @@ const ResearchContent = (
     <br />
     Here are the links to the two papers I worked on if you are interested:
     <br />
-    <br />- <a href="https://arxiv.org/abs/2006.12463">Slimming Neural Networks using Adaptive Connectivity Scores</a>
+    <br />-{' '}
+    <a href="https://arxiv.org/abs/2006.12463" target="_blank" rel="noopener noreferrer">
+      Slimming Neural Networks using Adaptive Connectivity Scores
+    </a>
     <br />
     <br />-{' '}
-    <a href="https://arxiv.org/abs/2006.12617">
+    <a href="https://arxiv.org/abs/2006.12617" target="_blank" rel="noopener noreferrer">
       Adaptive County Level COVID-19 Forecast Models: Analysis and Improvement
     </a>
   </div>
@@ -31,10 +34,13 @@ const ResearchContentJp = (
     <br />
     興味があれば、私が取り組んだ論文のリンクをここにあります。
     <br />
-    <br />- <a href="https://arxiv.org/abs/2006.12463">Slimming Neural Networks using Adaptive Connectivity Scores</a>
+    <br />-{' '}
+    <a href="https://arxiv.org/abs/2006.12463" target="_blank" rel="noopener noreferrer">
+      Slimming Neural Networks using Adaptive Connectivity Scores
+    </a>
     <br />
     <br />-{' '}
-    <a href="https://arxiv.org/abs/2006.12617">
+    <a href="https://arxiv.org/abs/2006.12617" target="_blank" rel="noopener noreferrer">
       Adaptive County Level COVID-19 Forecast Models: Analysis and Improvement
     </a>
   </div>

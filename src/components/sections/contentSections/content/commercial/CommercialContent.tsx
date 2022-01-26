@@ -11,10 +11,14 @@ const CommercialContent = (
     sites like this one.
     <br />
     <br />I am available for contract/freelance work at the moment, so if you are interesed feel free to contact me at{' '}
-    <a href="mailto:dawsinb@gmail.com">dawsinb@gmail.com</a>.
+    <a href="mailto:dawsinb@gmail.com" target="_blank" rel="noopener noreferrer">
+      dawsinb@gmail.com
+    </a>
+    .
     <br />
     <br />
-    Unfortunately much of my previous work is private, but the <a href="https://github.com/dawsinb/dawsin.dev">
+    Unfortunately much of my previous work is private, but the{' '}
+    <a href="https://github.com/dawsinb/dawsin.dev" target="_blank" rel="noopener noreferrer">
       code
     </a>{' '}
     for this site is open source and I have a few more examples in the section below.
@@ -27,11 +31,16 @@ const CommercialContentJp = (
     <br />
     <br />
     現在、フリーランスまたは契約業務に対応しています。もし興味があれば、
-    <a href="mailto:dawsinb@gmail.com">dawsinb@gmail.com</a>で私にEメールを送ってください。
+    <a href="mailto:dawsinb@gmail.com" target="_blank" rel="noopener noreferrer">
+      dawsinb@gmail.com
+    </a>
+    で私にEメールを送ってください。
     <br />
     <br />
     生憎、私の前コードの多くはプライベートです。でもこのサイトは
-    <a href="https://github.com/dawsinb/dawsin.dev">オープンソース</a>
+    <a href="https://github.com/dawsinb/dawsin.dev" target="_blank" rel="noopener noreferrer">
+      オープンソース
+    </a>
     だて、次のセクションでいくつかの例サイトがあります。
   </div>
 );

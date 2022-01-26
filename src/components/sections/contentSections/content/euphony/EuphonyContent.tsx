@@ -12,8 +12,14 @@ const EuphonyContent = (
     <br />
     <br />
     Euphony is an open source javascript library that streamlines audio playback and analysis. If you are interested
-    check out the project on <a href="https://github.com/dawsinb/euphony">Github</a> or{' '}
-    <a href="https://www.npmjs.com/package/@ninefour/euphony">NPM</a>
+    check out the project on{' '}
+    <a href="https://github.com/dawsinb/euphony" target="_blank" rel="noopener noreferrer">
+      Github
+    </a>{' '}
+    or{' '}
+    <a href="https://www.npmjs.com/package/@ninefour/euphony" target="_blank" rel="noopener noreferrer">
+      NPM
+    </a>
     <br />
     <br />
     To see an example of euphony in action scroll down and listen to some of my music with a visualizer powered by
@@ -28,8 +34,14 @@ const EuphonyContentJp = (
     <br />
     <br />
     Euphonyはオーディオの再生と分析を円滑にするオープンソースJavascriptライブラリです。興味があれば、
-    <a href="https://github.com/dawsinb/euphony">Github</a>と
-    <a href="https://www.npmjs.com/package/@ninefour/euphony">NPM</a>でプロジェクトを見てください。
+    <a href="https://github.com/dawsinb/euphony" target="_blank" rel="noopener noreferrer">
+      Github
+    </a>
+    と
+    <a href="https://www.npmjs.com/package/@ninefour/euphony" target="_blank" rel="noopener noreferrer">
+      NPM
+    </a>
+    でプロジェクトを見てください。
     <br />
     <br />
     Euphonyの使用例を見るために次のセクションにスクロールダウンして私の音楽を聴いて。
