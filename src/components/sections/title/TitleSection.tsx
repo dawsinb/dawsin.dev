@@ -135,15 +135,15 @@ function TitleSection({ index, parallax }: TitleProps) {
         </group>
       </SectionItem>
 
-      <SectionItem parallax={4}>
+      <SectionItem parallax={20}>
+        <Refractor index={index} />
+      </SectionItem>
+
+      <SectionItem parallax={2}>
         <mesh rotation={[0, 0, Math.PI / 8]} position={[0, 0, -10]}>
           <planeBufferGeometry args={[size.width * 3, size.height * 2, 32, 32]} />
           <meshBasicMaterial color={'#000'} />
         </mesh>
-      </SectionItem>
-
-      <SectionItem parallax={20}>
-        <Refractor index={index} />
       </SectionItem>
 
       <SectionItem parallax={4}>
