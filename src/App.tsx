@@ -50,6 +50,11 @@ const LanguageContainer = styled('div')`
  * @category Component
  */
 function App() {
+  // detect language
+  if (/^ja\b/.test(navigator.language)) {
+    useLanguage.setState({ isJapanese: true });
+  }
+
   // set margins
   useLayout.setState({ marginX: 0.1, marginY: 0.05 });
 
