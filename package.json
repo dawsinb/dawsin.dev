@@ -11,9 +11,7 @@
     "assetMap": "node generateAssetMap.js assets",
     "doc": "typedoc",
     "serve-build": "node serve-build.js",
-    "preserve-build": "npm run build",
     "serve-docs": "node serve-docs.js",
-    "preserve-docs": "npm run doc",
     "format": "prettier --write \"{src,__tests__}/**/*+(.ts|.tsx|.js|.jsx|.css)\"",
     "test": "jest test --silent=false",
     "snapshot": "jest test --updateSnapshot"
