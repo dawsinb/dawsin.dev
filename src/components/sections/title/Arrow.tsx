@@ -18,7 +18,7 @@ interface ArrowProps {
   color: AnimatedValue<string>;
 }
 /**
- * Displays an arrow svg of the given color and direction
+ * Displays an arrow svg with a fading color
  * @param props
  * @returns
  */
