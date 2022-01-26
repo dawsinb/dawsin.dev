@@ -121,7 +121,7 @@ function MusicSection({ index, parallax }: MusicSectionProps) {
       pm836.load('/music/836pm.mp3'),
       desire.load('/music/desire.mp3'),
       kakin.load('/music/kakin.mp3'),
-      hydrogen.load('/music/hydrogen.wav')
+      hydrogen.load('/music/hydrogen.mp3')
     ])
       .then(() => setIsLoaded(true))
       .catch((error) => console.error(error));
