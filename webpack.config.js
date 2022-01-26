@@ -1,5 +1,8 @@
 /* eslint-disable */
 
+// detect if in production
+const isProduction = process.argv[process.argv.indexOf('--mode') + 1] === 'production';
+
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const { GenerateSW } = require('workbox-webpack-plugin');
@@ -48,7 +51,7 @@ const config = {
   devtool: 'eval-source-map'
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction) {
   config.plugins.push(
     new GenerateSW({
       maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
