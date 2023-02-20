@@ -4,7 +4,7 @@
  * @mergeTarget
  */
 
-import { ShapeBufferGeometry } from 'three';
+import { ShapeGeometry } from 'three';
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader';
 // create loader and set path to WASM transcoder and JS wraper
 const loader = new SVGLoader();
@@ -21,7 +21,7 @@ const bus = new EventTarget();
  * @param url the url of the svg
  * @returns a promise which resolves to a geometry generated from the SVG
  */
-function loadSvg(url: string): Promise<ShapeBufferGeometry> {
+function loadSvg(url: string): Promise<ShapeGeometry> {
   return new Promise((resolve) => {
     // if url is already loaded just return from cache
     if (url in loadedSvgs) {
@@ -43,7 +43,7 @@ function loadSvg(url: string): Promise<ShapeBufferGeometry> {
           // create shapes from paths
           const shapes = paths.flatMap((path) => path.toShapes(true));
           // create geometry from shapes
-          const geometry = new ShapeBufferGeometry(shapes, 12);
+          const geometry = new ShapeGeometry(shapes, 12);
           geometry.center();
           // cache the SVG geometry
           loadedSvgs[url] = geometry;

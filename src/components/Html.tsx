@@ -4,7 +4,7 @@
  * @mergeTarget
  */
 
-import { createRoot, Root } from 'react-dom';
+import { createRoot, Root } from 'react-dom/client';
 import { useRef, useEffect, ReactNode } from 'react';
 import { Group, Vector3 } from 'three';
 import styled from 'styled-components';

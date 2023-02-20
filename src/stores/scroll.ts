@@ -5,7 +5,7 @@
  */
 
 import { clamp } from 'utils/math';
-import create, { GetState, SetState } from 'zustand';
+import { create, GetState, SetState } from 'zustand';
 import { subscribeWithSelector, StoreApiWithSubscribeWithSelector } from 'zustand/middleware';
 
 /**  Variables stored in the {@link useScroll scroll store} */

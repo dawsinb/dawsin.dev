@@ -5,7 +5,7 @@
  */
 
 import { useRef, ReactNode, useEffect, useState } from 'react';
-import { Mesh, Group, Vector3, Texture, Material, MirroredRepeatWrapping } from 'three';
+import { Mesh, Group, Vector3, Texture, Material, MirroredRepeatWrapping, LinearEncoding } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { Font } from 'three/examples/jsm/loaders/FontLoader';
 import { useFrame, useThree } from '@react-three/fiber';
@@ -202,6 +202,7 @@ function ContentSectionLayout({
     loadTexture(imageUrl, gl)
       .then((texture) => {
         texture.wrapS = texture.wrapT = MirroredRepeatWrapping;
+        texture.encoding = LinearEncoding;
         setImageTexture(texture);
       })
       .catch((error) => console.error(error));

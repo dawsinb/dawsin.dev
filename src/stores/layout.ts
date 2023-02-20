@@ -4,7 +4,7 @@
  * @mergeTarget
  */
 
-import create from 'zustand';
+import { create } from 'zustand';
 
 /**  Variables stored in the {@link useLayout layout store} */
 interface LayoutState {

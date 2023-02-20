@@ -83,15 +83,19 @@ function App() {
 
       // create r3f canvas
       if (canvasRootRef.current) {
-        createRoot(canvasRootRef.current, {
+        const root = createRoot(canvasRootRef.current);
+        root.configure({
           orthographic: true,
           camera: { position: [0, 0, 10000], far: 20000 },
           gl: { antialias: true },
           dpr: [1, 1],
           linear: true,
           flat: true,
+          legacy: true,
           events
-        }).render(
+        })
+        
+        root.render(
           <group>
             <TitleSection index={0} parallax={1} />
             <AboutSection index={1} parallax={1.5} />

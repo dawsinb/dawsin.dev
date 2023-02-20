@@ -6,7 +6,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { extend, useFrame, useThree } from '@react-three/fiber';
-import { NearestFilter, Mesh, Texture, Vector2 } from 'three';
+import { NearestFilter, Mesh, Texture, Vector2, LinearEncoding } from 'three';
 import { loadGeometry } from 'loaders/loadGeometry';
 import { loadTexture } from 'loaders/loadTexture';
 import { lerp } from 'utils/math';
@@ -87,6 +87,7 @@ function Phone({
       imageTextureUrls.map((url, index) => {
         return loadTexture(url, gl).then((texture) => {
           texture.minFilter = texture.magFilter = NearestFilter;
+          texture.encoding = LinearEncoding;
           imageTexturesBuffer[index] = texture;
         });
       })

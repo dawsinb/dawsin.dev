@@ -9,7 +9,7 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { lerp, seedRandomRange } from 'utils/math';
 import { useTransientScroll } from 'hooks/useTransientScroll';
 import { loadSvg } from 'loaders/loadSvg';
-import { Euler, Group, ShapeBufferGeometry, Vector3 } from 'three';
+import { Euler, Group, ShapeGeometry, Vector3 } from 'three';
 
 interface BackgroundProps {
   /** Number of sections to generate background content for */
@@ -35,10 +35,10 @@ function Background({ numSections }: BackgroundProps) {
   ];
 
   // load geometries from url
-  const [svgGeometries, setSvgGeometries] = useState<ShapeBufferGeometry[]>([]);
+  const [svgGeometries, setSvgGeometries] = useState<ShapeGeometry[]>([]);
   useEffect(() => {
     // load image geometries from svgs
-    const buffer: ShapeBufferGeometry[] = [];
+    const buffer: ShapeGeometry[] = [];
     Promise.all(
       svgUrls.map((url, index) => {
         return loadSvg(url).then((geometry) => {

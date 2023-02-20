@@ -158,7 +158,7 @@ function EndSection({ index, parallax }: EndSectionProps) {
                 setNineHovered(false);
               }}
             >
-              <planeBufferGeometry args={[fontSize * 4, fontSize * 2]} />
+              <planeGeometry args={[fontSize * 4, fontSize * 2]} />
               <meshBasicMaterial transparent opacity={0} />
             </mesh>
           </group>
@@ -178,7 +178,7 @@ function EndSection({ index, parallax }: EndSectionProps) {
                 setFourHovered(false);
               }}
             >
-              <planeBufferGeometry args={[fontSize * 4, fontSize * 2]} />
+              <planeGeometry args={[fontSize * 4, fontSize * 2]} />
               <meshBasicMaterial transparent opacity={0} />
             </mesh>
           </group>
@@ -188,7 +188,7 @@ function EndSection({ index, parallax }: EndSectionProps) {
       {/* background */}
       <SectionItem parallax={4}>
         <mesh rotation={[0, 0, Math.PI / 8]} position={[0, 0, -10]}>
-          <planeBufferGeometry args={[size.width * 3, size.height * 2, 32, 32]} />
+          <planeGeometry args={[size.width * 3, size.height * 2, 32, 32]} />
           <meshBasicMaterial color={'#000'} />
         </mesh>
       </SectionItem>

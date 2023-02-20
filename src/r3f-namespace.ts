@@ -7,7 +7,7 @@ import {
   MeshBasicMaterial,
   MeshStandardMaterial,
   MeshPhysicalMaterial,
-  PlaneBufferGeometry,
+  PlaneGeometry,
   AmbientLight,
   DirectionalLight,
   SpotLight
@@ -21,7 +21,7 @@ extend({
   MeshBasicMaterial,
   MeshStandardMaterial,
   MeshPhysicalMaterial,
-  PlaneBufferGeometry,
+  PlaneGeometry,
   AmbientLight,
   DirectionalLight,
   SpotLight
