@@ -173,7 +173,7 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
   return (
     <Section index={index} parallax={parallax}>
       {/* ambient light to tint the objects */}
-      <AnimatedAmbientLight intensity={0.4} color={colorSpring.to({ output: [primary, secondary] })} />
+      <AnimatedAmbientLight intensity={0.8} color={colorSpring.to({ output: [primary, secondary] })} />
       {/* directional light for base lighting */}
       <directionalLight intensity={0.2} position={[300, -500, 300]} />
       {/* spot light for highlights */}
