@@ -1,6 +1,6 @@
 import { MutableRefObject, Suspense, useEffect, useRef, useState } from 'react';
 import { createRoot, events, ReconcilerRoot } from '@react-three/fiber';
-import { PerformanceMonitor, Stats } from '@react-three/drei';
+import { PerformanceMonitor } from '@react-three/drei';
 import styled from 'styled-components';
 import { useLayout } from 'stores/layout';
 import { useLanguage } from 'stores/language';
@@ -103,11 +103,20 @@ function App() {
         <PerformanceMonitor
           bounds={(deviceFrameRate) => [50, Math.min(deviceFrameRate, 144)]}
           factor={1}
-          onChange={({ factor }) => {
-            setDpr(Math.round((0.5 + 1.5 * factor) * 10) / 10);
+          onDecline={({ averages }) => {
+            // take fps to be the max number in averages to be conservative when adjusting multiple times quickly
+            const fps = Math.max(...averages);
+            // calculate adjustment factor, should be adjusted more at lower fps values
+            const dprAdjustment = Math.max(0.7 - Math.round(fps / 10) / 10, 0.1);
+
+            // we can't update the store as an effect otherwise a single frame will render at the wrong DPR
+            // this still isn't perfect but helps effects stuttering
+            useLayout.setState({ dpr: dpr - dprAdjustment });
+
+            // update the pixel ratio to increase performance
+            setDpr(dpr - dprAdjustment);
           }}
         >
-          <Stats showPanel={0} />
           <group>
             <TitleSection index={0} parallax={1} />
             <AboutSection index={1} parallax={1.5} />

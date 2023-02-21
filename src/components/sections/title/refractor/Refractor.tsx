@@ -11,6 +11,7 @@ import { useTransientScroll } from 'hooks/useTransientScroll';
 import { BackfaceMaterial } from 'components/sections/title/refractor/BackfaceMaterial';
 import { RefractionMaterial } from 'components/sections/title/refractor/RefractionMaterial';
 import { loadGeometry } from 'loaders/loadGeometry';
+import { useLayout } from 'stores/layout';
 
 /** Props for {@link Refractor} */
 interface RefractorProps {
@@ -28,21 +29,27 @@ function Refractor({ index }: RefractorProps) {
   // get three constants
   const { size, gl, scene, camera } = useThree();
 
+  const dpr = useLayout((state) => state.dpr);
+
   // calculate size
   const scale = Math.max(size.width, size.height) / 2;
 
   // create fbo's and materials
   const [envFbo, backfaceFbo, backfaceMaterial, refractionMaterial] = useMemo(() => {
-    const envFbo = new WebGLRenderTarget(size.width, size.height);
-    const backfaceFbo = new WebGLRenderTarget(size.width, size.height);
+    const width = size.width * dpr;
+    const height = size.height * dpr;
+
+    const envFbo = new WebGLRenderTarget(width, height);
+    const backfaceFbo = new WebGLRenderTarget(width, height);
+
     const backfaceMaterial = new BackfaceMaterial();
     const refractionMaterial = new RefractionMaterial({
       envMap: envFbo.texture,
       backfaceMap: backfaceFbo.texture,
-      resolution: [size.width, size.height]
+      resolution: [width, height]
     });
     return [envFbo, backfaceFbo, backfaceMaterial, refractionMaterial];
-  }, [size]);
+  }, [size, dpr]);
   // create ref to model
   const modelRef = useRef<Mesh>();
 

@@ -23,6 +23,11 @@ interface LayoutState {
    * Used to creates a margin of `(marginY / 2) * height` on both ends of the page
    */
   marginY: number;
+  /**
+   * Device Pixel Ratio used by the WebGL renderer.
+   * This is only relevant for the calculation of certain shader effects
+   */
+  dpr: number;
 }
 
 /**
@@ -34,7 +39,8 @@ interface LayoutState {
 const useLayout = create<LayoutState>(() => ({
   isVertical: false,
   marginX: 0,
-  marginY: 0
+  marginY: 0,
+  dpr: 2
 }));
 
 export { useLayout };
