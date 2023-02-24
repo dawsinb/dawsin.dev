@@ -190,21 +190,18 @@ function MusicSection({ index, parallax }: MusicSectionProps) {
 
       // set position attribute from waveform
       const points = lineRef.current.geometry.getAttribute('position');
-      for (let i = 0; i < points.count; i++) {
-        points.setY(i, lerp(points.getY(i), analyser.waveform[i] * scaleFactor, 0.5));
-      }
+      const colors = lineRef.current.geometry.getAttribute('color');
 
-      // set color attribute from vertex
-      const color = lineRef.current.geometry.getAttribute('color');
-      const midPoint = points.count / 2;
-      for (let i = 0; i < points.count / 2; i++) {
-        // calculate rgb values
-        const r = lerp(secondaryRgb[0], primaryRgb[0], Math.min(analyser.frequency[i] * 2, 1));
-        const g = lerp(secondaryRgb[1], primaryRgb[1], Math.min(analyser.frequency[i] * 2, 1));
-        const b = lerp(secondaryRgb[2], primaryRgb[2], Math.min(analyser.frequency[i] * 2, 1));
-        // set left and right color
-        color.setXYZ(midPoint + i, r, g, b);
-        color.setXYZ(midPoint - i, r, g, b);
+      for (let i = 0; i < points.count; i++) {
+        // set y position based on intensity of the waveform at the given point
+        points.setY(i, lerp(points.getY(i), analyser.waveform[i] * scaleFactor, 0.5));
+
+        // calculate and set rgb values
+        const interpolationFactor = Math.min(Math.abs(analyser.waveform[i]) * 2, 1);
+        const r = lerp(secondaryRgb[0], primaryRgb[0], interpolationFactor);
+        const g = lerp(secondaryRgb[1], primaryRgb[1], interpolationFactor);
+        const b = lerp(secondaryRgb[2], primaryRgb[2], interpolationFactor);
+        colors.setXYZ(i, r, g, b);
       }
 
       // signal gpu to update buffer attributes
