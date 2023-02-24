@@ -75,16 +75,14 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
   const phoneRef = useRef<Group>();
 
   const laptopImageTextureUrls = [
-    '/assets/textures/sites/desktop/home_light.ktx2',
-    '/assets/textures/sites/desktop/module_light.ktx2',
-    '/assets/textures/sites/desktop/home_dark.ktx2',
-    '/assets/textures/sites/desktop/module_dark.ktx2'
+    '/assets/textures/sites/desktop/euphony.ktx2',
+    '/assets/textures/sites/desktop/mlmp.ktx2',
+    '/assets/textures/sites/desktop/stream.ktx2',
   ];
   const phoneImageTextureUrls = [
-    '/assets/textures/sites/mobile/home_light.ktx2',
-    '/assets/textures/sites/mobile/module_light.ktx2',
-    '/assets/textures/sites/mobile/home_dark.ktx2',
-    '/assets/textures/sites/mobile/module_dark.ktx2'
+    '/assets/textures/sites/mobile/euphony.ktx2',
+    '/assets/textures/sites/mobile/mlmp.ktx2',
+    '/assets/textures/sites/mobile/stream.ktx2',
   ];
 
   // state to handle mouse style when hovering objects
@@ -173,7 +171,7 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
   return (
     <Section index={index} parallax={parallax}>
       {/* ambient light to tint the objects */}
-      <AnimatedAmbientLight intensity={0.8} color={colorSpring.to({ output: [primary, secondary] })} />
+      <AnimatedAmbientLight intensity={0.8} color={colorSpring.to({ output: [secondary, primary] })} />
       {/* directional light for base lighting */}
       <directionalLight intensity={0.2} position={[300, -500, 300]} />
       {/* spot light for highlights */}
