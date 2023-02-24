@@ -10,26 +10,25 @@ const AboutContent = (
     Hello, as you may have guessed from the name of the site, my name is <em>Dawsin</em>. I'm a programmer and artist
     with a passion for the intersection of these fields.
     <br />
+    <br />I also love <em>music</em>. I play piano and make some music of my own. In my free time I've been working on a
+    project called Euphony to help streamline the creation of dynamic audio visualizers.
     <br />
-    My hobbies of course include coding, doing web app experiments and some game design. But I also love <em>music</em>,
-    I play piano and make some music of my own.
     <br />
-    <br />
-    Other than that I'm currently learning Japanese and plan to move there once travel restrictions are lifted.
+    Recently I moved to Tokyo and currently work as a full-stack engineer in the field of natural language processing.
   </div>
 );
 /** Japanese translation of HTML content for {@link AboutSection} */
 const AboutContentJp = (
   <div>
-    こんにちは、ご推察のとおり、私の名前は<em>ドソン</em>
-    です。私はwebデベロッパーとデザイナーだて、これらフィールドの組み合わせに情熱を持っています。
+    こんにちは、サイトの題名から察したかもしりませんが、私の名前は<em>ドシン</em>
+    です。私はプログラムとアーチィストであり、これらのフィールドの交差に情熱を持っています。
     <br />
     <br />
-    もちろん、趣味はコーディングが含まれます。Webアプリやビデオゲームをプログラムするのが好きです。でも、<em>音楽</em>
-    も大好きです。ピアノを引いて、ミュージックを作ります。
+    <em>音楽</em>
+    も大好きです。ピアノを引いていくつかの音楽を作ります。暇な時に、動的なオーディオビジュアライザの作成を円滑にするためにeuphonyと言うプロジェクトに取り組んでいました。
     <br />
     <br />
-    それ以外、日本語を覚えていて渡航制限が解除されたら日本に引っ越すつもりです。
+    最近東京に引っ越しました。現在、自然言語処理の分野のフルスタックエンジニアとして働いています。
   </div>
 );
 

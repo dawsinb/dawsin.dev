@@ -7,12 +7,8 @@
 /** HTML content for {@link EuphonySection} */
 const EuphonyContent = (
   <div>
-    Audio visualizers have always fascinated me, and with the web my medium of choice I set out to create a library to
-    facilitate their creation. As such I developed <em>euphony</em>.
-    <br />
-    <br />
-    Euphony is an open source javascript library that streamlines audio playback and analysis. If you are interested
-    check out the project on{' '}
+    Euphony is an open source library I made that streamlines audio playback and analysis. If you are interested check
+    out the project on{' '}
     <a href="https://github.com/dawsinb/euphony" target="_blank" rel="noopener noreferrer">
       Github
     </a>{' '}
@@ -20,6 +16,11 @@ const EuphonyContent = (
     <a href="https://www.npmjs.com/package/@ninefour/euphony" target="_blank" rel="noopener noreferrer">
       NPM
     </a>
+    .
+    <br />
+    <br />
+    Currently I am working on a rewrite of the library in Rust, and extending functionality to encode abritrary events
+    to execute in line with audio playback.
     <br />
     <br />
     To see an example of euphony in action scroll down and listen to some of my music with a visualizer powered by
@@ -29,11 +30,7 @@ const EuphonyContent = (
 /** Japanese translation of HTML content for {@link EuphonyContent} */
 const EuphonyContentJp = (
   <div>
-    オーディオビジュアライザはいつも私を魅了してきました。Webが私の選択した媒体をもって、ビジュアライザを簡単に作れるようにライブラリを作成したかった。因って、
-    <em>euphony</em>を作りました。
-    <br />
-    <br />
-    Euphonyはオーディオの再生と分析を円滑にするオープンソースJavascriptライブラリです。興味があれば、
+    Euphonyは、オーディオの再生と分析を円滑にするために私が作成したオープンソースライブラリです。興味があれば、
     <a href="https://github.com/dawsinb/euphony" target="_blank" rel="noopener noreferrer">
       Github
     </a>
@@ -42,6 +39,9 @@ const EuphonyContentJp = (
       NPM
     </a>
     でプロジェクトを見てください。
+    <br />
+    <br />
+    現在、Rustでライブラリを書き直し、機能を拡張してイベントをエンコードする作業を行っています。
     <br />
     <br />
     Euphonyの使用例を見るために次のセクションにスクロールダウンして私の音楽を聴いて。

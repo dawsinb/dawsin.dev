@@ -7,41 +7,42 @@
 /** HTML content for {@link CommercialSection} */
 const CommercialContent = (
   <div>
-    I have years of professional experience as a web developer making both traditional and fancy GPU accelerated 3D
-    sites like this one.
+    I am a professional developer with five years of experience and a bachelors in computer science.
+    {" I've "}worked in everything from frontend, backend, devops, machine learning, and more.
     <br />
-    <br />I am available for contract/freelance work at the moment, so if you are interesed feel free to contact me at{' '}
+    <br />
+    {"I'm "}not available for freelance work at the moment, but feel free to contact me at{' '}
     <a href="mailto:dawsinb@gmail.com" target="_blank" rel="noopener noreferrer">
       dawsinb@gmail.com
-    </a>
-    .
+    </a>{' '}
+    if {"you'd"} like to connect.
     <br />
     <br />
     Unfortunately much of my previous work is private, but the{' '}
     <a href="https://github.com/dawsinb/dawsin.dev" target="_blank" rel="noopener noreferrer">
       code
     </a>{' '}
-    for this site is open source and I have a few more examples in the section below.
+    for this site is open source and I have a few examples in the section below.
   </div>
 );
 /** Japanese translation of HTML content for {@link CommercialSection} */
 const CommercialContentJp = (
   <div>
-    私はwebデベロッパーとしての長年の専門的経験があります。普通のサイトとGPUアクセラレーションの3Dサイトが作れます。
+    私は５年の経験とコンプューター科学の学士号を持つ開発者です。フロントエンドやバックエンドやDevOpsや機械学習に携わっていました。
     <br />
     <br />
-    現在、フリーランスまたは契約業務に対応しています。もし興味があれば、
+    今フリーランスの仕事をすることができないけど、接続したいなら、
     <a href="mailto:dawsinb@gmail.com" target="_blank" rel="noopener noreferrer">
       dawsinb@gmail.com
     </a>
-    で私にEメールを送ってください。
+    までご連絡ください。
     <br />
     <br />
-    生憎、私の前コードの多くはプライベートです。でもこのサイトは
+    残念ながら、私の以前の仕事の多くはプライベートです。でもこのサイトの
     <a href="https://github.com/dawsinb/dawsin.dev" target="_blank" rel="noopener noreferrer">
-      オープンソース
+      コード
     </a>
-    だて、次のセクションでいくつかの例サイトがあります。
+    はオープンサースであり、以下のセクションに例がいくつかあります。
   </div>
 );
 
