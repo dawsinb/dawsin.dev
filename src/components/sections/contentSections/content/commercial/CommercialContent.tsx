@@ -7,7 +7,7 @@
 /** HTML content for {@link CommercialSection} */
 const CommercialContent = (
   <div>
-    I am a professional developer with five years of experience and a bachelors in computer science.
+    I am a professional web-developer with five years of experience and an expert in Rust and React.
     {" I've "}worked in everything from frontend, backend, devops, machine learning, and more.
     <br />
     <br />
@@ -28,7 +28,7 @@ const CommercialContent = (
 /** Japanese translation of HTML content for {@link CommercialSection} */
 const CommercialContentJp = (
   <div>
-    私は５年の経験とコンプューター科学の学士号を持つ開発者です。フロントエンドやバックエンドやDevOpsや機械学習に携わっていました。
+    私は5年の経験を持つプロのWeb開発者であり、RustとReactの専門家です。フロントエンドやバックエンドやDevOpsや機械学習に携わっていました。
     <br />
     <br />
     今フリーランスの仕事をすることができないけど、接続したいなら、

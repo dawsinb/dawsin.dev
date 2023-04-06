@@ -19,8 +19,8 @@ const EuphonyContent = (
     .
     <br />
     <br />
-    Currently I am working on a rewrite of the library in Rust, and extending functionality to encode abritrary events
-    to execute in line with audio playback.
+    Currently, I am working on a rewrite of the library in <em>Rust</em>, and extending functionality to encode
+    abritrary events to execute in line with audio playback.
     <br />
     <br />
     To see an example of euphony in action scroll down and listen to some of my music with a visualizer powered by
@@ -41,7 +41,7 @@ const EuphonyContentJp = (
     でプロジェクトを見てください。
     <br />
     <br />
-    現在、Rustでライブラリを書き直し、機能を拡張してイベントをエンコードする作業を行っています。
+    現在、<em>Rust</em>でライブラリを書き直し、機能を拡張してイベントをエンコードする作業を行っています。
     <br />
     <br />
     Euphonyの使用例を見るために次のセクションにスクロールダウンして私の音楽を聴いて。

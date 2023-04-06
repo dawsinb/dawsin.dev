@@ -77,12 +77,12 @@ function PortfolioSection({ index, parallax }: PortfolioProps) {
   const laptopImageTextureUrls = [
     '/assets/textures/sites/desktop/euphony.ktx2',
     '/assets/textures/sites/desktop/mlmp.ktx2',
-    '/assets/textures/sites/desktop/stream.ktx2',
+    '/assets/textures/sites/desktop/stream.ktx2'
   ];
   const phoneImageTextureUrls = [
     '/assets/textures/sites/mobile/euphony.ktx2',
     '/assets/textures/sites/mobile/mlmp.ktx2',
-    '/assets/textures/sites/mobile/stream.ktx2',
+    '/assets/textures/sites/mobile/stream.ktx2'
   ];
 
   // state to handle mouse style when hovering objects
