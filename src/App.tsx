@@ -28,7 +28,6 @@ const AppContainer = styled('div')`
 
 /** Container for the WebGL canvas */
 const CanvasRoot = styled('canvas')`
-  index: 0;
   position: fixed;
   width: 100vw;
   height: 100vh;
