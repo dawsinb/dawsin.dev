@@ -14,7 +14,7 @@ const AboutContent = (
     project called Euphony to help streamline the creation of dynamic audio visualizers.
     <br />
     <br />
-    Recently I moved to Tokyo and currently work as a full-stack engineer in the field of natural language processing.
+    Currently I work as a full-stack engineer in the field of natural language processing.
   </div>
 );
 /** Japanese translation of HTML content for {@link AboutSection} */
