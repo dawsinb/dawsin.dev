@@ -14,7 +14,7 @@ const AboutContent = (
     project called Euphony to help streamline the creation of dynamic audio visualizers.
     <br />
     <br />
-    Currently I work as a full-stack engineer in the field of natural language processing.
+    Currently, I work as a Rust platform engineer and live on the east coast of the US.
   </div>
 );
 /** Japanese translation of HTML content for {@link AboutSection} */
@@ -28,7 +28,7 @@ const AboutContentJp = (
     も大好きです。ピアノを引いていくつかの音楽を作ります。暇な時に、動的なオーディオビジュアライザの作成を円滑にするためにeuphonyと言うプロジェクトに取り組んでいました。
     <br />
     <br />
-    最近東京に引っ越しました。現在、自然言語処理の分野のフルスタックエンジニアとして働いています。
+    現在、私は Rust プラットフォーム エンジニアとして働いており、米国東海岸に住んでいます。
   </div>
 );
 

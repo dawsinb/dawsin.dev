@@ -7,11 +7,11 @@
 /** HTML content for {@link CommercialSection} */
 const CommercialContent = (
   <div>
-    I am a professional web-developer with five years of experience and an expert in Rust and React.
+    I am a professional software engineer with over six years of experience and an expert in Rust and React.
     {" I've "}worked in everything from frontend, backend, devops, machine learning, and more.
     <br />
     <br />
-    {"I'm "}not available for freelance work at the moment, but feel free to contact me at{' '}
+    {"I'm "}open to freelance work at the moment, if you are interested then contact me at{' '}
     <a href="mailto:dawsinb@gmail.com" target="_blank" rel="noopener noreferrer">
       dawsinb@gmail.com
     </a>{' '}
@@ -28,10 +28,10 @@ const CommercialContent = (
 /** Japanese translation of HTML content for {@link CommercialSection} */
 const CommercialContentJp = (
   <div>
-    私は5年の経験を持つプロのWeb開発者であり、RustとReactの専門家です。フロントエンドやバックエンドやDevOpsや機械学習に携わっていました。
+    私は 6 年以上の経験を持つプロのソフトウェア エンジニアであり、Rust と React の専門家です。フロントエンドやバックエンドやDevOpsや機械学習に携わっていました。
     <br />
     <br />
-    今フリーランスの仕事をすることができないけど、接続したいなら、
+    今フリーランスの仕事をすることができます、接続したいなら、
     <a href="mailto:dawsinb@gmail.com" target="_blank" rel="noopener noreferrer">
       dawsinb@gmail.com
     </a>
