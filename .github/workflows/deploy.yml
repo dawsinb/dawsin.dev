@@ -24,6 +24,5 @@ jobs:
 
     - name: Build
       run: |
-        npm i
+        npm ci
         npm run build
-        npm run serve-build
